@@ -11,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.AddPlantActivity
+import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.Plant
 import oasis.team.econg.graduationproject.databinding.FragmentHomeBinding
+import oasis.team.econg.graduationproject.rvAdapter.DiaryAdapter
 import oasis.team.econg.graduationproject.rvAdapter.HomeDiaryAdapter
 
 
@@ -57,7 +59,15 @@ class HomeFragment : Fragment() {
         homeDiaryAdapter.setData(plants)
         binding.diaryList.layoutManager = LinearLayoutManager(main,
         LinearLayoutManager.HORIZONTAL, false)
+        homeDiaryAdapter.listener = onClickedListItem
         binding.diaryList.adapter = homeDiaryAdapter
     }
 
+    private val onClickedListItem = object : HomeDiaryAdapter.OnItemClickListener{
+        override fun onClicked(id: String) {
+            val intent = Intent(main, DiaryListActivity::class.java)
+            intent.putExtra("id", id)
+            startActivity(intent)
+        }
+    }
 }

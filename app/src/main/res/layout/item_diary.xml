@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
 
     <TextView
         android:id="@+id/date"
@@ -26,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgDiary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -48,5 +49,5 @@
 라지지 않는 것이다 이것은 현저하게 일월과"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imgDiary" />
 </androidx.constraintlayout.widget.ConstraintLayout>
