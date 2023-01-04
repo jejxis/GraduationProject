@@ -24,9 +24,9 @@
         app:srcCompat="@drawable/ic_baseline_close_45" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/plantThumb"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -44,7 +44,7 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnClose" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -55,7 +55,7 @@
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/plantThumb" />
 
     <TextView
         android:id="@+id/textView3"
@@ -145,6 +145,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="물 주는 양: "
         android:textColor="@color/black"
         android:textSize="18dp"
@@ -166,11 +167,12 @@
         style="@style/sunshineRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:numStars="5"
         android:progressDrawable="@drawable/rating_sunshine_body"
         android:rating="0"
         android:stepSize="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <RatingBar
@@ -179,9 +181,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        android:stepSize="0.5"
         android:rating="0"
+        android:stepSize="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="적음"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="많음"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar_sunshine"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="적음"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="많음"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar_water"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

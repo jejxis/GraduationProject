@@ -20,5 +20,13 @@ class AddPlantActivity : AppCompatActivity() {
                 ratingBar, fl, b
             ->  binding.waterAmount.text = fl.toString()
         }
+
+        binding.btnClose.setOnClickListener {
+            finish()
+        }
+
+        binding.btnSave.setOnClickListener {
+
+        }
     }
 }

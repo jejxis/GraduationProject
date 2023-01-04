@@ -14,6 +14,9 @@
         android:theme="@style/Theme.GraduationProject"
         tools:targetApi="31">
         <activity
+            android:name=".DiaryListActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddPlantActivity"
             android:exported="false" />
         <activity

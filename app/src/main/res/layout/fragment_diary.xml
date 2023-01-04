@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DiaryFragment">
+    tools:context=".menuFragments.DiaryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:padding="15dp">
 
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="식물일지"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/plant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="식물"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="스케줄"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/plant"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <FrameLayout
+            android:id="@+id/diaryFrame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plant">
+
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -3,6 +3,7 @@ package oasis.team.econg.graduationproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import oasis.team.econg.graduationproject.databinding.ActivityMainBinding
+import oasis.team.econg.graduationproject.menuFragments.DiaryFragment
 import oasis.team.econg.graduationproject.menuFragments.HomeFragment
 
 class MainActivity : AppCompatActivity() {
@@ -11,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         showHomeFragment()
+
+        getNavi()
     }
 
     private fun getNavi(){
@@ -18,6 +21,10 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.menuHome -> {
                     showHomeFragment()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.menuDiary -> {
+                    showDiaryFragment()
                     return@setOnItemSelectedListener true
                 }
                 else -> return@setOnItemSelectedListener true
@@ -28,6 +35,12 @@ class MainActivity : AppCompatActivity() {
     private fun showHomeFragment(){
         supportFragmentManager.beginTransaction()
             .replace(R.id.menuFrame, HomeFragment())
+            .commitAllowingStateLoss()
+    }
+
+    private fun showDiaryFragment(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.menuFrame, DiaryFragment())
             .commitAllowingStateLoss()
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2023.01.04"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/whatDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수요일"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whatDay"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:inputType="textMultiLine|text|textImeMultiLine"
+        android:text="안고 그들에게 밝은 길을 찾아 주며 그들을 행복스럽
+고 평화스러운 곳으로 인도하겠다는 커다란 이상을
+품었기 때문이다 그러므로 그들은 길지 아니한 목숨
+을 사는가 싶이 살았으며 그들의 그림자는 천고에 사
+라지지 않는 것이다 이것은 현저하게 일월과"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
