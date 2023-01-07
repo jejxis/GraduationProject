@@ -11,6 +11,7 @@ import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.databinding.FragmentDiaryBinding
 import oasis.team.econg.graduationproject.diaryFragments.MyPlantFragment
+import oasis.team.econg.graduationproject.diaryFragments.ScheduleFragment
 
 class DiaryFragment : Fragment() {
     lateinit var binding: FragmentDiaryBinding
@@ -29,13 +30,16 @@ class DiaryFragment : Fragment() {
         binding = FragmentDiaryBinding.inflate(inflater, container, false)
 
         setMenuPlant()
+        showMyPlantFragment()
 
         binding.plant.setOnClickListener {
             setMenuPlant()
+            showMyPlantFragment()
         }
 
         binding.schedule.setOnClickListener {
             setMenuSchedule()
+            showScheduleFragment()
         }
         return binding.root
     }
@@ -59,6 +63,12 @@ class DiaryFragment : Fragment() {
     private fun showMyPlantFragment() {
         childFragmentManager.beginTransaction()
             .replace(R.id.diaryFrame, MyPlantFragment())
+            .commitAllowingStateLoss()
+    }
+
+    private fun showScheduleFragment(){
+        childFragmentManager.beginTransaction()
+            .replace(R.id.diaryFrame, ScheduleFragment())
             .commitAllowingStateLoss()
     }
 

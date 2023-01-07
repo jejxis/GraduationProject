@@ -1,6 +1,5 @@
 package oasis.team.econg.graduationproject.menuFragments
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,10 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.AddPlantActivity
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.MainActivity
-import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.Plant
 import oasis.team.econg.graduationproject.databinding.FragmentHomeBinding
-import oasis.team.econg.graduationproject.rvAdapter.DiaryAdapter
 import oasis.team.econg.graduationproject.rvAdapter.HomeDiaryAdapter
 
 

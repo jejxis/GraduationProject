@@ -10,6 +10,7 @@ class AddPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        val pictureAdder = PictureAdder(this, binding.plantThumb)
 
         binding.ratingBarSunshine.setOnRatingBarChangeListener {
                 ratingBar, fl, b
@@ -19,6 +20,10 @@ class AddPlantActivity : AppCompatActivity() {
         binding.ratingBarWater.setOnRatingBarChangeListener {
                 ratingBar, fl, b
             ->  binding.waterAmount.text = fl.toString()
+        }
+
+        binding.plantThumb.setOnClickListener {
+            pictureAdder.launch()
         }
 
         binding.btnClose.setOnClickListener {

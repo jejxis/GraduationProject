@@ -1,5 +1,6 @@
 package oasis.team.econg.graduationproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout
@@ -13,6 +14,7 @@ class DiaryListActivity : AppCompatActivity() {
     val binding by lazy{ActivityDiaryListBinding.inflate(layoutInflater)}
     var diaryList = mutableListOf<Diary>()
     var diaryAdapter = DiaryAdapter(this)
+    var id: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -22,9 +24,14 @@ class DiaryListActivity : AppCompatActivity() {
         }
 
         if(intent.hasExtra("id")){
-
+            id = intent.getStringExtra("id").toString()
         }
 
+        binding.addDiary.setOnClickListener {
+            var intent = Intent(this, AddDiaryActivity::class.java)
+            intent.putExtra("id", id)
+            startActivity(intent)
+        }
         loadData()
         setAdapter()
 
