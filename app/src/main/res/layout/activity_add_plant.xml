@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPlantActivity"
-    android:padding="20dp">
+    android:focusable="true"
+    android:padding="20dp"
+    tools:context=".AddPlantActivity">
 
     <ImageView
         android:id="@+id/btnSave"
@@ -28,12 +29,12 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="24dp"
+        android:background="@drawable/rv_item_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:srcCompat="@drawable/ic_baseline_add_45"
-        android:background="@drawable/rv_item_border"/>
+        tools:srcCompat="@drawable/ic_baseline_add_45" />
 
     <TextView
         android:id="@+id/textView"
@@ -78,14 +79,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <EditText
-        android:id="@+id/lastWater"
+    <TextView
+        android:id="@+id/adoptionDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:ems="10"
         android:inputType="date"
         android:text=""
-        android:enabled="false"
+        android:background="@drawable/rv_item_border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -97,13 +99,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:minHeight="30dp"
         android:background="@drawable/button_background"
+        android:minHeight="30dp"
         android:text="물 주기, 영양제, 분갈이 알림 설정"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastWater" />
+        app:layout_constraintTop_toBottomOf="@+id/adoptionDate" />
 
     <Button
         android:id="@+id/btnTemperatureSetting"

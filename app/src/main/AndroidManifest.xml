@@ -18,6 +18,9 @@
         android:theme="@style/Theme.GraduationProject"
         tools:targetApi="31">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetailPlantSpeciesActivity"
             android:exported="false" />
         <activity

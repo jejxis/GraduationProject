@@ -6,6 +6,7 @@ import oasis.team.econg.graduationproject.databinding.ActivityMainBinding
 import oasis.team.econg.graduationproject.menuFragments.DiaryFragment
 import oasis.team.econg.graduationproject.menuFragments.HomeFragment
 import oasis.team.econg.graduationproject.menuFragments.SearchFragment
+import oasis.team.econg.graduationproject.menuFragments.UserFragment
 
 class MainActivity : AppCompatActivity() {
     val binding by lazy{ActivityMainBinding.inflate(layoutInflater)}
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                     showSearchFragment()
                     return@setOnItemSelectedListener true
                 }
+                R.id.menuUser -> {
+                    showUserFragment()
+                    return@setOnItemSelectedListener true
+                }
                 else -> return@setOnItemSelectedListener true
             }
         }
@@ -52,6 +57,12 @@ class MainActivity : AppCompatActivity() {
     private fun showSearchFragment(){
         supportFragmentManager.beginTransaction()
             .replace(R.id.menuFrame, SearchFragment())
+            .commitAllowingStateLoss()
+    }
+
+    private fun showUserFragment(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.menuFrame, UserFragment())
             .commitAllowingStateLoss()
     }
 }
