@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.DialogFragment
 import oasis.team.econg.graduationproject.databinding.ActivityAddPlantBinding
+import oasis.team.econg.graduationproject.dialog.CultureSettingFragment
 import oasis.team.econg.graduationproject.dialog.DatePickerFragment
+import oasis.team.econg.graduationproject.dialog.TemperatureSettingFragment
 
 class AddPlantActivity : AppCompatActivity() {
     val binding by lazy{ActivityAddPlantBinding.inflate(layoutInflater)}
@@ -36,11 +38,13 @@ class AddPlantActivity : AppCompatActivity() {
         }
 
         binding.btnCultureSetting.setOnClickListener {
-
+            val cultureSettingFragment: CultureSettingFragment = CultureSettingFragment()
+            cultureSettingFragment.show(supportFragmentManager,"cultureSetting")
         }
 
         binding.btnTemperatureSetting.setOnClickListener {
-
+            val temperatureSettingFragment: TemperatureSettingFragment = TemperatureSettingFragment()
+            temperatureSettingFragment.show(supportFragmentManager, "temperatureSetting")
         }
 
         binding.btnClose.setOnClickListener {
@@ -59,6 +63,14 @@ class AddPlantActivity : AppCompatActivity() {
         if(month < 9) month_string = "0$month_string"
         if(day < 10) day_string = "0$day_string"
         val dateMessage = "$year_string-$month_string-$day_string"
-        binding.adoptionDate.setText(dateMessage)
+        binding.adoptionDate.text = dateMessage
+    }
+
+    fun setCultureSetting(water: String, nutrient: String, repotting: String){
+        binding.btnCultureSetting.text = "물 주기: ${water}일, 영양제: ${nutrient}일, 분갈이: ${repotting}일"
+    }
+
+    fun setTemperatureSetting(start: String, end: String){
+        binding.btnTemperatureSetting.text = "온도: ${start}℃ ~ ${end}℃"
     }
 }
