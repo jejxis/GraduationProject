@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사용자 설정"
-            android:textSize="30dp"
+            android:textSize="24dp"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,14 +28,14 @@
             android:layout_marginTop="8dp"
             android:text="사용자님"
             android:textColor="@color/black"
-            android:textSize="24dp"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
             android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,9 +47,9 @@
                 android:id="@+id/myPlants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:text="내가 키우는 식물"
                 android:textColor="@color/black"
-                android:paddingTop="10dp"
                 android:textSize="22dp" />
 
             <View style="@style/Divider" />
@@ -58,8 +58,8 @@
                 android:id="@+id/favoritePlants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="내가 찜한 식물"
                 android:paddingTop="10dp"
+                android:text="내가 찜한 식물"
                 android:textColor="@color/black"
                 android:textSize="22dp" />
 
@@ -69,8 +69,8 @@
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="로그아웃"
                 android:paddingTop="10dp"
+                android:text="로그아웃"
                 android:textColor="@color/black"
                 android:textSize="22dp" />
 
