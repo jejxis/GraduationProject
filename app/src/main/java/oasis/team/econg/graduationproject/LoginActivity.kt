@@ -13,8 +13,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("www.naver.com"))
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            //val intent = Intent(Intent.ACTION_VIEW, Uri.parse("www.naver.com"))
             startActivity(intent)
+            finish()
         }
     }
 }
