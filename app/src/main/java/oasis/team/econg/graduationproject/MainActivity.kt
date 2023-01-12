@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.mainToolBar.selectedItemId = R.id.menuHome
         showHomeFragment()
 
         getNavi()
