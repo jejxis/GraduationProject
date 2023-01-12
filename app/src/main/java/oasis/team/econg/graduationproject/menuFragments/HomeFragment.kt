@@ -42,10 +42,24 @@ class HomeFragment : Fragment() {
             var intent = Intent(main, AddPlantActivity::class.java)
             startActivity(intent)
         }
-        homeDiaryAdapter = HomeDiaryAdapter(main)
+
         loadData()
+        setAdapter()
+        //setNoPlant()
 
         return binding.root
+    }
+
+    private fun setNoPlant(){
+        binding.btnAddPlant.visibility = View.GONE
+        binding.diaryList.visibility = View.GONE
+        binding.btnAddWhenNoPlant.visibility = View.VISIBLE
+        binding.noPlantLayout.visibility = View.VISIBLE
+
+        binding.btnAddWhenNoPlant.setOnClickListener {
+            var intent = Intent(main, AddPlantActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loadData(){
@@ -53,9 +67,13 @@ class HomeFragment : Fragment() {
             var plant = Plant(plantId = "$i", hum = i+10.0, temp = i*5.0, name="${i}번째 식물", days = i*100)
             plants.add(plant)
         }
+    }
+
+    private fun setAdapter(){
+        homeDiaryAdapter = HomeDiaryAdapter(main)
         homeDiaryAdapter.setData(plants)
         binding.diaryList.layoutManager = LinearLayoutManager(main,
-        LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager.HORIZONTAL, false)
         homeDiaryAdapter.listener = onClickedListItem
         binding.diaryList.adapter = homeDiaryAdapter
     }
