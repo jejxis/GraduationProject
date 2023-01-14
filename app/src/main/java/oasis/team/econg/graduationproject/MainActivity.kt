@@ -1,7 +1,10 @@
 package oasis.team.econg.graduationproject
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
+import com.google.firebase.ktx.Firebase
 import oasis.team.econg.graduationproject.databinding.ActivityMainBinding
 import oasis.team.econg.graduationproject.menuFragments.DiaryFragment
 import oasis.team.econg.graduationproject.menuFragments.HomeFragment
@@ -13,6 +16,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        Firebase.dynamicLinks.
+            getDynamicLink(intent)
+            .addOnSuccessListener(this){ pendingDynamicLinkData ->
+                var deeplink: Uri? = null
+                if(pendingDynamicLinkData != null){
+                    deeplink = pendingDynamicLinkData.link
+                }
+                if(deeplink != null){
+
+                }
+            }
 
         binding.mainToolBar.selectedItemId = R.id.menuHome
         showHomeFragment()

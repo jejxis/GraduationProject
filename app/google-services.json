@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950956748170",
+    "project_id": "graduationproject-5ed9a",
+    "storage_bucket": "graduationproject-5ed9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950956748170:android:531951d2b2199b428bec73",
+        "android_client_info": {
+          "package_name": "oasis.team.econg.graduationproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950956748170-20nqelu19vjfdf9ujea2dc76i2ij5qev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_06dgYvihySSZlsPzVTr8JjFn9908U9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950956748170-20nqelu19vjfdf9ujea2dc76i2ij5qev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
