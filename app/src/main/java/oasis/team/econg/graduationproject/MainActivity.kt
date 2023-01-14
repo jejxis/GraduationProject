@@ -1,8 +1,10 @@
 package oasis.team.econg.graduationproject
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import oasis.team.econg.graduationproject.databinding.ActivityMainBinding
@@ -18,14 +20,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Firebase.dynamicLinks.
-            getDynamicLink(intent)
+        getDynamicLink(intent)
             .addOnSuccessListener(this){ pendingDynamicLinkData ->
                 var deeplink: Uri? = null
                 if(pendingDynamicLinkData != null){
                     deeplink = pendingDynamicLinkData.link
                 }
                 if(deeplink != null){
-
+                    //val key = deeplink.getQueryParameter("key")
                 }
             }
 
