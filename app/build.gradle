@@ -34,6 +34,25 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/INDEX.LIST'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/spring.tooling'
+        exclude 'META-INF/NOTICE.md'
+        exclude 'META-INF/spring.handlers'
+        exclude 'META-INF/spring-configuration-metadata.json'
+        exclude 'META-INF/additional-spring-configuration-metadata.json'
+        exclude 'META-INF/spring.factories'
+        exclude 'META-INF/spring.schemas'
+        exclude 'META-INF/LICENSE.md'
+    }
 }
 
 dependencies {
@@ -53,4 +72,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.2'
 
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.9' //swagger springdoc open api
+
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'//google map
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 }

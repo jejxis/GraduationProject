@@ -1,17 +1,12 @@
 package oasis.team.econg.graduationproject
 
-import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import oasis.team.econg.graduationproject.databinding.ActivityMainBinding
-import oasis.team.econg.graduationproject.menuFragments.DiaryFragment
-import oasis.team.econg.graduationproject.menuFragments.HomeFragment
-import oasis.team.econg.graduationproject.menuFragments.SearchFragment
-import oasis.team.econg.graduationproject.menuFragments.UserFragment
+import oasis.team.econg.graduationproject.menuFragments.*
 
 class MainActivity : AppCompatActivity() {
     val binding by lazy{ActivityMainBinding.inflate(layoutInflater)}
@@ -56,6 +51,10 @@ class MainActivity : AppCompatActivity() {
                     showUserFragment()
                     return@setOnItemSelectedListener true
                 }
+                R.id.menuMap -> {
+                    showMapFragment()
+                    return@setOnItemSelectedListener true
+                }
                 else -> return@setOnItemSelectedListener true
             }
         }
@@ -82,6 +81,12 @@ class MainActivity : AppCompatActivity() {
     private fun showUserFragment(){
         supportFragmentManager.beginTransaction()
             .replace(R.id.menuFrame, UserFragment())
+            .commitAllowingStateLoss()
+    }
+
+    private fun showMapFragment(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.menuFrame, MapFragment())
             .commitAllowingStateLoss()
     }
 }
