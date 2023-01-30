@@ -101,7 +101,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_background"
         android:minHeight="30dp"
-        android:text="물 주기, 영양제, 분갈이 알림 설정"
+        android:text="관수 푸시알림 주기: "
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,21 +121,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar_water" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar_sunshine" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="일조량: "
+        android:text="관수: "
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCultureSetting" />
 
     <TextView
-        android:id="@+id/sunshine"
+        android:id="@+id/waterAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.0"
@@ -149,14 +149,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="물 주는 양: "
+        android:text="일조량: "
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar_sunshine" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar_water" />
 
     <TextView
-        android:id="@+id/waterAmount"
+        android:id="@+id/sunshine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.0"
@@ -166,26 +166,30 @@
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <RatingBar
+        android:id="@+id/ratingBar_water"
+        style="@style/waterRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:numStars="4"
+        android:progressDrawable="@drawable/rating_water_body"
+        android:rating="0"
+        android:stepSize="1"
+        app:layout_constraintEnd_toStartOf="@+id/textView7"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <RatingBar
         android:id="@+id/ratingBar_sunshine"
         style="@style/sunshineRatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:numStars="5"
+        android:numStars="3"
         android:progressDrawable="@drawable/rating_sunshine_body"
         android:rating="0"
-        android:stepSize="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <RatingBar
-        android:id="@+id/ratingBar_water"
-        style="@style/waterRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="0"
-        android:stepSize="0.5"
+        android:stepSize="1"
+        app:layout_constraintEnd_toStartOf="@+id/textView9"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -204,7 +208,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="많음"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar_sunshine"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
@@ -222,7 +226,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="많음"
-        app:layout_constraintStart_toEndOf="@+id/ratingBar_water"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

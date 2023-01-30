@@ -28,7 +28,7 @@ class CultureSettingFragment : DialogFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentCultureSettingBinding.inflate(inflater, container, false)
         binding.btnOK.setOnClickListener {
-            addPlant.setCultureSetting(binding.waterCycle.text.toString(), binding.nutrientCycle.text.toString(), binding.repottingCycle.text.toString())
+            addPlant.setCultureSetting(binding.waterCycle.text.toString())
             this.dismiss()
         }
         return binding.root

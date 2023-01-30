@@ -1,10 +1,13 @@
 package oasis.team.econg.graduationproject.rvAdapter
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.DiaryPlant
 import oasis.team.econg.graduationproject.data.Plant
 import oasis.team.econg.graduationproject.databinding.ItemMyPlantBinding
@@ -35,10 +38,15 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
             binding.plantName.text = data.name
             binding.plantImg.setImageResource(data.thumb)
             binding.latestDiary.text = data.latestDiary
-            binding.waterCheck.visibility = if(data.waterCheck) View.VISIBLE else View.INVISIBLE
 
-            binding.giveWater.setOnClickListener {
-                binding.waterCheck.visibility = View.VISIBLE
+            binding.waterCheck.setOnClickListener {
+                checkEachCultureStyle(it as TextView)
+            }
+            binding.nutrientsCheck.setOnClickListener {
+                checkEachCultureStyle(it as TextView)
+            }
+            binding.repottingCheck.setOnClickListener {
+                checkEachCultureStyle(it as TextView)
             }
         }
     }
@@ -49,5 +57,10 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
 
     fun setData(list: MutableList<DiaryPlant>?){
         listData = list as ArrayList<DiaryPlant>
+    }
+
+    private fun checkEachCultureStyle(view: TextView){
+        view.setTextColor(Color.parseColor(("#000000")))
+        view.setBackgroundResource(R.drawable.button_background_gray)
     }
 }

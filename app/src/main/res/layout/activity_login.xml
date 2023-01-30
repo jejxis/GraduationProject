@@ -23,14 +23,60 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="구글 로그인"
+        android:background="@drawable/button_background"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:background="@drawable/button_background"
+        app:layout_constraintTop_toBottomOf="@+id/pw" />
+
+    <EditText
+        android:id="@+id/id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rv_item_border"
+        android:ems="10"
+        android:hint="이메일"
+        android:inputType="textEmailAddress"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/pw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/rv_item_border"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id" />
+
+    <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button_background_gray"
+        android:text="회원가입"
+        android:textSize="20dp"
         android:textColor="@color/white"
-        android:textSize="20dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

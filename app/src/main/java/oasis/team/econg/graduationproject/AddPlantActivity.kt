@@ -66,8 +66,8 @@ class AddPlantActivity : AppCompatActivity() {
         binding.adoptionDate.text = dateMessage
     }
 
-    fun setCultureSetting(water: String, nutrient: String, repotting: String){
-        binding.btnCultureSetting.text = "물 주기: ${water}일, 영양제: ${nutrient}일, 분갈이: ${repotting}일"
+    fun setCultureSetting(water: String){
+        binding.btnCultureSetting.text = "관수 푸시알림 주기: ${water}일"
     }
 
     fun setTemperatureSetting(start: String, end: String){

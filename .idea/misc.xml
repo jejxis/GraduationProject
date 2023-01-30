@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/button_background.xml" value="0.1" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/button_background_gray.xml" value="0.1" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/culture_check_background.xml" value="0.1" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/culture_check_background_nutrients.xml" value="0.1" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/culture_check_background_repotting.xml" value="0.1" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/diary_selector.xml" value="0.1" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.2665" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
@@ -21,10 +25,10 @@
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/drawable/rv_item_border.xml" value="0.235" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_add_diary.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_add_plant.xml" value="0.33" />
-        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_detail_plant_species.xml" value="0.246875" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_detail_plant_species.xml" value="0.183206106870229" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_diary_list.xml" value="0.33" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_favorite_plant.xml" value="0.3619791666666667" />
-        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_login.xml" value="0.3619791666666667" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_login.xml" value="0.2079207920792079" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_main.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_mine.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_schedule.xml" value="0.2037037037037037" />
@@ -40,6 +44,7 @@
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_user.xml" value="0.2625" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/item_diary.xml" value="0.33" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/item_home_diary.xml" value="0.33" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/item_my_plant.xml" value="0.33" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/item_plant_diary.xml" value="0.3609375" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/item_plant_species.xml" value="0.33" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/itme_schedule.xml" value="0.25" />

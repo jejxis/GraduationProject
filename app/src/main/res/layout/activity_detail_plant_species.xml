@@ -60,24 +60,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="식물 설명"
-                android:textColor="@color/black"
-                android:textSize="24dp" />
-
-            <TextView
-                android:id="@+id/plantDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:inputType="textMultiLine|text|textImeMultiLine"
-                android:text="TextView"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-            <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,6 +142,25 @@
                     android:textColor="@color/black"
                     android:textSize="20dp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/plantDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:inputType="textMultiLine|text|textImeMultiLine"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btnAddMyPlant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="내 식물 등록하기"
+                android:layout_margin="32dp"
+                android:background="@drawable/button_background"
+                android:textColor="@color/white"
+                android:textSize="20dp"/>
 
         </LinearLayout>
     </ScrollView>

@@ -13,47 +13,10 @@
         android:background="@drawable/rv_item_border">
 
         <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="물"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toStartOf="@+id/textView22"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="영양제"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="분갈이"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/textView25" />
-
-        <TextView
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="재배 주기 설정"
+            android:text="관수 푸시알림 주기 설정"
             android:textColor="@color/black"
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,34 +27,13 @@
             android:id="@+id/waterCycle"
             android:layout_width="70dp"
             android:layout_height="0dp"
+            android:layout_marginTop="32dp"
             android:ems="10"
             android:inputType="numberDecimal"
             android:text=""
-            app:layout_constraintEnd_toEndOf="@+id/textView21"
-            app:layout_constraintStart_toStartOf="@+id/textView21"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-        <EditText
-            android:id="@+id/nutrientCycle"
-            android:layout_width="70dp"
-            android:layout_height="0dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:text=""
-            app:layout_constraintEnd_toEndOf="@+id/textView22"
-            app:layout_constraintStart_toStartOf="@+id/textView22"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-        <EditText
-            android:id="@+id/repottingCycle"
-            android:layout_width="70dp"
-            android:layout_height="0dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            android:text=""
-            app:layout_constraintEnd_toEndOf="@+id/textView24"
-            app:layout_constraintStart_toStartOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
         <TextView
             android:id="@+id/textView26"
@@ -103,38 +45,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/waterCycle"
             app:layout_constraintStart_toEndOf="@+id/waterCycle" />
 
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="일"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/nutrientCycle"
-            app:layout_constraintStart_toEndOf="@+id/nutrientCycle" />
-
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="일"
-            android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/repottingCycle"
-            app:layout_constraintStart_toEndOf="@+id/repottingCycle" />
-
         <Button
             android:id="@+id/btnOK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="확인"
+            android:layout_marginTop="16dp"
             android:background="@drawable/button_background"
+            android:text="확인"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nutrientCycle" />
+            app:layout_constraintTop_toBottomOf="@+id/waterCycle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

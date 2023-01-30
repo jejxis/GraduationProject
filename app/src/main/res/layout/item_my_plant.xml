@@ -10,9 +10,10 @@
         android:id="@+id/plantImg"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_eco_45"/>
+        app:srcCompat="@drawable/ic_baseline_eco_45" />
 
     <TextView
         android:id="@+id/plantName"
@@ -21,6 +22,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="식물 이름"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/plantImg"
@@ -49,33 +51,51 @@
         app:layout_constraintStart_toEndOf="@+id/plantImg"
         app:layout_constraintTop_toBottomOf="@+id/ld" />
 
-    <ImageView
-        android:id="@+id/giveWater"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_radio_button_unchecked_45" />
-
-    <ImageView
+    <TextView
         android:id="@+id/waterCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/giveWater"
-        app:layout_constraintEnd_toEndOf="@+id/giveWater"
-        app:layout_constraintStart_toStartOf="@+id/giveWater"
-        app:layout_constraintTop_toTopOf="@+id/giveWater"
-        app:srcCompat="@drawable/ic_baseline_check_45" />
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/culture_check_background_water"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="물주기"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView12"
-        android:textColor="@color/black"
+        android:id="@+id/nutrientsCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="물주기"
-        app:layout_constraintEnd_toEndOf="@+id/giveWater"
-        app:layout_constraintStart_toStartOf="@+id/giveWater"
-        app:layout_constraintTop_toBottomOf="@+id/giveWater" />
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/culture_check_background_nutrients"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="영양제"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waterCheck" />
+
+    <TextView
+        android:id="@+id/repottingCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/culture_check_background_repotting"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="분갈이"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nutrientsCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
