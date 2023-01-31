@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        Firebase.dynamicLinks.
+        /*Firebase.dynamicLinks.
         getDynamicLink(intent)
             .addOnSuccessListener(this){ pendingDynamicLinkData ->
                 var deeplink: Uri? = null
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                 if(deeplink != null){
                     //val key = deeplink.getQueryParameter("key")
                 }
-            }
+            }*/
 
         binding.mainToolBar.selectedItemId = R.id.menuHome
         showHomeFragment()
