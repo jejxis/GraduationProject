@@ -6,17 +6,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.widget.Toast
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import oasis.team.econg.graduationproject.data.LoginDto
 import oasis.team.econg.graduationproject.databinding.ActivityLoginBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
+import oasis.team.econg.graduationproject.samplePreference.PreferenceUtil
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
 class LoginActivity : AppCompatActivity() {
     val binding by lazy{ActivityLoginBinding.inflate(layoutInflater)}
-    var token = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -58,15 +60,18 @@ class LoginActivity : AppCompatActivity() {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
-                    token = responseBody!!
+                    MyApplication.prefs = PreferenceUtil(this@LoginActivity)
+                    MyApplication.prefs.token = responseBody
+                    Log.d(TAG, MyApplication.prefs.token!!)
                     Log.d(TAG, "Login: api call success : $responseBody")
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    //val intent = Intent(Intent.ACTION_VIEW, Uri.parse("www.naver.com"))
                     startActivity(intent)
                     finish()
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK//액티비티 스택제거
                 }
                 RESPONSE_STATE.FAIL -> {
                     Log.d(TAG, "Login: api call fail : $responseBody")
+                    Toast.makeText(this@LoginActivity, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         })
