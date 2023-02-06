@@ -1,6 +1,7 @@
 package oasis.team.econg.graduationproject.retrofit
 
 import android.util.Log
+import com.google.gson.GsonBuilder
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.isJsonArray
 import oasis.team.econg.graduationproject.utils.isJsonObject
@@ -19,9 +20,11 @@ object RetrofitClient {
 
         val client = OkHttpClient.Builder()
 
+        val gson = GsonBuilder().setLenient().create()
+
         val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger{
             override fun log(message: String) {
-                Log.d(TAG, "RetorfitClient - log() called / message: $message")
+                Log.d(TAG, "RetrofitClient - log() called / message: $message")
                 when{
                     message.isJsonObject() ->
                         Log.d(TAG, JSONObject(message).toString(4))
@@ -29,8 +32,11 @@ object RetrofitClient {
                         Log.d(TAG, JSONObject(message).toString(4))
                     else -> {
                         try{
-                            Log.d(TAG, JSONObject(message).toString(4))
+                            val gson = GsonBuilder().setLenient().create().toJson(message)
+                            Log.d(TAG, "RetrofitClient log: is not json")
+                            Log.d(TAG, gson)
                         }catch (e: Exception){
+                            Log.d(TAG, "RetrofitClient log: Exception!!")
                             Log.d(TAG, message)
                         }
                     }
@@ -49,7 +55,7 @@ object RetrofitClient {
         if(retrofitClient == null) {
             retrofitClient = Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client.build())
                 .build()
         }

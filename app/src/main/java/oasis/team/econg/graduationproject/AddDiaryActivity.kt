@@ -21,7 +21,7 @@ class AddDiaryActivity : AppCompatActivity() {
         }
 
         binding.addPicture.setOnClickListener {
-            pictureAdder.launch()
+            pictureAdder.getImage()
         }
 
         binding.btnAddDiary.setOnClickListener {

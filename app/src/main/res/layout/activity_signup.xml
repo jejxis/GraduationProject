@@ -48,19 +48,20 @@
         app:layout_constraintTop_toBottomOf="@+id/signupEmail" />
 
     <Button
-        android:id="@+id/btnGoToLogin"
+        android:id="@+id/btnSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:text="로그인 화면으로"
         android:background="@drawable/button_background"
+        android:text="회원가입하기"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupPw" />
+        app:layout_constraintTop_toBottomOf="@+id/signupNickname" />
 
     <TextView
         android:id="@+id/textView12"
@@ -86,4 +87,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupProfile" />
+
+    <EditText
+        android:id="@+id/signupNickname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:ems="10"
+        android:hint="닉네임"
+        android:background="@drawable/rv_item_border"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupPw" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,7 +28,7 @@ class AddPlantActivity : AppCompatActivity() {
         }
 
         binding.plantThumb.setOnClickListener {
-            pictureAdder.launch()
+            pictureAdder.getImage()
         }
 
         binding.adoptionDate.setOnClickListener {
