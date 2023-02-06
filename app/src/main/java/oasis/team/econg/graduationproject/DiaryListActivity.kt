@@ -14,7 +14,7 @@ class DiaryListActivity : AppCompatActivity() {
     val binding by lazy{ActivityDiaryListBinding.inflate(layoutInflater)}
     var diaryList = mutableListOf<Diary>()
     var diaryAdapter = DiaryAdapter(this)
-    var id: String = ""
+    var id: Long = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -24,7 +24,7 @@ class DiaryListActivity : AppCompatActivity() {
         }
 
         if(intent.hasExtra("id")){
-            id = intent.getStringExtra("id").toString()
+            id = intent.getLongExtra("id", -1)
         }
 
         binding.addDiary.setOnClickListener {

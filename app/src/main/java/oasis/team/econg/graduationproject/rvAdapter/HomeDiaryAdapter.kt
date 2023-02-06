@@ -1,14 +1,19 @@
 package oasis.team.econg.graduationproject.rvAdapter
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import oasis.team.econg.graduationproject.data.Plant
+import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemHomeDiaryBinding
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
 
 class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAdapter.HomeDiaryHolder>() {
-    var listData = mutableListOf<Plant>()
+    var listData = mutableListOf<PlantsResponseDto>()
     var listener: HomeDiaryAdapter.OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeDiaryHolder {
@@ -21,7 +26,7 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
         holder.setData(data)
 
         holder.itemView.rootView.setOnClickListener {
-            listener!!.onClicked(data.plantId)
+            listener!!.onClicked(data.id)
         }
     }
 
@@ -30,20 +35,40 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
     }
 
     inner class HomeDiaryHolder(val binding: ItemHomeDiaryBinding): RecyclerView.ViewHolder(binding.root){
-        fun setData(data: Plant){
-            binding.diaryThumbnail.setImageResource(data.thumb)
-            binding.days.text = "함께한 지 " + data.days.toString()+"일!"
-            binding.name.text = data.name
-            binding.humidity.text = "토양 습도: " + data.hum.toString()
-            binding.temperature.text = "온도: " + data.temp.toString()
+        fun setData(data: PlantsResponseDto){
+            var bitmap: Bitmap? = null
+            val thread = object: Thread(){
+                override fun run() {
+                    try{
+                        var url = URL(data.picture)
+                        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                        conn.connect()
+                        val inputStream = conn.inputStream
+                        bitmap =  BitmapFactory.decodeStream(inputStream)
+                    }catch(e: IOException){
+                        e.printStackTrace()
+                    }
+                }
+            }
+            thread.start()
+
+            try{
+                thread.join()
+                binding.dday.text = "물 주기까지 "+data.dday.toString()+"일!"
+                binding.name.text = data.name
+                binding.recentRecordDate.text = "최근 기록 날짜: " + data.recentRecordDate
+                binding.diaryThumbnail.setImageBitmap(bitmap)
+            }catch(e: InterruptedException){
+                e.printStackTrace()
+            }
         }
     }
 
     interface OnItemClickListener{
-        fun onClicked(id:String)
+        fun onClicked(id:Long)
     }
 
-    fun setData(list: MutableList<Plant>?){
-        listData = list as ArrayList<Plant>
+    fun setData(list: MutableList<PlantsResponseDto>?){
+        listData = list as ArrayList<PlantsResponseDto>
     }
 }

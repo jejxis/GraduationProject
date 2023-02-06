@@ -8,13 +8,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.AddPlantActivity
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.MainActivity
-import oasis.team.econg.graduationproject.data.Plant
+import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.FragmentHomeBinding
+import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.HomeDiaryAdapter
+import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants.TAG
+import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
 
 class HomeFragment : Fragment() {
@@ -22,7 +27,7 @@ class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     lateinit var main: MainActivity
 
-    var plants: MutableList<Plant> = mutableListOf()
+    var plants: MutableList<PlantsResponseDto> = mutableListOf()
 
     lateinit var homeDiaryAdapter: HomeDiaryAdapter
 
@@ -44,8 +49,6 @@ class HomeFragment : Fragment() {
         }
 
         loadData()
-        setAdapter()
-        //setNoPlant()
 
         return binding.root
     }
@@ -53,6 +56,7 @@ class HomeFragment : Fragment() {
     private fun setNoPlant(){
         binding.btnAddPlant.visibility = View.GONE
         binding.diaryList.visibility = View.GONE
+        binding.btnAddPlant.visibility = View.GONE
         binding.btnAddWhenNoPlant.visibility = View.VISIBLE
         binding.noPlantLayout.visibility = View.VISIBLE
 
@@ -63,10 +67,25 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadData(){
-        for(i in 0..8){
-            var plant = Plant(plantId = "$i", hum = i+10.0, temp = i*5.0, name="${i}번째 식물", days = i*100)
-            plants.add(plant)
-        }
+        RetrofitManager.instance.getPlants(auth = API.HEADER_TOKEN, completion = {
+            responseState, responseBody ->
+            when(responseState){
+                RESPONSE_STATE.OKAY -> {
+                    Log.d(TAG, "HomeFragment - loadData(): api call success : ${responseBody.toString()}")
+                    plants = responseBody
+                    if(plants.size < 1){
+                        setNoPlant()
+                    }
+                    else{
+                        setAdapter()
+                    }
+                }
+                RESPONSE_STATE.FAIL -> {
+                    Toast.makeText(main, "HomeFragment - loadData(): api call error", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "HomeFragment - loadData(): api call fail : $responseBody")
+                }
+            }
+        })
     }
 
     private fun setAdapter(){
@@ -79,7 +98,7 @@ class HomeFragment : Fragment() {
     }
 
     private val onClickedListItem = object : HomeDiaryAdapter.OnItemClickListener{
-        override fun onClicked(id: String) {
+        override fun onClicked(id: Long) {
             val intent = Intent(main, DiaryListActivity::class.java)
             intent.putExtra("id", id)
             startActivity(intent)

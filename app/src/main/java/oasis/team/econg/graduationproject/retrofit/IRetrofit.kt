@@ -24,5 +24,14 @@ interface IRetrofit {
 
     //내 식물 목록 불러오기
     @GET("/api/plants")
-    fun getPlants(@Header("Authorization") auth: String)
+    fun getPlants(@Header("Authorization") auth: String): Call<JsonElement>
+
+    //식물 등록하기
+    @Multipart
+    @POST("/api/plants")
+    fun postPlants(@Header("Authorization") auth: String, @Part("key") key: RequestBody, @Part file: MultipartBody.Part?): Call<JsonElement>
+
+    //식물샵 가져오기
+    @GET("/api/places")
+    fun getPlaces(@Header("Authorization") auth: String)
 }
