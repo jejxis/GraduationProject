@@ -3,16 +3,23 @@ package oasis.team.econg.graduationproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.data.Diary
+import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.databinding.ActivityDiaryListBinding
+import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.DiaryAdapter
+import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants.TAG
+import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
 class DiaryListActivity : AppCompatActivity() {
     val binding by lazy{ActivityDiaryListBinding.inflate(layoutInflater)}
-    var diaryList = mutableListOf<Diary>()
+    var diaryList = mutableListOf<JournalsResponseDto>()
     var diaryAdapter = DiaryAdapter(this)
     var id: Long = -1
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,21 +40,23 @@ class DiaryListActivity : AppCompatActivity() {
             startActivity(intent)
         }
         loadData()
-        setAdapter()
-
     }
 
     private fun loadData(){
-        for(i in 0..17){
-            diaryList.add(
-                Diary(
-                    "$i",
-                    "2023.01.$i",
-                    "${i}요일",
-                    "안고 그들에게 밝은 길을 찾아 주며 그들을 행복스럽고 평화스러운 곳으로 인도하겠다는 커다란 이상을 품었기 때문이다 그러므로 그들은 길지 아니한 목숨을 사는가 싶이 살았으며 그들의 그림자는 천고에 사라지지 않는 것이다 이것은 현저하게 일월과"
-                )
-            )
-        }
+        RetrofitManager.instance.getJournals(auth = API.HEADER_TOKEN, plantId = id, completion = {
+            responseState, responseBody ->
+            when(responseState){
+                RESPONSE_STATE.OKAY ->{
+                    Log.d(TAG, "DiaryListActivity - loadData(): api call success : ${responseBody.toString()}")
+                    diaryList = responseBody
+                    setAdapter()
+                }
+                RESPONSE_STATE.FAIL ->{
+                    Toast.makeText(this@DiaryListActivity, "다이어리 리스트를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "DiaryListActivity - loadData(): api call fail : $responseBody")
+                }
+            }
+        })
     }
 
     private fun setAdapter(){

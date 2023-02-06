@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
-                    MyApplication.prefs = PreferenceUtil(this@LoginActivity)
+                    MyApplication.prefs = PreferenceUtil(application)
                     MyApplication.prefs.token = responseBody
                     Log.d(TAG, MyApplication.prefs.token!!)
                     Log.d(TAG, "Login: api call success : $responseBody")

@@ -16,24 +16,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/whatDay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수요일"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
-
     <ImageView
         android:id="@+id/imgDiary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/whatDay"
+        app:layout_constraintTop_toBottomOf="@+id/date"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView

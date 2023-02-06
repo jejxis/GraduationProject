@@ -1,6 +1,8 @@
 package oasis.team.econg.graduationproject.utils
 
 import com.google.gson.JsonElement
+import com.google.gson.JsonNull
+import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 
 fun String?.isJsonObject():Boolean {
@@ -27,5 +29,20 @@ fun JsonElement.convertToPlantsResponseDto(): PlantsResponseDto{
         picture = picture,
         recentRecordDate = recentRecordDate,
         dday = dday
+    )
+}
+
+fun JsonElement.convertToJournalsResponseDto(): JournalsResponseDto{
+    val resultItemObject = this.asJsonObject
+    val id = resultItemObject.get("id").asLong
+    val content = resultItemObject.get("content").asString
+    val picture = if(resultItemObject.get("picture") != JsonNull.INSTANCE) resultItemObject.get("picture").asString else null
+    val date = resultItemObject.get("date").asString
+
+    return JournalsResponseDto(
+        id = id,
+        content = content,
+        picture = picture,
+        date = date
     )
 }

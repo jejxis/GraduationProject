@@ -31,6 +31,16 @@ interface IRetrofit {
     @POST("/api/plants")
     fun postPlants(@Header("Authorization") auth: String, @Part("key") key: RequestBody, @Part file: MultipartBody.Part?): Call<JsonElement>
 
+    //다이어리 리스트 가져오기
+    @GET("/api/journals/{plantId}")
+    fun getJournals(@Header("Authorization") auth: String, @Path("plantId") plantId: Long): Call<JsonElement>
+
+    //다이어리 올리기
+    @Multipart
+    @POST("/api/journals/{plantId}")
+    fun postJournals(@Header("Authorization") auth: String, @Path("plantId") plantId: Long,
+    @Part("key") key: RequestBody, @Part file: MultipartBody.Part?): Call<JsonElement>
+
     //식물샵 가져오기
     @GET("/api/places")
     fun getPlaces(@Header("Authorization") auth: String)
