@@ -7,6 +7,7 @@ import oasis.team.econg.graduationproject.utils.isJsonArray
 import oasis.team.econg.graduationproject.utils.isJsonObject
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,7 +30,7 @@ object RetrofitClient {
                     message.isJsonObject() ->
                         Log.d(TAG, JSONObject(message).toString(4))
                     message.isJsonArray() ->
-                        Log.d(TAG, JSONObject(message).toString(4))
+                        Log.d(TAG, JSONArray(message).toString(4))
                     else -> {
                         try{
                             val gson = GsonBuilder().setLenient().create().toJson(message)

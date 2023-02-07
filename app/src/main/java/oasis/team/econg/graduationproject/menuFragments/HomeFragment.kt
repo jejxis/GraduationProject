@@ -105,7 +105,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getCurrentWeather(){
-        RetrofitManager.instance.getWeather(auth = API.HEADER_TOKEN, x = gpsTransfer!!.getYLng().toString(), y = gpsTransfer!!.getXLat().toString(), completion = {
+        RetrofitManager.instance.getWeather(auth = API.HEADER_TOKEN, x = gpsTransfer!!.getXLat().toInt().toString(), y = gpsTransfer!!.getYLng().toInt().toString(), completion = {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
