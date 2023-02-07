@@ -42,4 +42,9 @@ interface IRetrofit {
     @GET("/api/places")
     fun getPlaces(@Header("Authorization") auth: String,
                   @Query("x") x: String, @Query("y") y: String): Call<JsonElement>
+
+    //날씨 가져오기
+    @GET("/api/home")
+    fun getWeather(@Header("Authorization") auth: String,
+                   @Query("x") x: String, @Query("y") y: String): Call<JsonElement>
 }

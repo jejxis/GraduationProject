@@ -236,4 +236,38 @@ class RetrofitManager {
             }
         })
     }
+
+    fun getWeather(auth: String?, x: String, y: String, completion: (RESPONSE_STATE,HashMap<String, String>) -> Unit){
+        var au = auth.let{it}?:""
+        val call = iRetrofit?.getWeather(au, x, y).let{
+            it
+        }?: return
+        var parsedDataMap = HashMap<String, String>()
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - getWeather(): onResponse() called/ response: ${response.raw()}")
+                when(response.code()){
+                    200 ->{
+                        response.body()?.let{
+                            val body = it.asJsonArray
+                            Log.d(TAG, "RetrofitManager - getWeather(): onResponse() called")
+                            body.forEach{ resultItem ->
+                                parsedDataMap.put(
+                                    resultItem.asJsonObject.get("Category").asString,
+                                    resultItem.asJsonObject.get("Value").asString
+                                )
+                            }
+                            completion(RESPONSE_STATE.OKAY, parsedDataMap)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - getWeather(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, parsedDataMap)
+            }
+        })
+    }
 }

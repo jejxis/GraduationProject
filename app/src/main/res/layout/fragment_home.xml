@@ -40,7 +40,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintBottom_toTopOf="@+id/weatherInfo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hello" />
@@ -51,15 +51,6 @@
             android:layout_height="wrap_content"
             android:text="기온이 어쩌고"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="오늘의 날씨"
-            app:layout_constraintBottom_toTopOf="@+id/weatherInfo"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
@@ -75,14 +66,12 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hello"
             android:background="@drawable/rv_item_border"
             android:padding="20dp"
-            android:visibility="gone">
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hello">
 
             <Button
                 android:id="@+id/btnAddWhenNoPlant"
@@ -95,12 +84,12 @@
                 android:drawableTop="@drawable/ic_baseline_add_45"
                 android:paddingTop="200dp"
                 android:text="아직 등록된 식물이 없습니다.\n새로운 식물을 등록해보세요!"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.39"
-                android:visibility="gone"/>
+                app:layout_constraintVertical_bias="0.39" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

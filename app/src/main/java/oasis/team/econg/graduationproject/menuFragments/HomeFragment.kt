@@ -1,7 +1,12 @@
 package oasis.team.econg.graduationproject.menuFragments
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Criteria
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,9 +14,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.AddPlantActivity
 import oasis.team.econg.graduationproject.DiaryListActivity
+import oasis.team.econg.graduationproject.GpsTransfer
 import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.FragmentHomeBinding
@@ -26,8 +34,12 @@ class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
     lateinit var main: MainActivity
+    private var locationPermissionGranted = false
+    private var weatherMamp = HashMap<String, String>()
+    private var gpsTransfer: GpsTransfer? = null
 
     var plants: MutableList<PlantsResponseDto> = mutableListOf()
+    var location: Location? = null
 
     lateinit var homeDiaryAdapter: HomeDiaryAdapter
 
@@ -48,6 +60,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        getLocationUpdated()
+        if(location != null && gpsTransfer != null){
+            getCurrentWeather()
+        }
         loadData()
 
         return binding.root
@@ -86,6 +102,74 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun getCurrentWeather(){
+        RetrofitManager.instance.getWeather(auth = API.HEADER_TOKEN, x = gpsTransfer!!.getYLng().toString(), y = gpsTransfer!!.getXLat().toString(), completion = {
+            responseState, responseBody ->
+            when(responseState){
+                RESPONSE_STATE.OKAY -> {
+                    Log.d(TAG, "HomeFragment - getCurrentWeather(): api call success : ${responseBody.toString()}")
+                    weatherMamp = responseBody
+                    setWeather()
+                }
+                RESPONSE_STATE.FAIL -> {
+                    Toast.makeText(main, "HomeFragment - getCurrentWeather(): api call error", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "HomeFragment - getCurrentWeather(): api call fail : $responseBody")
+                }
+            }
+        })
+    }
+
+    private fun setWeather() {
+        binding.weatherInfo.text = "기온: ${weatherMamp["T1H"]}°C\n하늘상태: ${weatherMamp["SKY"]}"
+    }
+
+    private fun getLocationUpdated(){
+        val locationManager: LocationManager = main.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (ActivityCompat.checkSelfPermission(
+                main,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                main,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            locationPermissionGranted = true
+        }else{
+            ActivityCompat.requestPermissions(main, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10.0f, locationListener)
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        gpsTransfer = GpsTransfer(location!!.latitude, location!!.longitude)
+        if(gpsTransfer!=null){
+            gpsTransfer!!.transfer()
+        }
+    }
+
+    val locationListener = object : android.location.LocationListener {
+        override fun onLocationChanged(location: Location) {
+            // 위치가 변경되었을 때 호출됩니다.
+            val latitude = location.latitude
+            val longitude = location.longitude
+        }
+
+        override fun onLocationChanged(locations: MutableList<Location>) {
+            super.onLocationChanged(locations)
+        }
+        override fun onProviderDisabled(provider: String) {
+            super.onProviderDisabled(provider)
+        }
+
+        override fun onProviderEnabled(provider: String) {
+            super.onProviderEnabled(provider)
+        }
+
+        override fun onFlushComplete(requestCode: Int) {
+            super.onFlushComplete(requestCode)
+        }
     }
 
     private fun setAdapter(){
