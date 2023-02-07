@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -17,17 +18,24 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import oasis.team.econg.graduationproject.MainActivity
+import oasis.team.econg.graduationproject.data.Document
 import oasis.team.econg.graduationproject.databinding.FragmentMapBinding
+import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants.TAG
+import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
     private var map: GoogleMap? = null
     private var cameraPosition: CameraPosition? = null
+    private var placeList = mutableListOf<Document>()
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
@@ -57,6 +65,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(main)
         binding.map.getMapAsync(this)
+
         return binding.root
     }
 
@@ -91,13 +100,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
+                            val lat = lastKnownLocation!!.latitude
+                            val lng = lastKnownLocation!!.longitude
                             map?.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                LatLng(lastKnownLocation!!.latitude,
-                                    lastKnownLocation!!.longitude), 10.0f))
+                                LatLng(lat, lng), ZOOM))
+                            loadPlaces(lng.toString(), lat.toString())
                         }
                     } else {
                         map?.moveCamera(CameraUpdateFactory
-                            .newLatLngZoom(defaultLocation, 10.0f))
+                            .newLatLngZoom(defaultLocation, ZOOM))
                         map?.uiSettings?.isMyLocationButtonEnabled = false
                     }
                 }
@@ -120,6 +131,31 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         } else {
             ActivityCompat.requestPermissions(main, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+        }
+    }
+    private fun loadPlaces(x: String, y: String){
+        RetrofitManager.instance.getPlaces(auth = API.HEADER_TOKEN, x = x, y = y, completion = {
+            responseState, responseBody ->
+                when (responseState) {
+                    RESPONSE_STATE.OKAY -> {
+                        Log.d(TAG, "MapFragment - loadPlaces(): api call success")
+                        placeList = responseBody
+                        addMarkers()
+                    }
+                    RESPONSE_STATE.FAIL -> {
+                        Toast.makeText(main, "식물샵 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "DiaryListActivity - loadData(): api call fail : $responseBody")
+                    }
+                }
+        })
+    }
+
+    private fun addMarkers(){
+        placeList.forEach {
+            map?.addMarker(MarkerOptions()
+                .title(it.place_name)
+                .position(LatLng(it.y.toDouble(), it.x.toDouble()))
+                .snippet(it.address_name))
         }
     }
 
@@ -147,6 +183,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         private const val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
         private const val KEY_CAMERA_POSITION = "camera_position"
         private const val KEY_LOCATION = "location"
+        private const val ZOOM = 15.0f
 
     }
 

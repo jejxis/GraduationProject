@@ -4,11 +4,8 @@ import com.google.gson.JsonElement
 import oasis.team.econg.graduationproject.data.LoginDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.Response
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.*
-import java.io.File
 
 interface IRetrofit {
 
@@ -43,5 +40,6 @@ interface IRetrofit {
 
     //식물샵 가져오기
     @GET("/api/places")
-    fun getPlaces(@Header("Authorization") auth: String)
+    fun getPlaces(@Header("Authorization") auth: String,
+                  @Query("x") x: String, @Query("y") y: String): Call<JsonElement>
 }

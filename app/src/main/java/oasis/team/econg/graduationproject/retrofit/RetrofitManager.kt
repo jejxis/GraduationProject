@@ -2,21 +2,16 @@ package oasis.team.econg.graduationproject.retrofit
 
 import android.util.Log
 import com.google.gson.JsonElement
+import oasis.team.econg.graduationproject.data.Document
 import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.data.LoginDto
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
-import oasis.team.econg.graduationproject.samplePreference.MyApplication
-import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.*
 import oasis.team.econg.graduationproject.utils.Constants.TAG
-import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
-import oasis.team.econg.graduationproject.utils.convertToJournalsResponseDto
-import oasis.team.econg.graduationproject.utils.convertToPlantsResponseDto
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import java.io.File
 
 class RetrofitManager {
     companion object{
@@ -204,6 +199,40 @@ class RetrofitManager {
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 Log.d(TAG, "RetrofitManager - postJournals(): onFailure() called/ t: $t")
                 completion(RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+
+    //식물샵 가져오기
+    fun getPlaces(auth: String?, x: String, y: String, completion: (RESPONSE_STATE, ArrayList<Document>) -> Unit){
+        var au = auth.let{it}?:""
+        val call = iRetrofit?.getPlaces(au, x, y).let{
+            it
+        }?: return
+        var parsedDataArray = ArrayList<Document>()
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - getPlaces(): onResponse() called/ response: ${response.raw()}")
+                when(response.code()){
+                    200 ->{
+                        response.body()?.let{
+                            val body = it.asJsonObject.get("documents").asJsonArray
+                            Log.d(TAG, "RetrofitManager - getPlaces(): onResponse() called")
+
+                            body.forEach { resultItem ->
+                                val document = resultItem.convertToDocument()
+                                parsedDataArray.add(document)
+                            }
+                            completion(RESPONSE_STATE.OKAY, parsedDataArray)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - getPlaces(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, parsedDataArray)
             }
         })
     }

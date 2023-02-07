@@ -2,6 +2,7 @@ package oasis.team.econg.graduationproject.utils
 
 import com.google.gson.JsonElement
 import com.google.gson.JsonNull
+import oasis.team.econg.graduationproject.data.Document
 import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 
@@ -44,5 +45,26 @@ fun JsonElement.convertToJournalsResponseDto(): JournalsResponseDto{
         content = content,
         picture = picture,
         date = date
+    )
+}
+
+fun JsonElement.convertToDocument(): Document {
+    var resultItemObject = this.asJsonObject
+    val place_name = resultItemObject.get("place_name").asString
+    val phone = resultItemObject.get("phone").asString
+    val address_name = resultItemObject.get("address_name").asString
+    val road_address_name = resultItemObject.get("road_address_name").asString
+    val place_url = resultItemObject.get("place_url").asString
+    val x = resultItemObject.get("x").asString
+    val y = resultItemObject.get("y").asString
+
+    return Document(
+        place_name = place_name,
+        phone = phone,
+        address_name = address_name,
+        road_address_name = road_address_name,
+        place_url = place_url,
+        x = x,
+        y = y
     )
 }
