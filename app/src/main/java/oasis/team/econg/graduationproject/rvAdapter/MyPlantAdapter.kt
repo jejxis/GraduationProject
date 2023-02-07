@@ -1,6 +1,8 @@
 package oasis.team.econg.graduationproject.rvAdapter
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.DiaryPlant
 import oasis.team.econg.graduationproject.data.Plant
+import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemMyPlantBinding
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter.MyPlantHolder>(){
-    var listData: MutableList<DiaryPlant> = mutableListOf()
+    var listData: MutableList<PlantsResponseDto> = mutableListOf()
     var listener: MyPlantAdapter.OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPlantHolder {
@@ -25,7 +31,7 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
         val data = listData.get(position)
         holder.setData(data)
         holder.itemView.setOnClickListener {
-            listener!!.onClicked(data.plantId)
+            listener!!.onClicked(data.id)
         }
     }
 
@@ -34,10 +40,31 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
     }
 
     inner class MyPlantHolder(val binding: ItemMyPlantBinding): RecyclerView.ViewHolder(binding.root){
-        fun setData(data: DiaryPlant){
-            binding.plantName.text = data.name
-            binding.plantImg.setImageResource(data.thumb)
-            binding.latestDiary.text = data.latestDiary
+        fun setData(data: PlantsResponseDto){
+            var bitmap: Bitmap? = null
+            val thread = object: Thread(){
+                override fun run() {
+                    try{
+                        var url = URL(data.picture)
+                        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                        conn.connect()
+                        val inputStream = conn.inputStream
+                        bitmap =  BitmapFactory.decodeStream(inputStream)
+                    }catch(e: IOException){
+                        e.printStackTrace()
+                    }
+                }
+            }
+            thread.start()
+
+            try{
+                thread.join()
+                binding.plantName.text = data.name
+                binding.plantImg.setImageBitmap(bitmap)
+                binding.latestDiary.text = data.recentRecordDate
+            }catch(e: InterruptedException){
+                e.printStackTrace()
+            }
 
             binding.waterCheck.setOnClickListener {
                 checkEachCultureStyle(it as TextView)
@@ -52,11 +79,11 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
     }
 
     interface OnItemClickListener{
-        fun onClicked(id:String)
+        fun onClicked(id:Long)
     }
 
-    fun setData(list: MutableList<DiaryPlant>?){
-        listData = list as ArrayList<DiaryPlant>
+    fun setData(list: MutableList<PlantsResponseDto>?){
+        listData = list as ArrayList<PlantsResponseDto>
     }
 
     private fun checkEachCultureStyle(view: TextView){
