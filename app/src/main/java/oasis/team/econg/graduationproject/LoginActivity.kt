@@ -1,12 +1,15 @@
 package oasis.team.econg.graduationproject
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import oasis.team.econg.graduationproject.data.LoginDto
@@ -14,6 +17,7 @@ import oasis.team.econg.graduationproject.databinding.ActivityLoginBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.samplePreference.PreferenceUtil
+import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
@@ -22,6 +26,19 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        if (ActivityCompat.checkSelfPermission(
+                application,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                application,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                1
+            )
+        }
 
         binding.btnLogin.setOnClickListener {
             val email = binding.loginEmail.text.toString().trim()
@@ -63,6 +80,7 @@ class LoginActivity : AppCompatActivity() {
                     MyApplication.prefs = PreferenceUtil(application)
                     MyApplication.prefs.token = responseBody
                     Log.d(TAG, MyApplication.prefs.token!!)
+                    API.HEADER_TOKEN = "Bearer ${MyApplication.prefs.token}"
                     Log.d(TAG, "Login: api call success : $responseBody")
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)

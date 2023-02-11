@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
         }
 
         getLocationUpdated()
-        if(location != null && gpsTransfer != null){
+        if(location != null && gpsTransfer != null && locationPermissionGranted){
             getCurrentWeather()
         }
         loadData()
@@ -130,16 +130,16 @@ class HomeFragment : Fragment() {
         if (ActivityCompat.checkSelfPermission(
                 main,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
                 main,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            locationPermissionGranted = true
-        }else{
-            ActivityCompat.requestPermissions(main, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            ActivityCompat.requestPermissions(main, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                 1
             )
+        }else{
+            locationPermissionGranted = true
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10.0f, locationListener)
         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
