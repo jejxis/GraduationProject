@@ -55,7 +55,6 @@
         android:id="@+id/waterCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/culture_check_background_water"
         android:paddingLeft="20dp"
@@ -64,7 +63,7 @@
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/plantName" />
 
     <TextView
         android:id="@+id/nutrientsCheck"

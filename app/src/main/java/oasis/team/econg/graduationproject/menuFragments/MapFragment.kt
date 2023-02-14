@@ -22,6 +22,7 @@ import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.data.Document
@@ -81,9 +82,31 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        setClickListener()
         getLocationPermission()
         updateLocationUI()
         getDeviceLocation()
+    }
+    private fun setClickListener(){
+        map!!.setOnMarkerClickListener(object: GoogleMap.OnMarkerClickListener{
+            override fun onMarkerClick(marker: Marker): Boolean {
+                binding.info.visibility = View.VISIBLE
+                var arr = marker.tag.toString().split("/")
+                binding.placeName.text = arr[0]
+                binding.phone.text = arr[1]
+                binding.address.text = arr[2]
+                binding.roadAddress.text = arr[3]
+                binding.placeUrl.text = arr[4]
+
+                return false
+            }
+        })
+
+        map!!.setOnMapClickListener(object: GoogleMap.OnMapClickListener{
+            override fun onMapClick(p0: LatLng) {
+                binding.info.visibility = View.GONE
+            }
+        })
     }
 
     @SuppressLint("MissingPermission")
@@ -152,10 +175,14 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     private fun addMarkers(){
         placeList.forEach {
-            map?.addMarker(MarkerOptions()
-                .title(it.place_name)
+            var markerOptions = MarkerOptions()
+            markerOptions.title(it.place_name)
                 .position(LatLng(it.y.toDouble(), it.x.toDouble()))
-                .snippet(it.address_name))
+                .snippet(it.address_name)
+            val marker = map?.addMarker(markerOptions)
+            marker?.tag =
+                it.place_name+"/"+it.phone+"/"+it.address_name+"/"+it.road_address_name+"/"+it.place_url
+
         }
     }
 
