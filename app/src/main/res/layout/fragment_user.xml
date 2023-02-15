@@ -44,11 +44,11 @@
             app:layout_constraintTop_toBottomOf="@+id/userName">
 
             <TextView
-                android:id="@+id/myPlants"
+                android:id="@+id/editUserInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="내가 키우는 식물"
+                android:text="사용자 정보 수정"
                 android:textColor="@color/black"
                 android:textSize="22dp" />
 

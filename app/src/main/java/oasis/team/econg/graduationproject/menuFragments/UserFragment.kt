@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import oasis.team.econg.graduationproject.FavoritePlantActivity
 import oasis.team.econg.graduationproject.MainActivity
-import oasis.team.econg.graduationproject.MineActivity
-import oasis.team.econg.graduationproject.R
+import oasis.team.econg.graduationproject.UserInfoActivity
 import oasis.team.econg.graduationproject.databinding.FragmentUserBinding
 
 class UserFragment : Fragment() {
@@ -33,8 +32,8 @@ class UserFragment : Fragment() {
             val intent = Intent(main, FavoritePlantActivity::class.java)
             startActivity(intent)
         }
-        binding.myPlants.setOnClickListener {
-            val intent = Intent(main, MineActivity::class.java)
+        binding.editUserInfo.setOnClickListener {
+            val intent = Intent(main, UserInfoActivity::class.java)
             startActivity(intent)
         }
         return binding.root
