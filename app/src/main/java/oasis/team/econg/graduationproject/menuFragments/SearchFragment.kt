@@ -2,18 +2,19 @@ package oasis.team.econg.graduationproject.menuFragments
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.DetailPlantSpeciesActivity
 import oasis.team.econg.graduationproject.MainActivity
-import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.PlantSpecies
 import oasis.team.econg.graduationproject.databinding.FragmentSearchBinding
 import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter
+import oasis.team.econg.graduationproject.utils.Constants.GUIDELINE
 
 class SearchFragment : Fragment() {
 
@@ -34,8 +35,19 @@ class SearchFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false)
-        loadData()
-        setAdapter()
+
+        binding.searchView.setOnClickListener {
+            binding.rvSearch.visibility = View.VISIBLE
+            binding.guidelineLayout.visibility = View.GONE
+            loadData()
+            setAdapter()
+        }
+
+        binding.btnGuideline.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GUIDELINE))
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
