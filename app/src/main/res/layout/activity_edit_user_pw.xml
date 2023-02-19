@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditUserPwActivity"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_close_45" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="현재 비밀번호"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/curPw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:background="@drawable/rv_item_border"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/text27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="새 비밀번호"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/curPw" />
+
+    <EditText
+        android:id="@+id/editUserPw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rv_item_border"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text27" />
+
+    <Button
+        android:id="@+id/btnProfileSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        android:text="저장"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnProfileCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background_gray"
+        android:paddingStart="60dp"
+        android:paddingEnd="60dp"
+        android:text="취소"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="새 비밀번호 확인"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/editUserPw"
+        app:layout_constraintTop_toBottomOf="@+id/editUserPw" />
+
+    <EditText
+        android:id="@+id/checkUserPw"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:background="@drawable/rv_item_border"
+        android:textSize="24dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용자 비밀번호 수정"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

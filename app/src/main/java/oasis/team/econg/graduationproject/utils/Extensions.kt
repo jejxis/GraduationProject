@@ -2,9 +2,7 @@ package oasis.team.econg.graduationproject.utils
 
 import com.google.gson.JsonElement
 import com.google.gson.JsonNull
-import oasis.team.econg.graduationproject.data.Document
-import oasis.team.econg.graduationproject.data.JournalsResponseDto
-import oasis.team.econg.graduationproject.data.PlantsResponseDto
+import oasis.team.econg.graduationproject.data.*
 
 fun String?.isJsonObject():Boolean {
     if(this == null) return false
@@ -66,5 +64,53 @@ fun JsonElement.convertToDocument(): Document {
         place_url = place_url,
         x = x,
         y = y
+    )
+}
+
+fun JsonElement.convertToGardenDto(): GardenDto{
+    var resultItemObject = this.asJsonObject
+
+    val id = resultItemObject.get("id").asLong
+    val name = resultItemObject.get("name").asString
+    val picture = resultItemObject.get("picture").asString
+    val manageLevel = resultItemObject.get("manageLevel").asString
+
+    return GardenDto(
+        id = id,
+        name = name,
+        picture = picture,
+        manageLevel = manageLevel
+    )
+}
+
+fun JsonElement.convertToGardenDetailDto(): GardenDetailDto{
+    var resultItemObject = this.asJsonObject
+
+    val id = resultItemObject.get("id").asLong
+    val name = resultItemObject.get("name").asString
+    val picture = resultItemObject.get("picture").asString
+    val temperature = resultItemObject.get("temperature").asString
+    val humidity = resultItemObject.get("humidity").asString
+    val adviceInfo = resultItemObject.get("adviceInfo").asString
+    val manageLevel = resultItemObject.get("manageLevel").asString
+    val waterSupply = resultItemObject.get("waterSupply").asString
+    val light = resultItemObject.get("light").asString
+    val place = resultItemObject.get("place").asString
+    val bug = resultItemObject.get("bug").asString
+    val bookmark = resultItemObject.get("bookmark").asBoolean
+
+    return GardenDetailDto(
+        id = id,
+        name = name,
+        picture = picture,
+        temperature = temperature,
+        humidity = humidity,
+        adviceInfo = adviceInfo,
+        manageLevel = manageLevel,
+        waterSupply = waterSupply,
+        light = light,
+        place = place,
+        bug = bug,
+        bookmark = bookmark
     )
 }

@@ -2,10 +2,8 @@ package oasis.team.econg.graduationproject.retrofit
 
 import android.util.Log
 import com.google.gson.JsonElement
-import oasis.team.econg.graduationproject.data.Document
-import oasis.team.econg.graduationproject.data.JournalsResponseDto
-import oasis.team.econg.graduationproject.data.LoginDto
-import oasis.team.econg.graduationproject.data.PlantsResponseDto
+import io.swagger.v3.core.util.Json
+import oasis.team.econg.graduationproject.data.*
 import oasis.team.econg.graduationproject.utils.*
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import okhttp3.MultipartBody
@@ -267,6 +265,195 @@ class RetrofitManager {
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 Log.d(TAG, "RetrofitManager - getWeather(): onFailure() called/ t: $t")
                 completion(RESPONSE_STATE.FAIL, parsedDataMap)
+            }
+        })
+    }
+
+    fun getUser(auth: String?, completion: (RESPONSE_STATE, UserDto) -> Unit){
+        var au = auth.let{it}?:""
+        val call = iRetrofit?.getUser(au).let{
+            it
+        }?: return
+
+        var parsedData = UserDto("","","")
+
+        call.enqueue(object: retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - getUser(): onResponse() called/ response: ${response.raw()}")
+                when(response.code()){
+                    200 ->{
+                        response.body()?.let{
+                            val body = it.asJsonObject.get("data").asJsonObject
+                            Log.d(TAG, "RetrofitManager - getUser(): onResponse() called")
+                            val email = body.get("email").asString
+                            val nickName = body.get("nickName").asString
+                            val picture = body.get("picture").asString
+                            parsedData = UserDto(email, nickName, picture)
+                            completion(RESPONSE_STATE.OKAY, parsedData)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - getUser(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, parsedData)
+            }
+        })
+
+    }
+
+    fun updateUserInfo(auth: String?, key: RequestBody, file: MultipartBody.Part?, completion: (RESPONSE_STATE) -> Unit){
+        var au = auth.let{it}?:""
+        var key = key
+        var file = file
+
+        val call = iRetrofit?.updateUserInfo(au, key, file).let{
+            it
+        }?: return
+
+        call.enqueue(object: retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "updateUserInfo: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            completion(RESPONSE_STATE.OKAY)
+                            Log.d(TAG, "onResponse: SUCCESS")
+                        }
+                    }
+                    else -> {
+                        response.body()?.let{
+                            completion(RESPONSE_STATE.FAIL)
+                            Log.d(TAG, "onResponse: FAIL")
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "updateUserInfo: onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL)
+            }
+        })
+    }
+
+    fun changeUserPw(auth: String?, pwDto: PwDto, completion: (RESPONSE_STATE) -> Unit){
+        var au = auth.let{it}?:""
+        val call = iRetrofit?.changeUserPw(auth = au, param = pwDto).let{it}?:return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "changeUserPw: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        Log.d(TAG, "changeUserPw: code 200")
+                        completion(RESPONSE_STATE.OKAY)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "changeUserPw: onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL)
+            }
+        })
+    }
+
+    fun getGarden(auth: String?, completion: (RESPONSE_STATE, ArrayList<GardenDto>) -> Unit){
+        var au = auth.let{it}?:""
+        var parsedDataArray = ArrayList<GardenDto>()
+
+        val call = iRetrofit?.getGarden(au).let{
+            it
+        }?: return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "getGarden: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val body = it.asJsonObject.get("data").asJsonArray
+                            Log.d(TAG, "RetrofitManager - getGarden(): onResponse() called")
+
+                            body.forEach { resultItem ->
+                                val gardenDto = resultItem.convertToGardenDto()
+                                parsedDataArray.add(gardenDto)
+                            }
+                        }
+                    }
+                }
+                completion(RESPONSE_STATE.OKAY, parsedDataArray)
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "getGarden: onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, parsedDataArray)
+            }
+        })
+    }
+
+    fun getGardenDetail(auth: String?, gardenId: Long, completion: (RESPONSE_STATE, GardenDetailDto) -> Unit){
+        var au = auth.let{it}?:""
+        val gardenId = gardenId
+
+        val call = iRetrofit?.getGardenDetail(au, gardenId).let{it}?: return
+        var gardenDetailDto = GardenDetailDto(-1,"","","","","","","","","","",false)
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "getGardenDetail: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            gardenDetailDto = it.asJsonObject.get("data").asJsonObject.convertToGardenDetailDto()
+                            completion(RESPONSE_STATE.OKAY, gardenDetailDto)
+                            Log.d(TAG, "getGardenDetail - onResponse: SUCCESS")
+                        }
+                    }
+                    else -> {
+                        completion(RESPONSE_STATE.FAIL, gardenDetailDto)
+                        Log.d(TAG, "onResponse: FAIL")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "getGardenDetail - onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, gardenDetailDto)
+            }
+        })
+    }
+
+    fun searchGarden(auth: String?, key: String, completion: (RESPONSE_STATE, ArrayList<GardenDto>) -> Unit){
+        var au = auth.let{it}?:""
+        val key = key
+        var parsedDataArray = ArrayList<GardenDto>()
+
+        val call = iRetrofit?.searchGarden(auth = au, key = key).let{it}?: return
+        call.enqueue(object: retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "searchGarden: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val body = it.asJsonObject.get("data").asJsonArray
+                            Log.d(TAG, "RetrofitManager - searchGarden(): onResponse() called")
+
+                            body.forEach { resultItem ->
+                                val gardenDto = resultItem.convertToGardenDto()
+                                parsedDataArray.add(gardenDto)
+                            }
+                        }
+                    }
+                }
+                completion(RESPONSE_STATE.OKAY, parsedDataArray)
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - searchGarden(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, parsedDataArray)
             }
         })
     }

@@ -3,16 +3,31 @@ package oasis.team.econg.graduationproject
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import oasis.team.econg.graduationproject.databinding.ActivityMainBinding
 import oasis.team.econg.graduationproject.menuFragments.*
+import oasis.team.econg.graduationproject.utils.Constants.TAG
 
 class MainActivity : AppCompatActivity() {
     val binding by lazy{ActivityMainBinding.inflate(layoutInflater)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+            Log.d("token", token)
+        })
 
         /*Firebase.dynamicLinks.
         getDynamicLink(intent)

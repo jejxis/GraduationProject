@@ -20,6 +20,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GraduationProject"
         tools:targetApi="31">
+
+        <service android:name=".PushMessagingService"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".EditUserPwActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditUserInfoActivity"
+            android:exported="false" />
         <activity
             android:name=".UserInfoActivity"
             android:exported="false" />
@@ -30,9 +44,6 @@
 
         <activity
             android:name=".SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MineActivity"
             android:exported="false" />
         <activity
             android:name=".FavoritePlantActivity"
@@ -60,7 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

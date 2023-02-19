@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import oasis.team.econg.graduationproject.EditUserPwActivity
 import oasis.team.econg.graduationproject.FavoritePlantActivity
 import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.UserInfoActivity
@@ -34,6 +35,11 @@ class UserFragment : Fragment() {
         }
         binding.editUserInfo.setOnClickListener {
             val intent = Intent(main, UserInfoActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.changePw.setOnClickListener {
+            val intent = Intent(main, EditUserPwActivity::class.java)
             startActivity(intent)
         }
         return binding.root
