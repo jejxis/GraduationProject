@@ -19,7 +19,6 @@ import java.net.URL
 class DetailPlantSpeciesActivity : AppCompatActivity() {
     val binding by lazy{ActivityDetailPlantSpeciesBinding.inflate(layoutInflater)}
     var id: Long = -1
-    var bookmark = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

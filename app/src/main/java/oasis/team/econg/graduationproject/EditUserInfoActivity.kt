@@ -30,6 +30,7 @@ class EditUserInfoActivity : AppCompatActivity() {
     private lateinit var pictureAdder: PictureAdder
     private var user = UserDto("","","")
     private var requestFile: MultipartBody.Part? = null
+    private var ischange = "false"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -56,11 +57,7 @@ class EditUserInfoActivity : AppCompatActivity() {
 
         binding.btnSetBasic.setOnClickListener {
             binding.userProfile.setImageResource(R.drawable.flower_pot)
-            val path = Uri.parse("android.resource://"+ packageName +"/"+R.drawable.flower_pot).toString()
-            val file = File(path)
-            Log.d(TAG, "onCreate: $file")
-            val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            requestFile = MultipartBody.Part.createFormData("file", file.name, requestBody)
+            ischange = "true"
         }
     }
 
@@ -114,11 +111,13 @@ class EditUserInfoActivity : AppCompatActivity() {
     }
 
     private fun proceedUpdateUserInfo(){
-        val key = binding.editUserNickname.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        if(requestFile == null)
-            requestFile = pictureAdder.getRequestFile()
-
-        RetrofitManager.instance.updateUserInfo(API.HEADER_TOKEN, key, requestFile, completion = {responseState ->
+        val name = binding.editUserNickname.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        requestFile = pictureAdder.getRequestFile()
+        if(requestFile != null){
+            ischange = "true"
+        }
+        val change = ischange.toRequestBody("text/plain".toMediaTypeOrNull())
+        RetrofitManager.instance.updateUserInfo(API.HEADER_TOKEN, name, change, requestFile, completion = {responseState ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
                     Log.d(TAG, "proceedUpdateUserInfo: SUCCESS")

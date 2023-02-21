@@ -303,12 +303,13 @@ class RetrofitManager {
 
     }
 
-    fun updateUserInfo(auth: String?, key: RequestBody, file: MultipartBody.Part?, completion: (RESPONSE_STATE) -> Unit){
+    fun updateUserInfo(auth: String?, name: RequestBody, change: RequestBody, file: MultipartBody.Part?, completion: (RESPONSE_STATE) -> Unit){
         var au = auth.let{it}?:""
-        var key = key
+        var name = name
+        var change = change
         var file = file
 
-        val call = iRetrofit?.updateUserInfo(au, key, file).let{
+        val call = iRetrofit?.updateUserInfo(au, name, change, file).let{
             it
         }?: return
 

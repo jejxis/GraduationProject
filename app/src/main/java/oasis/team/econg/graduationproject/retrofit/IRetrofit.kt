@@ -57,7 +57,7 @@ interface IRetrofit {
     @Multipart
     @JvmSuppressWildcards
     @PATCH("/api/user/update")
-    fun updateUserInfo(@Header("Authorization") auth: String, @Part("key") key: RequestBody, @Part file: MultipartBody.Part?): Call<JsonElement>
+    fun updateUserInfo(@Header("Authorization") auth: String, @Part("name") name: RequestBody, @Part("change") change: RequestBody, @Part file: MultipartBody.Part?): Call<JsonElement>
 
     //비밀번호 변경
     @PATCH("/api/user/changepw")
