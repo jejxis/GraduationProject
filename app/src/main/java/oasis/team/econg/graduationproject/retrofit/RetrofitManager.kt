@@ -457,4 +457,61 @@ class RetrofitManager {
             }
         })
     }
+
+    fun getBookmarks(auth: String?, completion: (RESPONSE_STATE, ArrayList<GardenDto>) -> Unit){
+        var au = auth.let{it}?:""
+        var parsedDataArray = ArrayList<GardenDto>()
+
+        val call = iRetrofit?.getBookmarks(auth = au).let{it}?: return
+        call.enqueue(object: retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "getBookmarks: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val body = it.asJsonObject.get("data").asJsonArray
+                            Log.d(TAG, "RetrofitManager - getBookmarks(): onResponse() called")
+
+                            body.forEach { resultItem ->
+                                val gardenDto = resultItem.convertToGardenDto()
+                                parsedDataArray.add(gardenDto)
+                            }
+                        }
+                    }
+                }
+                completion(RESPONSE_STATE.OKAY, parsedDataArray)
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - getBookmarks(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, parsedDataArray)
+            }
+        })
+    }
+
+    fun postBookmarks(auth: String?, gardenId: Long, completion: (RESPONSE_STATE, String?) -> Unit){
+        var au = auth.let{it}?:""
+        var gardenId = gardenId
+
+        val call = iRetrofit?.postBookmarks(auth = au, gardenId = gardenId).let{it}?:return
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "postBookmarks: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val msg = it.asJsonObject.get("data").asString
+                            Log.d(TAG, "RetrofitManager - postBookmarks(): msg: $msg")
+                            completion(RESPONSE_STATE.OKAY, msg)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - postBookmarks(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
 }

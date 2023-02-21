@@ -4,11 +4,13 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import oasis.team.econg.graduationproject.data.GardenDetailDto
 import oasis.team.econg.graduationproject.databinding.ActivityDetailPlantSpeciesBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -29,12 +31,7 @@ class DetailPlantSpeciesActivity : AppCompatActivity() {
         loadData()
 
         binding.btnBookmark.setOnClickListener {
-            if(!bookmark){
-                binding.btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_45)
-            }
-            else
-                binding.btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_border_45)
-            bookmark = !bookmark
+            postBookmarks()
         }
 
         binding.btnClose.setOnClickListener {
@@ -83,10 +80,35 @@ class DetailPlantSpeciesActivity : AppCompatActivity() {
 
             binding.plantDescription.text =
                 dto.manageLevel + "\n" + dto.waterSupply + "\n" + dto.bug + "\n" + dto.adviceInfo
-            bookmark = dto.bookmark
+            if(dto.bookmark){
+                binding.btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_45)
+            }
+            else{
+                binding.btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_border_45)
+            }
         }catch (e: InterruptedException){
             e.printStackTrace()
         }
 
+    }
+
+    private fun postBookmarks(){
+        RetrofitManager.instance.postBookmarks(API.HEADER_TOKEN, id, completion = {
+            responseState, msg ->
+            when(responseState){
+                RESPONSE_STATE.OKAY -> {
+                    Log.d(TAG, "DetailPlantSpeciesActivity - postBookmarks: $msg")
+                    if(msg == "Bookmark Add"){
+                        binding.btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_45)
+                    }
+                    else{//Bookmark Delete
+                        binding.btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_border_45)
+                    }
+                }
+                RESPONSE_STATE.FAIL -> {
+
+                }
+            }
+        })
     }
 }

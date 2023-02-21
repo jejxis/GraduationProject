@@ -74,4 +74,12 @@ interface IRetrofit {
     //식물도감 검색
     @GET("/api/garden/search")
     fun searchGarden(@Header("Authorization") auth: String, @Query("keyword") keyword: String): Call<JsonElement>
+
+    //찜한 식물 가져오기
+    @GET("/api/bookmarks")
+    fun getBookmarks(@Header("Authorization") auth: String): Call<JsonElement>
+
+    //식물 찜하기
+    @POST("/api/bookmarks/{gardenId}")
+    fun postBookmarks(@Header("Authorization") auth: String, @Path("gardenId") gardenId: Long): Call<JsonElement>
 }

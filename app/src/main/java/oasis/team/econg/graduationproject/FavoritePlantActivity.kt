@@ -3,11 +3,15 @@ package oasis.team.econg.graduationproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.data.GardenDto
 import oasis.team.econg.graduationproject.data.PlantSpecies
 import oasis.team.econg.graduationproject.databinding.ActivityFavoritePlantBinding
+import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter
+import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
 class FavoritePlantActivity : AppCompatActivity() {
     val binding by lazy{ActivityFavoritePlantBinding.inflate(layoutInflater)}
@@ -17,8 +21,11 @@ class FavoritePlantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
         loadData()
-        setAdapter()
     }
 
     private fun setAdapter() {
@@ -31,7 +38,18 @@ class FavoritePlantActivity : AppCompatActivity() {
     }
 
     private fun loadData(){
-
+        RetrofitManager.instance.getBookmarks(auth = API.HEADER_TOKEN, completion = {
+            responseState, responseBody ->
+            when(responseState){
+                RESPONSE_STATE.OKAY -> {
+                    plantSpeciesList = responseBody
+                    setAdapter()
+                }
+                RESPONSE_STATE.FAIL -> {
+                    Toast.makeText(this@FavoritePlantActivity, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private val listener = object: PlantSpeciesAdapter.OnClickedItem{
