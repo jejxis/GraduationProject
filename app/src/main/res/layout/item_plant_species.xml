@@ -21,9 +21,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:textSize="20dp"
-        android:textColor="@color/black"
         android:text="식물 종 이름"
+        android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintStart_toEndOf="@+id/plantSpeciesPicture"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="재배 난이도: "
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/plantSpeciesPicture"
+        app:layout_constraintTop_toBottomOf="@+id/plantSpeciesName" />
+
+    <TextView
+        android:id="@+id/plantSpeciesManageLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/plantSpeciesName" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,13 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import oasis.team.econg.graduationproject.data.GardenDto
 import oasis.team.econg.graduationproject.data.PlantSpecies
 import oasis.team.econg.graduationproject.databinding.ActivityFavoritePlantBinding
 import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter
 
 class FavoritePlantActivity : AppCompatActivity() {
     val binding by lazy{ActivityFavoritePlantBinding.inflate(layoutInflater)}
-    var plantSpeciesList = mutableListOf<PlantSpecies>()
+    var plantSpeciesList = mutableListOf<GardenDto>()
     lateinit var favoriteAdapter: PlantSpeciesAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +31,11 @@ class FavoritePlantActivity : AppCompatActivity() {
     }
 
     private fun loadData(){
-        for(i in 0..11){
-            plantSpeciesList.add(
-                PlantSpecies(
-                    "$i",
-                    "PLANT_SPECIES$i",
-                    ""
-                )
-            )
-        }
+
     }
 
     private val listener = object: PlantSpeciesAdapter.OnClickedItem{
-        override fun onClick(id: String) {
+        override fun onClick(id: Long) {
             val intent = Intent(this@FavoritePlantActivity, DetailPlantSpeciesActivity::class.java)
             intent.putExtra("id", id)
             startActivity(intent)

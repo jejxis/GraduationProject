@@ -426,12 +426,12 @@ class RetrofitManager {
         })
     }
 
-    fun searchGarden(auth: String?, key: String, completion: (RESPONSE_STATE, ArrayList<GardenDto>) -> Unit){
+    fun searchGarden(auth: String?, keyword: String, completion: (RESPONSE_STATE, ArrayList<GardenDto>) -> Unit){
         var au = auth.let{it}?:""
-        val key = key
+        val keyword = keyword
         var parsedDataArray = ArrayList<GardenDto>()
 
-        val call = iRetrofit?.searchGarden(auth = au, key = key).let{it}?: return
+        val call = iRetrofit?.searchGarden(auth = au, keyword = keyword).let{it}?: return
         call.enqueue(object: retrofit2.Callback<JsonElement>{
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 Log.d(TAG, "searchGarden: onResponse() called/ response: $response")

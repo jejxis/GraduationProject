@@ -73,5 +73,5 @@ interface IRetrofit {
 
     //식물도감 검색
     @GET("/api/garden/search")
-    fun searchGarden(@Header("Authorization") auth: String, @Query("key") key: String): Call<JsonElement>
+    fun searchGarden(@Header("Authorization") auth: String, @Query("keyword") keyword: String): Call<JsonElement>
 }
