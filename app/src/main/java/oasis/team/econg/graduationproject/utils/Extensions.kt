@@ -114,3 +114,17 @@ fun JsonElement.convertToGardenDetailDto(): GardenDetailDto{
         bookmark = bookmark
     )
 }
+
+fun JsonElement.convertToSchedule(): Schedule{
+    var resultItemObject = this.asJsonObject
+
+    val date = resultItemObject.get("date").asString
+    val plantName = resultItemObject.get("plantName").asString
+    val careType = resultItemObject.get("careType").asString
+
+    return Schedule(
+        date = date,
+        plantName = plantName,
+        careType = careType
+    )
+}

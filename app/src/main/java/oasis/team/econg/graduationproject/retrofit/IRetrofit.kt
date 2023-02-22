@@ -82,4 +82,12 @@ interface IRetrofit {
     //식물 찜하기
     @POST("/api/bookmarks/{gardenId}")
     fun postBookmarks(@Header("Authorization") auth: String, @Path("gardenId") gardenId: Long): Call<JsonElement>
+
+    //물주기, 분갈이, 영양제 주기 표시
+    @POST("/api/calendars/{plantId}")
+    fun postCalendars(@Header("Authorization") auth: String, @Path("plantId") plantId: Long, @Query("type") type: String): Call<JsonElement>
+
+    //물주기, 분갈이, 영양제 준 날들 가져오기
+    @GET("/api/calendars")
+    fun getCalendars(@Header("Authorization") auth: String):Call<JsonElement>
 }

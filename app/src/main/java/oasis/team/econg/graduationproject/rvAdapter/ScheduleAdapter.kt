@@ -30,7 +30,11 @@ class ScheduleAdapter(val context: Context?): RecyclerView.Adapter<ScheduleAdapt
     inner class ScheduleHolder(val binding: ItemScheduleBinding): RecyclerView.ViewHolder(binding.root){
         fun setData(data: Schedule){
             binding.plantName.text = data.plantName
-            binding.boolWater.text = if(data.water) "O" else "X"
+            when(data.careType){
+                "WATER" -> binding.careType.text = "물주기"
+                "NUTRITION" -> binding.careType.text = "영양제"
+                "REPOTTING" -> binding.careType.text = "분갈이"
+            }
         }
     }
 }

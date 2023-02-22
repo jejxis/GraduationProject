@@ -4,16 +4,19 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import oasis.team.econg.graduationproject.R
-import oasis.team.econg.graduationproject.data.DiaryPlant
-import oasis.team.econg.graduationproject.data.Plant
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemMyPlantBinding
+import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants.TAG
+import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -29,6 +32,7 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
 
     override fun onBindViewHolder(holder: MyPlantHolder, position: Int) {
         val data = listData.get(position)
+        holder.saveData(data)
         holder.setData(data)
         holder.itemView.setOnClickListener {
             listener!!.onClicked(data.id)
@@ -40,6 +44,10 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
     }
 
     inner class MyPlantHolder(val binding: ItemMyPlantBinding): RecyclerView.ViewHolder(binding.root){
+        private lateinit var data: PlantsResponseDto
+        fun saveData(data: PlantsResponseDto){
+            this.data = data
+        }
         fun setData(data: PlantsResponseDto){
             var bitmap: Bitmap? = null
             val thread = object: Thread(){
@@ -67,14 +75,29 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
             }
 
             binding.waterCheck.setOnClickListener {
-                checkEachCultureStyle(it as TextView)
+                postCalendars("w", it)
             }
             binding.nutrientsCheck.setOnClickListener {
-                checkEachCultureStyle(it as TextView)
+                postCalendars("n", it)
             }
             binding.repottingCheck.setOnClickListener {
-                checkEachCultureStyle(it as TextView)
+                postCalendars("r", it)
             }
+        }
+
+        private fun postCalendars(type: String, view: View){
+            RetrofitManager.instance.postCalendars(auth = API.HEADER_TOKEN, plantId = data.id, type = type, completion = {
+                responseState, message ->
+                when(responseState){
+                    RESPONSE_STATE.OKAY -> {
+                        Log.d(TAG, "MyPlantAdapter - postCalendars: $message")
+                        checkEachCultureStyle(view as TextView)
+                    }
+                    RESPONSE_STATE.FAIL -> {
+                        Log.d(TAG, "MyPlantAdapter - postCalendars: fail")
+                    }
+                }
+            })
         }
     }
 

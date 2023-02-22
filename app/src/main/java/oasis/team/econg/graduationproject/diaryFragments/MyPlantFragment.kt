@@ -12,8 +12,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.MainActivity
-import oasis.team.econg.graduationproject.R
-import oasis.team.econg.graduationproject.data.DiaryPlant
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.FragmentMyPlantBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager

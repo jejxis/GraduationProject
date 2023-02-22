@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rv_item_border"
-    android:layout_margin="10dp">
+    android:background="@drawable/rv_item_border">
 
     <TextView
         android:id="@+id/plantName"
@@ -21,17 +20,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="물주기: "
+        android:text="재배종류: "
         android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plantName" />
 
     <TextView
-        android:id="@+id/boolWater"
+        android:id="@+id/careType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="O"
+        android:text=""
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/plantName" />

@@ -1,25 +1,18 @@
 package oasis.team.econg.graduationproject.menuFragments
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import oasis.team.econg.graduationproject.DetailPlantSpeciesActivity
 import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.R
-import oasis.team.econg.graduationproject.data.PlantSpecies
 import oasis.team.econg.graduationproject.databinding.FragmentSearchBinding
-import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter
 import oasis.team.econg.graduationproject.searchFragments.AllGardenFragment
 import oasis.team.econg.graduationproject.searchFragments.GuideFragment
 import oasis.team.econg.graduationproject.searchFragments.SearchResultFragment
-import oasis.team.econg.graduationproject.utils.Constants.GUIDELINE
 
 class SearchFragment : Fragment() {
 

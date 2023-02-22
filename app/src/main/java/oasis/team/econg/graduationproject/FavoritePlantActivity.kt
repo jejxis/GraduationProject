@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.data.GardenDto
-import oasis.team.econg.graduationproject.data.PlantSpecies
 import oasis.team.econg.graduationproject.databinding.ActivityFavoritePlantBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import oasis.team.econg.graduationproject.data.Diary
 import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemDiaryBinding
 import java.io.IOException

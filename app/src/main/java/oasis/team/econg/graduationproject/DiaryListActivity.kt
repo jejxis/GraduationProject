@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import oasis.team.econg.graduationproject.data.Diary
 import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.databinding.ActivityDiaryListBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager

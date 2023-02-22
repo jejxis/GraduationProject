@@ -11,9 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.DetailPlantSpeciesActivity
 import oasis.team.econg.graduationproject.MainActivity
-import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.GardenDto
-import oasis.team.econg.graduationproject.data.PlantSpecies
 import oasis.team.econg.graduationproject.databinding.FragmentSearchResultBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter

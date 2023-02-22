@@ -515,4 +515,60 @@ class RetrofitManager {
             }
         })
     }
+
+    fun postCalendars(auth: String?, plantId: Long, type: String, completion: (RESPONSE_STATE, String?) -> Unit){
+        var au = auth.let { it }?:""
+        var plantId = plantId
+        var type = type
+
+        val call = iRetrofit?.postCalendars(auth = au, plantId = plantId, type = type).let{it}?:return
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "postCalendars: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val msg = it.asJsonObject.get("data").asString
+                            Log.d(TAG, "RetrofitManager - postCalendars(): msg: $msg")
+                            completion(RESPONSE_STATE.OKAY, msg)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - postCalendars(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+
+    fun getCalendars(auth: String?, completion: (RESPONSE_STATE, ArrayList<Schedule>) -> Unit){
+        var au = auth.let{it}?:""
+        var parsedDataArray = ArrayList<Schedule>()
+        val call = iRetrofit?.getCalendars(auth = au).let{it}?:return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "getCalendars: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val body = it.asJsonObject.get("data").asJsonArray
+                            body.forEach {
+                                val obj = it.convertToSchedule()
+                                parsedDataArray.add(obj)
+                            }
+                        }
+                        completion(RESPONSE_STATE.OKAY, parsedDataArray)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - getCalendars(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, parsedDataArray)
+            }
+        })
+    }
 }

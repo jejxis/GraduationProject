@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.GardenDto
-import oasis.team.econg.graduationproject.data.PlantSpecies
 import oasis.team.econg.graduationproject.databinding.ItemPlantSpeciesBinding
 import java.io.IOException
 import java.net.HttpURLConnection
