@@ -29,7 +29,6 @@ import java.util.logging.Logger
 class LoginActivity : AppCompatActivity() {
     val binding by lazy{ActivityLoginBinding.inflate(layoutInflater)}
     var fcmToken = ""
-    @RequiresApi(33)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,12 +40,9 @@ class LoginActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
                 application,
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                application,
-                Manifest.permission.POST_NOTIFICATIONS)
-            != PackageManager.PERMISSION_GRANTED
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.POST_NOTIFICATIONS),
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                 1
             )
         }

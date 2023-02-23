@@ -142,7 +142,7 @@ class HomeFragment : Fragment() {
             locationPermissionGranted = true
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10.0f, locationListener)
-        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)?: locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
         gpsTransfer = GpsTransfer(location!!.latitude, location!!.longitude)
         if(gpsTransfer!=null){
             gpsTransfer!!.transfer()

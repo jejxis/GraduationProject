@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -33,6 +34,22 @@ class DiaryListActivity : AppCompatActivity() {
             id = intent.getLongExtra("id", -1)
         }
 
+        binding.btnVisibleGone.setOnClickListener {
+            if(binding.btnGoToMyPlantInfo.visibility == View.VISIBLE){
+                binding.btnGoToMyPlantInfo.visibility = View.GONE
+                binding.btnVisibleGone.setImageResource(R.drawable.ic_baseline_chevron_left_24)
+            }
+            else{
+                binding.btnGoToMyPlantInfo.visibility = View.VISIBLE
+                binding.btnVisibleGone.setImageResource(R.drawable.ic_baseline_chevron_right_24)
+            }
+        }
+
+        binding.btnGoToMyPlantInfo.setOnClickListener {
+            val intent = Intent(this@DiaryListActivity, MyPlantInfoActivity::class.java)
+            intent.putExtra("plantId", id)
+            startActivity(intent)
+        }
         binding.addDiary.setOnClickListener {
             var intent = Intent(this, AddDiaryActivity::class.java)
             intent.putExtra("id", id)
