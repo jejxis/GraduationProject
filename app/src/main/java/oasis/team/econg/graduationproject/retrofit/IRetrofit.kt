@@ -90,4 +90,15 @@ interface IRetrofit {
     //물주기, 분갈이, 영양제 준 날들 가져오기
     @GET("/api/calendars")
     fun getCalendars(@Header("Authorization") auth: String):Call<JsonElement>
+
+    //다이어리 삭제
+    @DELETE("/api/journals/{journalId}")
+    fun deleteJournals(@Header("Authorization") auth: String, @Path("journalId") journalId: Long): Call<JsonElement>
+
+    //사용자가 입력한 특정 식물 정보 받아오기
+    @GET("/api/plants/{plantId}")
+    fun getPlantInfo(@Header("Authorization") auth: String, @Path("plantId") plantId: Long): Call<JsonElement>
+
+    @GET("/api/plants/{plantId}")
+    fun deletePlants(@Header("Authorization") auth: String, @Path("plantId") plantId: Long): Call<JsonElement>
 }

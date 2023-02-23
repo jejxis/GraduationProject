@@ -1,17 +1,21 @@
 package oasis.team.econg.graduationproject
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.firebase.dynamiclinks.ktx.dynamicLinks
-import com.google.firebase.ktx.Firebase
+import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
 import oasis.team.econg.graduationproject.data.LoginDto
 import oasis.team.econg.graduationproject.databinding.ActivityLoginBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
@@ -20,26 +24,34 @@ import oasis.team.econg.graduationproject.samplePreference.PreferenceUtil
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
+import java.util.logging.Logger
 
 class LoginActivity : AppCompatActivity() {
     val binding by lazy{ActivityLoginBinding.inflate(layoutInflater)}
+    var fcmToken = ""
+    @RequiresApi(33)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        createNotificationChannel("notificationPermission", "notification")
         if (ActivityCompat.checkSelfPermission(
                 application,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
                 application,
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+                application,
+                Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
         ) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.POST_NOTIFICATIONS),
                 1
             )
         }
 
+        pushToken()
         binding.btnLogin.setOnClickListener {
             val email = binding.loginEmail.text.toString().trim()
             val pw = binding.loginPw.text.toString().trim()
@@ -54,8 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 binding.loginPw.requestFocus()
                 return@setOnClickListener
             }
-
-            val loginDto = LoginDto(email, pw)
+            val loginDto = makeLoginDto(email, pw)
 
             if(loginDto == null) return@setOnClickListener
             else{
@@ -72,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun proceedLogin(dto: LoginDto){
-        Log.d(TAG, "in proceedLogin()")
+        Log.d(TAG, "proceedLogin() - dto: $dto")
         RetrofitManager.instance.signIn(dto, completion = {
             responseState, responseBody ->
             when(responseState){
@@ -82,6 +93,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, MyApplication.prefs.token!!)
                     API.HEADER_TOKEN = "Bearer ${MyApplication.prefs.token}"
                     Log.d(TAG, "Login: api call success : $responseBody")
+                    applyTopic()
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -93,5 +105,40 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun applyTopic(){
+        FirebaseMessaging.getInstance().subscribeToTopic("weather-notification").addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d(TAG,"구독 요청 성공")
+            } else {
+                Log.d(TAG, "구독 요청 실패")
+            }
+        }
+    }
+
+    private fun pushToken(){
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task: Task<String> ->
+                if (!task.isSuccessful) {
+                    Log.d(TAG, "pushToken: Fetching FCM registration token failed" + task.exception)
+                    return@addOnCompleteListener
+                }
+                fcmToken = task.result
+                Log.d(TAG, "pushToken: $fcmToken")
+                return@addOnCompleteListener
+        }
+    }
+
+    private fun makeLoginDto(email: String, pw: String): LoginDto{
+        Log.d(TAG, "in makeLoginDto.. is it after pushToken?")
+        return LoginDto(email, pw, fcmToken)
+    }
+
+    private fun createNotificationChannel(channelId: String, channelName: String){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT))
+        }
     }
 }

@@ -17,7 +17,7 @@ object RetrofitClient {
     private var retrofitClient: Retrofit? = null
 
     fun getClient(baseUrl: String): Retrofit?{
-        Log.d(TAG, "RetorfitClient - getClient() called")
+        Log.d(TAG, "RetrofitClient - getClient() called")
 
         val client = OkHttpClient.Builder()
 

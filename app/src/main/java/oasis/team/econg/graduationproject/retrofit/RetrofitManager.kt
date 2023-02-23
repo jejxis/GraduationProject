@@ -20,7 +20,7 @@ class RetrofitManager {
 
     //유저로그인
     fun signIn(loginDto: LoginDto, completion: (RESPONSE_STATE, String?) -> Unit){
-        var dto = loginDto?: LoginDto("", "")
+        var dto = loginDto?: LoginDto("", "", "")
         Log.d(TAG, "Login: RetrofitManager - in API")
         val call = iRetrofit?.signIn(dto).let{
             it
@@ -568,6 +568,81 @@ class RetrofitManager {
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
                 Log.d(TAG, "RetrofitManager - getCalendars(): onFailure() called/ t: $t")
                 completion(RESPONSE_STATE.FAIL, parsedDataArray)
+            }
+        })
+    }
+
+    fun deleteJournals(auth: String?, journalId: Long, completion: (RESPONSE_STATE, String?) -> Unit){
+        var au = auth.let{it}?:""
+        var id = journalId
+        val call = iRetrofit?.deleteJournals(auth = au, journalId = id).let{it}?:return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "deleteJournals: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val msg = it.asJsonObject.get("data").asString
+                            completion(RESPONSE_STATE.OKAY, msg)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - deleteJournals(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+
+    fun getPlantInfo(auth: String?, plantId: Long, completion: (RESPONSE_STATE, PlantsDetailResponseDto?) -> Unit){
+        var au = auth.let { it }?:""
+        var id = plantId
+        val call = iRetrofit?.getPlantInfo(auth = au, plantId = id).let{it}?:return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "getPlantInfo: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let {
+                            val dto = it.asJsonObject.get("data").asJsonObject.convertToPlantsDetailResponseDto()
+                            completion(RESPONSE_STATE.OKAY, dto)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - getPlantInfo(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
+
+    fun deletePlants(auth: String?, plantId: Long, completion: (RESPONSE_STATE, String?) -> Unit){
+        var au = auth.let { it }?:""
+        var id = plantId
+        val call = iRetrofit?.deletePlants(auth = au, plantId = id).let{it}?:return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - deletePlants: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val msg = it.asJsonObject.get("data").asString
+                            completion(RESPONSE_STATE.OKAY, msg)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - deletePlants(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, null)
             }
         })
     }

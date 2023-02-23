@@ -22,9 +22,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="식물 이름"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/plantImg"
         app:layout_constraintTop_toTopOf="@+id/plantImg" />
 

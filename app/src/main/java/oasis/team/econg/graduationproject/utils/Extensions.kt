@@ -128,3 +128,27 @@ fun JsonElement.convertToSchedule(): Schedule{
         careType = careType
     )
 }
+
+fun JsonElement.convertToPlantsDetailResponseDto(): PlantsDetailResponseDto{
+    var resultItemObject = this.asJsonObject
+
+    val name = resultItemObject.get("name").asString
+    val picture = resultItemObject.get("picture").asString
+    val adoptingDate = resultItemObject.get("adoptingDate").asString
+    val waterAlarmInterval = resultItemObject.get("waterAlarmInterval").asInt
+    val waterSupply = resultItemObject.get("waterSupply").asString
+    val sunshine = resultItemObject.get("sunshine").asDouble
+    val highTemperature = resultItemObject.get("highTemperature").asInt
+    val lowTemperature = resultItemObject.get("lowTemperature").asInt
+
+    return PlantsDetailResponseDto(
+        name = name,
+        picture = picture,
+        adoptingDate = adoptingDate,
+        waterAlarmInterval = waterAlarmInterval,
+        waterSupply = waterSupply,
+        sunshine = sunshine,
+        highTemperature = highTemperature,
+        lowTemperature = lowTemperature
+    )
+}
