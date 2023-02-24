@@ -99,6 +99,6 @@ interface IRetrofit {
     @GET("/api/plants/{plantId}")
     fun getPlantInfo(@Header("Authorization") auth: String, @Path("plantId") plantId: Long): Call<JsonElement>
 
-    @GET("/api/plants/{plantId}")
+    @DELETE("/api/plants/{plantId}")
     fun deletePlants(@Header("Authorization") auth: String, @Path("plantId") plantId: Long): Call<JsonElement>
 }

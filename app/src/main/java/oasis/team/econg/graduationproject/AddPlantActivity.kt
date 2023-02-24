@@ -28,12 +28,12 @@ class AddPlantActivity : AppCompatActivity() {
     var waterAlarmInterval = 0
     var temStart = 0
     var temEnd = 0
+    private lateinit var pictureAdder: PictureAdder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val pictureAdder = PictureAdder(this, binding.plantThumb)
-
+        pictureAdder = PictureAdder(this, binding.plantThumb)
         binding.ratingBarSunshine.setOnRatingBarChangeListener {
                 ratingBar, fl, b
             ->  binding.sunshine.text = fl.toInt().toString()
@@ -70,11 +70,11 @@ class AddPlantActivity : AppCompatActivity() {
 
         binding.btnSave.setOnClickListener {
             val dto = makePlant()
+            requestFile = pictureAdder.getRequestFile()
             if(dto == null) return@setOnClickListener
             else{
                 val key = Gson().toJson(dto).toString().toRequestBody("text/plain".toMediaTypeOrNull())
-                requestFile = pictureAdder.getRequestFile()
-                RetrofitManager.instance.postPlants(auth = API.HEADER_TOKEN, key = key, requestFile, completion = {
+                RetrofitManager.instance.postPlants(auth = API.HEADER_TOKEN, key = key, file = requestFile, completion = {
                     responseState, responseBody ->
                     when(responseState){
                         RESPONSE_STATE.OKAY ->{

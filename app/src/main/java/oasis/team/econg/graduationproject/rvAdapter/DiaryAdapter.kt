@@ -43,6 +43,8 @@ class DiaryAdapter(val context: Context?): RecyclerView.Adapter<DiaryAdapter.Dia
     }
 
     inner class DiaryHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
+        private val checkDeleteJournalFragment = CheckDeleteJournalFragment()
+
         fun setData(data: JournalsResponseDto){
             var bitmap: Bitmap? = null
             val thread = object: Thread(){
@@ -82,14 +84,12 @@ class DiaryAdapter(val context: Context?): RecyclerView.Adapter<DiaryAdapter.Dia
             }
 
             binding.btnDeleteDiary.setOnClickListener {
-                val checkDeleteJournalFragment = CheckDeleteJournalFragment()
                 checkDeleteJournalFragment.setDialogListener(object: CheckDeleteJournalFragment.CheckDeleteListener{
                     override fun onDeleteClicked() {
                         proceedDelete(data)
                     }
                 })
                 checkDeleteJournalFragment.show(diaryList.supportFragmentManager, "checkDeleteJournalFragment")
-
             }
         }
 

@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.R
-import oasis.team.econg.graduationproject.databinding.FragmentCheckDeletecJournalBinding
+import oasis.team.econg.graduationproject.databinding.FragmentCheckDeletePlantBinding
 
-class CheckDeleteJournalFragment : DialogFragment() {
 
-    var _binding: FragmentCheckDeletecJournalBinding? = null
+class CheckDeletePlantFragment : DialogFragment() {
+
+    var _binding: FragmentCheckDeletePlantBinding? = null
     private val binding get() = _binding!!
     lateinit var diaryListActivity: DiaryListActivity
     private var checkDeleteListener : CheckDeleteListener? = null
@@ -27,7 +28,7 @@ class CheckDeleteJournalFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCheckDeletecJournalBinding.inflate(inflater, container, false)
+        _binding = FragmentCheckDeletePlantBinding.inflate(inflater, container, false)
         binding.btnCheckDelete.setOnClickListener {
             checkDeleteListener!!.onDeleteClicked()
             this.dismiss()

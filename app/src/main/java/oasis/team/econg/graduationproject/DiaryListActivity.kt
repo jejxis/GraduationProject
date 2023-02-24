@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.databinding.ActivityDiaryListBinding
+import oasis.team.econg.graduationproject.dialog.CheckDeletePlantFragment
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.DiaryAdapter
 import oasis.team.econg.graduationproject.utils.API
@@ -22,9 +23,17 @@ class DiaryListActivity : AppCompatActivity() {
     var diaryList = mutableListOf<JournalsResponseDto>()
     var diaryAdapter = DiaryAdapter(this)
     var id: Long = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val deletePlantDialog = CheckDeletePlantFragment()
+        deletePlantDialog.setDialogListener(object : CheckDeletePlantFragment.CheckDeleteListener{
+            override fun onDeleteClicked() {
+                proceedDeletePlant()
+            }
+        })
 
         binding.btnClose.setOnClickListener {
             finish()
@@ -35,12 +44,12 @@ class DiaryListActivity : AppCompatActivity() {
         }
 
         binding.btnVisibleGone.setOnClickListener {
-            if(binding.btnGoToMyPlantInfo.visibility == View.VISIBLE){
-                binding.btnGoToMyPlantInfo.visibility = View.GONE
+            if(binding.buttons.visibility == View.VISIBLE){
+                binding.buttons.visibility = View.GONE
                 binding.btnVisibleGone.setImageResource(R.drawable.ic_baseline_chevron_left_24)
             }
             else{
-                binding.btnGoToMyPlantInfo.visibility = View.VISIBLE
+                binding.buttons.visibility = View.VISIBLE
                 binding.btnVisibleGone.setImageResource(R.drawable.ic_baseline_chevron_right_24)
             }
         }
@@ -49,6 +58,10 @@ class DiaryListActivity : AppCompatActivity() {
             val intent = Intent(this@DiaryListActivity, MyPlantInfoActivity::class.java)
             intent.putExtra("plantId", id)
             startActivity(intent)
+        }
+
+        binding.btnDeletePlant.setOnClickListener {
+            deletePlantDialog.show(supportFragmentManager, "deletePlantDialog")
         }
         binding.addDiary.setOnClickListener {
             var intent = Intent(this, AddDiaryActivity::class.java)
@@ -80,5 +93,24 @@ class DiaryListActivity : AppCompatActivity() {
         diaryAdapter.setData(diaryList)
         binding.rvDiary.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvDiary.adapter = diaryAdapter
+    }
+
+    private fun proceedDeletePlant(){
+        if(id < 0) return
+        RetrofitManager.instance.deletePlants(API.HEADER_TOKEN, id, completion = {
+            responseState, s ->
+            when(responseState){
+                RESPONSE_STATE.OKAY -> {
+                    Log.d(TAG, "proceedDeletePlant: msg: $s")
+                    val intent = Intent(this@DiaryListActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                RESPONSE_STATE.FAIL -> {
+                    Toast.makeText(this@DiaryListActivity, "데이터를 삭제하는 데 실패했습니다.",
+                    Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 }
