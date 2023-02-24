@@ -18,9 +18,11 @@
 
     <ImageView
         android:id="@+id/imgDiary"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:scaleType="center"
+        android:maxHeight="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date"
@@ -28,16 +30,43 @@
 
     <TextView
         android:id="@+id/content"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:inputType="textMultiLine|text|textImeMultiLine"
-        android:text="안고 그들에게 밝은 길을 찾아 주며 그들을 행복스럽
-고 평화스러운 곳으로 인도하겠다는 커다란 이상을
-품었기 때문이다 그러므로 그들은 길지 아니한 목숨
-을 사는가 싶이 살았으며 그들의 그림자는 천고에 사
-라지지 않는 것이다 이것은 현저하게 일월과"
+        android:text="예시"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgDiary" />
+
+    <TextView
+        android:id="@+id/btnEditDiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="수정"
+        android:textColor="@color/teal_700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="|"
+        app:layout_constraintStart_toEndOf="@+id/btnEditDiary"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <TextView
+        android:id="@+id/btnDeleteDiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="삭제"
+        android:textColor="@color/delete_red"
+        app:layout_constraintStart_toEndOf="@+id/textView37"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
 </androidx.constraintlayout.widget.ConstraintLayout>
