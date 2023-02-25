@@ -7,11 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import oasis.team.econg.graduationproject.EditUserPwActivity
-import oasis.team.econg.graduationproject.FavoritePlantActivity
-import oasis.team.econg.graduationproject.MainActivity
-import oasis.team.econg.graduationproject.UserInfoActivity
+import oasis.team.econg.graduationproject.*
 import oasis.team.econg.graduationproject.databinding.FragmentUserBinding
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 
 class UserFragment : Fragment() {
     lateinit var binding: FragmentUserBinding
@@ -40,6 +38,12 @@ class UserFragment : Fragment() {
 
         binding.changePw.setOnClickListener {
             val intent = Intent(main, EditUserPwActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.logout.setOnClickListener {
+            MyApplication.prefs.logout()
+            val intent = Intent(main, LoginActivity::class.java)
             startActivity(intent)
         }
         return binding.root

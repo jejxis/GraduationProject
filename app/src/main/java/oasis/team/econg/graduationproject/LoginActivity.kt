@@ -32,11 +32,18 @@ class LoginActivity : AppCompatActivity() {
     val binding by lazy{ActivityLoginBinding.inflate(layoutInflater)}
     var email = ""
     var pw = ""
+    var auto = ""
     private var fcmToken = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        MyApplication.prefs = PreferenceUtil(application)
+        if(MyApplication.prefs.token != null){
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         createNotificationChannel("notificationPermission", "notification")
         if (ActivityCompat.checkSelfPermission(
                 application,
@@ -88,7 +95,6 @@ class LoginActivity : AppCompatActivity() {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
-                    MyApplication.prefs = PreferenceUtil(application)
                     MyApplication.prefs.token = responseBody
                     Log.d(TAG, MyApplication.prefs.token!!)
                     API.HEADER_TOKEN = "Bearer ${MyApplication.prefs.token}"
