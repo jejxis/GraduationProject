@@ -79,10 +79,6 @@ class DiaryAdapter(val context: Context?): RecyclerView.Adapter<DiaryAdapter.Dia
         }
 
         fun setOnClickListener(data: JournalsResponseDto){
-            binding.btnEditDiary.setOnClickListener {
-                Log.d(TAG, "DiaryAdapter setOnClickListener: btnEditDiary Clicked!!")
-            }
-
             binding.btnDeleteDiary.setOnClickListener {
                 checkDeleteJournalFragment.setDialogListener(object: CheckDeleteJournalFragment.CheckDeleteListener{
                     override fun onDeleteClicked() {

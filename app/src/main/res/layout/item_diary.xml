@@ -40,33 +40,12 @@
         app:layout_constraintTop_toBottomOf="@+id/imgDiary" />
 
     <TextView
-        android:id="@+id/btnEditDiary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="수정"
-        android:textColor="@color/teal_700"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
-
-    <TextView
-        android:id="@+id/textView37"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:text="|"
-        app:layout_constraintStart_toEndOf="@+id/btnEditDiary"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
-
-    <TextView
         android:id="@+id/btnDeleteDiary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="삭제"
         android:textColor="@color/delete_red"
-        app:layout_constraintStart_toEndOf="@+id/textView37"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content" />
 </androidx.constraintlayout.widget.ConstraintLayout>
