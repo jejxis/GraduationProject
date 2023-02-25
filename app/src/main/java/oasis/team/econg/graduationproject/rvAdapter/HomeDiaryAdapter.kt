@@ -3,11 +3,18 @@ package oasis.team.econg.graduationproject.rvAdapter
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemHomeDiaryBinding
+import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants.TAG
+import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
@@ -23,7 +30,7 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
 
     override fun onBindViewHolder(holder: HomeDiaryHolder, position: Int) {
         val data = listData.get(position)
-        holder.setData(data)
+        holder.setData(data, position)
 
         holder.itemView.rootView.setOnClickListener {
             listener!!.onClicked(data.id)
@@ -35,7 +42,8 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
     }
 
     inner class HomeDiaryHolder(val binding: ItemHomeDiaryBinding): RecyclerView.ViewHolder(binding.root){
-        fun setData(data: PlantsResponseDto){
+
+        fun setData(data: PlantsResponseDto, position: Int){
             var bitmap: Bitmap? = null
             val thread = object: Thread(){
                 override fun run() {
@@ -54,15 +62,42 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
 
             try{
                 thread.join()
-                binding.dday.text = "물 주기까지 "+data.dday.toString()+"일!"
+                binding.dday.text = "함께한지 "+data.dday.toString()+"일!"
                 binding.name.text = data.name
                 binding.recentRecordDate.text = "최근 기록 날짜: " + data.recentRecordDate
                 binding.diaryThumbnail.setImageBitmap(bitmap)
+                if(data.star)binding.star.setImageResource(R.drawable.ic_baseline_star_45_true)
+                else binding.star.setImageResource(R.drawable.ic_baseline_star_45_false)
+                binding.star.setOnClickListener {
+                    proceedStarPlants(data.star, data.id)
+                    data.star = !data.star
+                    this@HomeDiaryAdapter.notifyItemChanged(position)
+                }
             }catch(e: InterruptedException){
                 e.printStackTrace()
             }
         }
+
+        private fun proceedStarPlants(isStar: Boolean, id: Long){
+            RetrofitManager.instance.starPlants(API.HEADER_TOKEN, id, completion = {
+                    responseState, s ->
+                when(responseState){
+                    RESPONSE_STATE.OKAY -> {
+                        Log.d(TAG, "HomeDiaryAdapter - proceedStarPlants: $s")
+                        if(isStar){
+                            binding.star.setImageResource(R.drawable.ic_baseline_star_45_false)
+                        } else{
+                            binding.star.setImageResource(R.drawable.ic_baseline_star_45_true)
+                        }
+                    }
+                    RESPONSE_STATE.FAIL -> {
+                        Log.d(TAG, "HomeDiaryAdapter - proceedStarPlants: FAIL")
+                    }
+                }
+            })
+        }
     }
+
 
     interface OnItemClickListener{
         fun onClicked(id:Long)

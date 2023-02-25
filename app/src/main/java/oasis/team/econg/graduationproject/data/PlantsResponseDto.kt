@@ -5,5 +5,6 @@ data class PlantsResponseDto(
     var name: String,
     var picture: String,
     var recentRecordDate: String,
+    var star: Boolean,
     var dday: Long
 )

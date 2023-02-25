@@ -101,4 +101,7 @@ interface IRetrofit {
 
     @DELETE("/api/plants/{plantId}")
     fun deletePlants(@Header("Authorization") auth: String, @Path("plantId") plantId: Long): Call<JsonElement>
+
+    @PATCH("/api/plants/star/{plantId}")
+    fun starPlants(@Header("Authorization") auth: String, @Path("plantId") plantId: Long): Call<JsonElement>
 }

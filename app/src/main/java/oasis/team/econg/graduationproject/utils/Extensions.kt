@@ -20,6 +20,7 @@ fun JsonElement.convertToPlantsResponseDto(): PlantsResponseDto{
     val name = resultItemObject.get("name").asString
     val picture = resultItemObject.get("picture").asString
     val recentRecordDate = resultItemObject.get("recentRecordDate").asString
+    var star = resultItemObject.get("star").asBoolean
     val dday = resultItemObject.get("dday").asLong
 
     return PlantsResponseDto(
@@ -27,6 +28,7 @@ fun JsonElement.convertToPlantsResponseDto(): PlantsResponseDto{
         name = name,
         picture = picture,
         recentRecordDate = recentRecordDate,
+        star = star,
         dday = dday
     )
 }

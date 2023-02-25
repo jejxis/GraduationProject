@@ -646,4 +646,29 @@ class RetrofitManager {
             }
         })
     }
+
+    fun starPlants(auth: String?, plantId: Long, completion: (RESPONSE_STATE, String?) -> Unit){
+        var au = auth.let{it}?:""
+        var plantId = plantId
+        val call = iRetrofit?.starPlants(au, plantId).let{it}?: return
+
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.d(TAG, "RetrofitManager - starPlants: onResponse() called/ response: $response")
+                when(response.code()){
+                    200 -> {
+                        response.body()?.let{
+                            val msg = it.asJsonObject.get("data").asString
+                            completion(RESPONSE_STATE.OKAY, msg)
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.d(TAG, "RetrofitManager - starPlants(): onFailure() called/ t: $t")
+                completion(RESPONSE_STATE.FAIL, null)
+            }
+        })
+    }
 }

@@ -17,6 +17,12 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import oasis.team.econg.graduationproject.AddPlantActivity
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.GpsTransfer
@@ -37,6 +43,8 @@ class HomeFragment : Fragment() {
     private var locationPermissionGranted = false
     private var weatherMamp = HashMap<String, String>()
     private var gpsTransfer: GpsTransfer? = null
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     var plants: MutableList<PlantsResponseDto> = mutableListOf()
     var location: Location? = null
@@ -59,11 +67,8 @@ class HomeFragment : Fragment() {
             var intent = Intent(main, AddPlantActivity::class.java)
             startActivity(intent)
         }
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(main)
         getLocationUpdated()
-        if(location != null && gpsTransfer != null && locationPermissionGranted){
-            getCurrentWeather()
-        }
         loadData()
 
         return binding.root
@@ -142,10 +147,36 @@ class HomeFragment : Fragment() {
             locationPermissionGranted = true
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 10.0f, locationListener)
-        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)?: locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
-        gpsTransfer = GpsTransfer(location!!.latitude, location!!.longitude)
-        if(gpsTransfer!=null){
-            gpsTransfer!!.transfer()
+
+        location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+        if(location == null){
+            fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, object : CancellationToken() {
+                override fun onCanceledRequested(p0: OnTokenCanceledListener) = CancellationTokenSource().token
+
+                override fun isCancellationRequested() = false
+            })
+                .addOnSuccessListener { l: Location? ->
+                    if (l== null)
+                        Log.d(TAG, "getLocationUpdated: l is null")
+                    else {
+                        location = l
+                        Log.d(TAG, "getLocationUpdated: location: $location")
+                        gpsTransfer = GpsTransfer(location!!.latitude, location!!.longitude)
+                        if(gpsTransfer!=null){
+                            Log.d(TAG, "getLocationUpdated: gpsTransfer is not null")
+                            gpsTransfer!!.transfer()
+                            getCurrentWeather()
+                        }
+                    }
+
+                }
+        }
+        else{
+            gpsTransfer = GpsTransfer(location!!.latitude, location!!.longitude)
+            if(gpsTransfer!=null){
+                gpsTransfer!!.transfer()
+                getCurrentWeather()
+            }
         }
     }
 

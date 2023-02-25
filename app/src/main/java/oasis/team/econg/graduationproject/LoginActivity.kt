@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.Task
+import com.google.firebase.iid.FirebaseInstanceIdReceiver
+import com.google.firebase.iid.internal.FirebaseInstanceIdInternal
 import com.google.firebase.messaging.FirebaseMessaging
 import oasis.team.econg.graduationproject.data.LoginDto
 import oasis.team.econg.graduationproject.databinding.ActivityLoginBinding
@@ -28,7 +30,9 @@ import java.util.logging.Logger
 
 class LoginActivity : AppCompatActivity() {
     val binding by lazy{ActivityLoginBinding.inflate(layoutInflater)}
-    var fcmToken = ""
+    var email = ""
+    var pw = ""
+    private var fcmToken = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -47,10 +51,9 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        pushToken()
         binding.btnLogin.setOnClickListener {
-            val email = binding.loginEmail.text.toString().trim()
-            val pw = binding.loginPw.text.toString().trim()
+            email = binding.loginEmail.text.toString().trim()
+            pw = binding.loginPw.text.toString().trim()
 
             if (email.isEmpty()/* || !Patterns.EMAIL_ADDRESS.matcher(email).matches()*/) {
                 binding.loginEmail.error = "Check the Email"
@@ -62,12 +65,8 @@ class LoginActivity : AppCompatActivity() {
                 binding.loginPw.requestFocus()
                 return@setOnClickListener
             }
-            val loginDto = makeLoginDto(email, pw)
 
-            if(loginDto == null) return@setOnClickListener
-            else{
-                proceedLogin(loginDto)
-            }
+            pushToken()
 
         }
 
@@ -78,7 +77,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun proceedLogin(dto: LoginDto){
+    private fun proceedLogin(){
+        if(fcmToken.isEmpty()){
+            Toast.makeText(this@LoginActivity, "다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val dto = LoginDto(email = email, password = pw, fcmToken = fcmToken)
         Log.d(TAG, "proceedLogin() - dto: $dto")
         RetrofitManager.instance.signIn(dto, completion = {
             responseState, responseBody ->
@@ -122,19 +126,15 @@ class LoginActivity : AppCompatActivity() {
                 }
                 fcmToken = task.result
                 Log.d(TAG, "pushToken: $fcmToken")
+                proceedLogin()
                 return@addOnCompleteListener
         }
-    }
-
-    private fun makeLoginDto(email: String, pw: String): LoginDto{
-        Log.d(TAG, "in makeLoginDto.. is it after pushToken?")
-        return LoginDto(email, pw, fcmToken)
     }
 
     private fun createNotificationChannel(channelId: String, channelName: String){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT))
+            notificationManager.createNotificationChannel(NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH))
         }
     }
 }

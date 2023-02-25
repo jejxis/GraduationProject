@@ -22,18 +22,21 @@
         android:theme="@style/Theme.GraduationProject"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".MyPlantInfoActivity"
-            android:exported="false" />
-
         <service
             android:name=".PushMessagingService"
-            android:exported="true"
-            tools:ignore="Instantiatable">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDs9a_pFMuXibrLNYuMwrXcq136Jb-63vc" />
+
+        <activity
+            android:name=".MyPlantInfoActivity"
+            android:exported="false" />
 
         <activity
             android:name=".EditUserPwActivity"
@@ -44,10 +47,6 @@
         <activity
             android:name=".UserInfoActivity"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDs9a_pFMuXibrLNYuMwrXcq136Jb-63vc" />
 
         <activity
             android:name=".SignupActivity"
