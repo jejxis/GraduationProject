@@ -12,7 +12,7 @@
         android:padding="20dp">
 
         <ImageView
-            android:id="@+id/btnShowGuide"
+            android:id="@+id/btnShowAll"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_arrow_back_45"
@@ -27,7 +27,7 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/rv_item_border"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnShowGuide"
+            app:layout_constraintStart_toEndOf="@+id/btnShowAll"
             app:layout_constraintTop_toTopOf="parent" />
 
         <FrameLayout

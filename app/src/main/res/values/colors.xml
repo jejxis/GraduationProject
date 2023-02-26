@@ -10,4 +10,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="delete_red">#8A0707</color>
+    <color name="activity_background">#FFFFFA</color>
 </resources>

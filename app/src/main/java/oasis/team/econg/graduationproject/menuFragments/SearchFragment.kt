@@ -31,15 +31,13 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false)
 
-        showGuideFragment()
-
+        showAllGardenFragment()
         binding.searchView.setOnClickListener {
-            binding.btnShowGuide.visibility = View.VISIBLE
-            showAllGardenFragment()
+            binding.btnShowAll.visibility = View.VISIBLE
         }
 
-        binding.btnShowGuide.setOnClickListener {
-            showGuideFragment()
+        binding.btnShowAll.setOnClickListener {
+            showAllGardenFragment()
             it.visibility = View.GONE
         }
 
@@ -68,12 +66,6 @@ class SearchFragment : Fragment() {
     private fun showSearchResultFragment(key:String){
         childFragmentManager.beginTransaction()
             .replace(R.id.searchFrame, SearchResultFragment().newInstance(key))
-            .commitAllowingStateLoss()
-    }
-
-    private fun showGuideFragment(){
-        childFragmentManager.beginTransaction()
-            .replace(R.id.searchFrame, GuideFragment())
             .commitAllowingStateLoss()
     }
 

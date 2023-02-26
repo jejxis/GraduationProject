@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_b"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_eb"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_l"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_long_b"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_long_bl"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_long_eb"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_long_l"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_long_m"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/seoul_namsan_m"/>
+</font-family>
