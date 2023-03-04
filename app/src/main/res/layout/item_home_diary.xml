@@ -23,23 +23,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="함께한 지 000일째"
+        android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/black"
-        android:fontFamily="@font/seoul_namsan_m"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="식물이름"
-        android:textSize="16dp"
-        android:textColor="@color/black"
         android:fontFamily="@font/seoul_namsan_m"
+        android:text="식물이름"
+        android:textColor="@color/black"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diaryThumbnail" />
@@ -49,10 +49,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="온도"
-        android:textSize="14dp"
-        android:textColor="@color/black"
         android:fontFamily="@font/seoul_namsan_l"
+        android:text="온도"
+        android:textColor="@color/black"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -65,17 +65,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_star_45_false" />
 
-    <TextView
-        android:id="@+id/sesorValue"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bluetoothLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textSize="14dp"
-        android:inputType="textMultiLine"
-        android:textColor="@color/black"
-        android:fontFamily="@font/seoul_namsan_l"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recentRecordDate" />
+        app:layout_constraintTop_toBottomOf="@+id/recentRecordDate">
+
+        <TextView
+            android:id="@+id/sensorValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/seoul_namsan_l"
+            android:inputType="textMultiLine"
+            android:text="데이터를 받아오는 중입니다."
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBluetooth"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnBluetooth"
+            app:layout_constraintTop_toTopOf="@+id/btnBluetooth" />
+
+        <ImageButton
+            android:id="@+id/btnBluetooth"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/rv_item_border"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_bluetooth_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,5 +6,6 @@ data class PlantsResponseDto(
     var picture: String,
     var recentRecordDate: String,
     var star: Boolean,
-    var dday: Long
+    var dday: Long,
+    var sensorValue: String = ""
 )
