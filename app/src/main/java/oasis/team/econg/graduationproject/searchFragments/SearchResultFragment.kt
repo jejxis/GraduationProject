@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.DetailPlantSpeciesActivity
 import oasis.team.econg.graduationproject.MainActivity
@@ -59,6 +61,7 @@ class SearchResultFragment : Fragment() {
         plantSearchAdapter = PlantSpeciesAdapter(main)
         plantSearchAdapter.setData(plantSpeciesList)
         plantSearchAdapter.listener = listener
+        binding.rvSearch.addItemDecoration(DividerItemDecoration(main, LinearLayout.VERTICAL))
         binding.rvSearch.layoutManager = LinearLayoutManager(main, LinearLayoutManager.VERTICAL, false)
         binding.rvSearch.adapter = plantSearchAdapter
 

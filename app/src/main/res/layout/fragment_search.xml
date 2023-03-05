@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:autofillHints="찾고자 하는 식물을 검색하세요"
+    android:background="@color/activity_background"
     tools:context=".menuFragments.SearchFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,30 +13,46 @@
         android:layout_height="match_parent"
         android:padding="20dp">
 
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/seoul_namsan_long_eb"
+            android:text="식물도감"
+            android:textColor="#476930"
+            android:textSize="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/btnShowAll"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_arrow_back_45"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/rv_item_border"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border_round"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@null"
+            android:queryHint="찾고자 하는 식물을 검색하세요"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnShowAll"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
         <FrameLayout
             android:id="@+id/searchFrame"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

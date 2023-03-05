@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.DetailPlantSpeciesActivity
 import oasis.team.econg.graduationproject.MainActivity
@@ -62,6 +64,7 @@ class AllGardenFragment : Fragment() {
         gardenAdapter = PlantSpeciesAdapter(main)
         gardenAdapter.setData(gardenList)
         gardenAdapter.listener = listener
+        binding.rvAllGarden.addItemDecoration(DividerItemDecoration(main, LinearLayout.VERTICAL))
         binding.rvAllGarden.layoutManager = LinearLayoutManager(main, LinearLayoutManager.VERTICAL, false)
         binding.rvAllGarden.adapter = gardenAdapter
     }

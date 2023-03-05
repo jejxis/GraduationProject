@@ -1,5 +1,6 @@
 package oasis.team.econg.graduationproject.utils
 
+import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.samplePreference.MyApplication
 
 object Constants {
@@ -26,3 +27,14 @@ object API{
     //    const val HEADER_TOKEN : String = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZWxsb0BnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjY1MDc2MTk2fQ.WPuvT-YsumY2xQsmwSCHFzIQbgCgthdHEGQ0qT0UXyFeb_QkpC1FZthgeVRlrSEmncqwcgq_Fi-XxO9zN4GXhw"
     var HEADER_TOKEN : String = "Bearer ${MyApplication.prefs.token}"
 }
+
+val skyList = arrayOf("", "맑음", "", "구름많음", "흐림")
+val ptyList = arrayOf("없음", "비", "비/눈", "눈","", "비", "눈", "눈")
+val weatherIconSetMap: Map<String, Int> = mapOf(
+    "맑음" to R.drawable.weather_sunny,
+    "구름많음" to R.drawable.weather_some_cloud,
+    "흐림" to R.drawable.weather_cloudy,
+    "비" to R.drawable.weather_rainy,
+    "비/눈" to R.drawable.weather_rain_snow,
+    "눈" to R.drawable.weather_snowy
+)

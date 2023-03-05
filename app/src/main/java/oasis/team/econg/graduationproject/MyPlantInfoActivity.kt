@@ -28,11 +28,6 @@ class MyPlantInfoActivity : AppCompatActivity() {
             plantId = intent.getLongExtra("plantId", -1)
         }
 
-        binding.adoptionDate.isEnabled = false
-        binding.editPlantName.isEnabled = false
-        binding.btnCultureSetting.isClickable = false
-        binding.btnTemperatureSetting.isClickable = false
-
         binding.btnClose.setOnClickListener {
             finish()
         }
@@ -85,12 +80,12 @@ class MyPlantInfoActivity : AppCompatActivity() {
                 thread.join()
                 binding.plantThumb.setImageBitmap(bitmap)
             }
-            binding.editPlantName.setText(dto.name)
+            binding.plantName.text = dto.name
             binding.adoptionDate.text = dto.adoptingDate
-            binding.btnCultureSetting.text = "관수 푸시알림 주기: ${dto.waterAlarmInterval}일"
-            binding.btnTemperatureSetting.text = "온도: ${dto.lowTemperature}°C ~ ${dto.highTemperature}°C"
-            binding.waterAmount.text = dto.waterSupply
-            binding.sunshine.text = dto.sunshine.toString()
+            binding.waterInterval.text = "${dto.waterAlarmInterval}day(s)"
+            binding.temperature.text = "${dto.lowTemperature}°C ~ ${dto.highTemperature}°C"
+            binding.waterSupply.text = dto.waterSupply
+            binding.light.text = dto.sunshine.toString()
         }catch (e: InterruptedException){
             e.printStackTrace()
         }

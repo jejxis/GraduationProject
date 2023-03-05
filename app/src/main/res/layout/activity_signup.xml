@@ -5,101 +5,184 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".SignupActivity">
+    tools:context=".SignupActivity"
+    android:background="@color/activity_background">
 
-    <ImageView
-        android:id="@+id/signupProfile"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="40dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:srcCompat="@drawable/flower_pot" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/signupEmail"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_pot" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:srcCompat="@drawable/logo_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/rv_item_border"
-        android:ems="10"
-        android:hint="이메일"
-        android:inputType="textEmailAddress"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/card"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-    <EditText
-        android:id="@+id/signupPw"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="비밀번호"
-        android:background="@drawable/rv_item_border"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupEmail" />
+        <Button
+            android:id="@+id/siggnupChangeProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/seoul_namsan_long_b"
+            android:text="프로필 이미지 변경"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signupProfile" />
+
+        <ImageView
+            android:id="@+id/signupProfile"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView39"
+            app:srcCompat="@drawable/flower_pot" />
+
+        <EditText
+            android:id="@+id/signupEmail"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="@+id/signupPw"
+            app:layout_constraintStart_toStartOf="@+id/signupPw"
+            app:layout_constraintTop_toTopOf="@+id/textView16"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/signupPw"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="@+id/textView37"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView37"
+            app:layout_constraintTop_toTopOf="@+id/textView37"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="Id"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toStartOf="@+id/signupEmail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/siggnupChangeProfile" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="pw"
+            android:textColor="@color/black"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="Signup"
+            android:textColor="#4A332D"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/signupNickname"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toBottomOf="@+id/textView40"
+            app:layout_constraintEnd_toEndOf="@+id/signupPw"
+            app:layout_constraintStart_toStartOf="@+id/signupPw"
+            app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="Nick\nName"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/button_background"
+        android:fontFamily="@font/seoul_namsan_long_b"
         android:text="회원가입하기"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupNickname" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="회원가입"
-        android:textColor="@color/black"
-        android:textSize="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/siggnupChangeProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="프로필 이미지 변경"
-        android:textSize="14dp"
-        android:textColor="@color/white"
-        android:background="@drawable/button_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupProfile" />
-
-    <EditText
-        android:id="@+id/signupNickname"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:hint="닉네임"
-        android:background="@drawable/rv_item_border"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupPw" />
 </androidx.constraintlayout.widget.ConstraintLayout>

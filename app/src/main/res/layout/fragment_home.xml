@@ -11,22 +11,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:src="@drawable/ic_baseline_eco_45"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo_leaf" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="75dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                app:srcCompat="@drawable/logo_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/hello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/seoul_namsan_m"
             android:text="안녕하세요 OOO님!"
             android:textColor="@color/black"
@@ -39,7 +59,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,29 +84,40 @@
             android:layout_width="260dp"
             android:layout_height="340dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/rv_item_border"
+            android:background="@drawable/card"
             android:padding="20dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnGoToGuide">
 
-            <Button
+            <ImageView
                 android:id="@+id/btnAddWhenNoPlant"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="64dp"
-                android:drawableTop="@drawable/ic_baseline_add_45"
-                android:paddingTop="200dp"
-                android:text="아직 등록된 식물이 없습니다.\n새로운 식물을 등록해보세요!"
+                android:background="@drawable/card"
+                android:src="@drawable/ic_baseline_add_45"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.39" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/seoul_namsan_long_m"
+                android:text="아직 등록된 식물이 없습니다.\n새로운 식물을 등록해보세요!"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddWhenNoPlant" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -100,7 +133,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@drawable/rv_item_border"
+            android:background="@drawable/card"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -118,11 +151,11 @@
 
             <ImageView
                 android:id="@+id/weatherIcon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/sun_fill"
+                android:src="@drawable/logo_pot"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -131,21 +164,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/seoul_namsan_m"
                 android:inputType="textMultiLine|text|textImeMultiLine"
                 android:text="날씨 정보 받아오는 중..."
                 android:textColor="@color/black"
-                android:textSize="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/view"
+                android:textSize="22dp"
                 app:layout_constraintStart_toEndOf="@+id/weatherIcon"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/weatherTemp" />
+
+            <TextView
+                android:id="@+id/weatherTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/seoul_namsan_m"
+                android:inputType="textMultiLine|text|textImeMultiLine"
+                android:text="기온"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+                app:layout_constraintTop_toTopOf="@+id/weatherIcon" />
 
             <ImageView
                 android:id="@+id/imageView8"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:src="@drawable/wind"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -154,7 +201,7 @@
                 android:id="@+id/imageView9"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="32dp"
                 android:src="@drawable/humidity"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -166,8 +213,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="풍속 m/s"
                 android:fontFamily="@font/seoul_namsan_m"
+                android:text="풍속 m/s"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView8"
                 app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -178,8 +225,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="습도%"
                 android:fontFamily="@font/seoul_namsan_m"
+                android:text="습도%"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
@@ -189,7 +236,7 @@
                 android:id="@+id/imageView10"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/umbrella"
                 app:layout_constraintEnd_toStartOf="@+id/weatherRain"
@@ -200,22 +247,56 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="0mm"
                 android:fontFamily="@font/seoul_namsan_m"
+                android:text="0mm"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageView10" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_l"
+                android:text="바람"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                app:layout_constraintStart_toStartOf="@+id/imageView8"
+                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_l"
+                android:text="습도"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView9"
+                app:layout_constraintStart_toStartOf="@+id/imageView9"
+                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_l"
+                android:text="1시간 강수량"
+                android:textSize="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView10"
+                app:layout_constraintStart_toStartOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="30dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="80dp"
             android:src="@drawable/tulips"
             app:layout_constraintBottom_toTopOf="@+id/btnGoToGuide"
-            app:layout_constraintEnd_toStartOf="@+id/btnAddPlant" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -223,8 +304,7 @@
             android:layout_height="60dp"
             android:src="@drawable/flowers"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/diaryList" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FavoritePlantActivity"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="@color/activity_background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavorite"
@@ -23,11 +24,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="내가 찜한 식물"
-        android:textColor="@color/black"
+        android:textColor="#4A332D"
         android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
         app:layout_constraintStart_toEndOf="@+id/btnBack"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
     <ImageView
         android:id="@+id/btnBack"

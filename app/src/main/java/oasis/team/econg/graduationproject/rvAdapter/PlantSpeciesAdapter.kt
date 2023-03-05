@@ -65,7 +65,13 @@ class PlantSpeciesAdapter(val context: Context?):RecyclerView.Adapter<PlantSpeci
                     binding.plantSpeciesPicture.setImageBitmap(bitmap)
                 }
                 binding.plantSpeciesName.text = data.name
-                binding.plantSpeciesManageLevel.text = data.manageLevel
+                binding.plantSpeciesManageLevel.text = when(data.manageLevel){
+                    "초보자" -> "⭐"
+                    "경험자" -> "⭐⭐"
+                    "전문가" -> "⭐⭐⭐"
+                    else -> ""
+                }
+               data.manageLevel
             }catch (e:InterruptedException){
                 e.printStackTrace()
             }

@@ -3,7 +3,9 @@ package oasis.team.econg.graduationproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.data.GardenDto
 import oasis.team.econg.graduationproject.databinding.ActivityFavoritePlantBinding
@@ -31,6 +33,7 @@ class FavoritePlantActivity : AppCompatActivity() {
         favoriteAdapter = PlantSpeciesAdapter(this)
         favoriteAdapter.setData(plantSpeciesList)
         favoriteAdapter.listener = listener
+        binding.rvFavorite.addItemDecoration(DividerItemDecoration(this, LinearLayout.VERTICAL))
         binding.rvFavorite.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvFavorite.adapter = favoriteAdapter
 

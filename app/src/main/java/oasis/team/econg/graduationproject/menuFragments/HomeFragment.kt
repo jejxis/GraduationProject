@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Criteria
 import android.location.Location
 import android.location.LocationManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -31,9 +32,9 @@ import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.FragmentHomeBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.HomeDiaryAdapter
-import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.*
+import oasis.team.econg.graduationproject.utils.Constants.GUIDELINE
 import oasis.team.econg.graduationproject.utils.Constants.TAG
-import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
 
 class HomeFragment : Fragment() {
@@ -62,6 +63,10 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container, false)
+        binding.btnGoToGuide.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GUIDELINE))
+            startActivity(intent)
+        }
         binding.btnAddPlant.setOnClickListener {
             Log.d("TAG", "onAttach: click")
             var intent = Intent(main, AddPlantActivity::class.java)
@@ -127,7 +132,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun setWeather() {
-        binding.weatherInfo.text = "기온: ${weatherMamp["T1H"]}°C\n하늘상태: ${weatherMamp["SKY"]}"
+        var weather = ""
+        if(weatherMamp["PTY"] == "0"){
+            weather = skyList[weatherMamp["SKY"]!!.toInt()]
+        }
+        else{
+            weather = ptyList[weatherMamp["PTY"]!!.toInt()]
+        }
+        binding.weatherInfo.text = weather
+        binding.weatherTemp.text = "${weatherMamp["T1H"]}°C"
+        var weatherPicture = weatherIconSetMap[weather]
+        if(weatherPicture != null)
+            binding.weatherIcon.setImageResource(weatherPicture!!)
+        binding.weatherWind.text = "${weatherMamp["WSD"]}m/s"
+        binding.weatherHumidity.text = "${weatherMamp["REH"]}%"
+        if(weatherMamp["RN1"] == "강수없음") binding.weatherRain.text = weatherMamp["RN1"]
+        else
+            binding.weatherRain.text = "${weatherMamp["RN1"]}mm"
     }
 
     private fun getLocationUpdated(){

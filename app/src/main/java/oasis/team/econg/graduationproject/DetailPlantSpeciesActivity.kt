@@ -73,12 +73,14 @@ class DetailPlantSpeciesActivity : AppCompatActivity() {
             thread.join()
             binding.plantSpeciesPicture.setImageBitmap(bitmap)
             binding.plantSpeciesName.text = dto.name
-            binding.plantPlace.text = dto.light + "\n" + dto.place
+            binding.plantPlace.text = dto.place
             binding.plantHumidity.text = dto.humidity
             binding.plantTemperature.text = dto.temperature
-
-            binding.plantDescription.text =
-                dto.manageLevel + "\n" + dto.waterSupply + "\n" + dto.bug + "\n" + dto.adviceInfo
+            binding.waterSupply.text = dto.waterSupply
+            binding.manageLevel.text = dto.manageLevel
+            binding.plantLight.text = dto.light
+            binding.plantBug.text = dto.bug
+            binding.plantDescription.text =dto.adviceInfo
             if(dto.bookmark){
                 binding.btnBookmark.setImageResource(R.drawable.ic_baseline_bookmark_45)
             }
