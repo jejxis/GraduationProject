@@ -28,6 +28,7 @@ import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.data.Document
 import oasis.team.econg.graduationproject.databinding.FragmentMapBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -157,7 +158,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
     }
     private fun loadPlaces(x: String, y: String){
-        RetrofitManager.instance.getPlaces(auth = API.HEADER_TOKEN, x = x, y = y, completion = {
+        RetrofitManager.instance.getPlaces(auth = MyApplication.prefs.token, x = x, y = y, completion = {
             responseState, responseBody ->
                 when (responseState) {
                     RESPONSE_STATE.OKAY -> {

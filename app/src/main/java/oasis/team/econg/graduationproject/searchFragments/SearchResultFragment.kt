@@ -17,6 +17,7 @@ import oasis.team.econg.graduationproject.data.GardenDto
 import oasis.team.econg.graduationproject.databinding.FragmentSearchResultBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
@@ -68,7 +69,7 @@ class SearchResultFragment : Fragment() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.searchGarden(auth = API.HEADER_TOKEN, keyword = key!!, completion = {
+        RetrofitManager.instance.searchGarden(auth = MyApplication.prefs.token, keyword = key!!, completion = {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY->{

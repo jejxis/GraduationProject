@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.google.gson.JsonObject
 import oasis.team.econg.graduationproject.databinding.ActivityAddDiaryBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -49,7 +50,7 @@ class AddDiaryActivity : AppCompatActivity() {
         val key = jsonObject.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         RetrofitManager.instance.postJournals(
-            auth = API.HEADER_TOKEN, plantId = id, key = key, file = requestFile,completion = {
+            auth = MyApplication.prefs.token, plantId = id, key = key, file = requestFile,completion = {
                 responseState, responseBody ->
                 when(responseState){
                     RESPONSE_STATE.OKAY ->{

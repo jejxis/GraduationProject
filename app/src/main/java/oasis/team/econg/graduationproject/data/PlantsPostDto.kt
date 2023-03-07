@@ -1,5 +1,7 @@
 package oasis.team.econg.graduationproject.data
 
+import java.io.Serializable
+
 data class PlantsPostDto(
     val name: String,
     val waterAlarmInterval: Int,
@@ -8,3 +10,8 @@ data class PlantsPostDto(
     val highTemperature: Int,
     val lowTemperature: Int
 )
+data class DetailToMineDto(
+    val water: String,
+    val sunshine: String,
+    val temperature: String
+):Serializable

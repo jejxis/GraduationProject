@@ -14,6 +14,7 @@ import oasis.team.econg.graduationproject.databinding.ActivityDiaryListBinding
 import oasis.team.econg.graduationproject.dialog.CheckDeletePlantFragment
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.DiaryAdapter
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -72,7 +73,7 @@ class DiaryListActivity : AppCompatActivity() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.getJournals(auth = API.HEADER_TOKEN, plantId = id, completion = {
+        RetrofitManager.instance.getJournals(auth = MyApplication.prefs.token, plantId = id, completion = {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY ->{
@@ -97,7 +98,7 @@ class DiaryListActivity : AppCompatActivity() {
 
     private fun proceedDeletePlant(){
         if(id < 0) return
-        RetrofitManager.instance.deletePlants(API.HEADER_TOKEN, id, completion = {
+        RetrofitManager.instance.deletePlants(MyApplication.prefs.token, id, completion = {
             responseState, s ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {

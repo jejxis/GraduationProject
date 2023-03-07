@@ -32,6 +32,7 @@ import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.FragmentHomeBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.HomeDiaryAdapter
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.*
 import oasis.team.econg.graduationproject.utils.Constants.GUIDELINE
 import oasis.team.econg.graduationproject.utils.Constants.TAG
@@ -93,7 +94,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.getPlants(auth = API.HEADER_TOKEN, completion = {
+        RetrofitManager.instance.getPlants(auth = MyApplication.prefs.token, completion = {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
@@ -115,7 +116,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getCurrentWeather(){
-        RetrofitManager.instance.getWeather(auth = API.HEADER_TOKEN, x = gpsTransfer!!.getXLat().toInt().toString(), y = gpsTransfer!!.getYLng().toInt().toString(), completion = {
+        RetrofitManager.instance.getWeather(auth = MyApplication.prefs.token, x = gpsTransfer!!.getXLat().toInt().toString(), y = gpsTransfer!!.getYLng().toInt().toString(), completion = {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {

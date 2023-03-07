@@ -18,6 +18,7 @@ import oasis.team.econg.graduationproject.data.GardenDto
 import oasis.team.econg.graduationproject.databinding.FragmentAllGardenBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.PlantSpeciesAdapter
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 
@@ -46,7 +47,7 @@ class AllGardenFragment : Fragment() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.getGarden(auth = API.HEADER_TOKEN, completion = {
+        RetrofitManager.instance.getGarden(auth = MyApplication.prefs.token, completion = {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {

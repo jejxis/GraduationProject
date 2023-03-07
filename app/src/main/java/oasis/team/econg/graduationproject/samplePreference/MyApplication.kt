@@ -1,24 +1,9 @@
 package oasis.team.econg.graduationproject.samplePreference
 
 import android.app.Application
-/*import android.content.Context
-import oasis.team.econg.graduationproject.di.repositoryModule
-import oasis.team.econg.graduationproject.di.viewModelModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidFileProperties
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin*/
-
 class MyApplication: Application() {
-    /*init{
-        instance = this
-    }*/
     companion object {
         lateinit var prefs: PreferenceUtil
-        /*lateinit var instance: MyApplication
-        fun applicationContext() : Context {
-            return instance.applicationContext
-        }*/
     }
 
     override fun onCreate() {

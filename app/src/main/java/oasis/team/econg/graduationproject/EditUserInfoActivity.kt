@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import oasis.team.econg.graduationproject.data.UserDto
 import oasis.team.econg.graduationproject.databinding.ActivityEditUserInfoBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants
 import oasis.team.econg.graduationproject.utils.Constants.TAG
@@ -62,7 +63,7 @@ class EditUserInfoActivity : AppCompatActivity() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.getUser(API.HEADER_TOKEN, completion = {
+        RetrofitManager.instance.getUser(MyApplication.prefs.token, completion = {
             responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
@@ -117,7 +118,7 @@ class EditUserInfoActivity : AppCompatActivity() {
             ischange = "true"
         }
         val change = ischange.toRequestBody("text/plain".toMediaTypeOrNull())
-        RetrofitManager.instance.updateUserInfo(API.HEADER_TOKEN, name, change, requestFile, completion = {responseState ->
+        RetrofitManager.instance.updateUserInfo(MyApplication.prefs.token, name, change, requestFile, completion = {responseState ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
                     Log.d(TAG, "proceedUpdateUserInfo: SUCCESS")

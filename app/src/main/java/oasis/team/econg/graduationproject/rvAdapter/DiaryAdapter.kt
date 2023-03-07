@@ -13,6 +13,7 @@ import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemDiaryBinding
 import oasis.team.econg.graduationproject.dialog.CheckDeleteJournalFragment
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -90,7 +91,7 @@ class DiaryAdapter(val context: Context?): RecyclerView.Adapter<DiaryAdapter.Dia
         }
 
         fun proceedDelete(data: JournalsResponseDto){
-            RetrofitManager.instance.deleteJournals(API.HEADER_TOKEN, data.id, completion = {
+            RetrofitManager.instance.deleteJournals(MyApplication.prefs.token, data.id, completion = {
                     responseState, msg ->
                 when(responseState){
                     RESPONSE_STATE.OKAY -> {

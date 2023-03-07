@@ -13,6 +13,7 @@ import oasis.team.econg.graduationproject.bluetooth.BluetoothConnector
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemHomeDiaryBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -91,7 +92,7 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
         }
 
         private fun proceedStarPlants(isStar: Boolean, id: Long){
-            RetrofitManager.instance.starPlants(API.HEADER_TOKEN, id, completion = {
+            RetrofitManager.instance.starPlants(auth = MyApplication.prefs.token, id, completion = {
                     responseState, s ->
                 when(responseState){
                     RESPONSE_STATE.OKAY -> {

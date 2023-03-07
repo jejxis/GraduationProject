@@ -14,6 +14,7 @@ import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemMyPlantBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -86,7 +87,7 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
         }
 
         private fun postCalendars(type: String, view: View){
-            RetrofitManager.instance.postCalendars(auth = API.HEADER_TOKEN, plantId = data.id, type = type, completion = {
+            RetrofitManager.instance.postCalendars(auth = MyApplication.prefs.token, plantId = data.id, type = type, completion = {
                 responseState, message ->
                 when(responseState){
                     RESPONSE_STATE.OKAY -> {

@@ -37,13 +37,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        MyApplication.prefs = PreferenceUtil(application)
-        if(MyApplication.prefs.token != null){
+        if(MyApplication.prefs != null && MyApplication.prefs.token != null){
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+        MyApplication.prefs = PreferenceUtil(application)
         createNotificationChannel("notificationPermission", "notification")
         if (ActivityCompat.checkSelfPermission(
                 application,
@@ -97,7 +96,6 @@ class LoginActivity : AppCompatActivity() {
                 RESPONSE_STATE.OKAY -> {
                     MyApplication.prefs.token = responseBody
                     Log.d(TAG, MyApplication.prefs.token!!)
-                    API.HEADER_TOKEN = "Bearer ${MyApplication.prefs.token}"
                     Log.d(TAG, "Login: api call success : $responseBody")
                     applyTopic()
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)

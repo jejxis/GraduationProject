@@ -18,6 +18,7 @@ import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.FragmentMyPlantBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.MyPlantAdapter
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -60,7 +61,7 @@ class MyPlantFragment : Fragment() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.getPlants(auth = API.HEADER_TOKEN, completion = {
+        RetrofitManager.instance.getPlants(auth = MyApplication.prefs.token, completion = {
                 responseState, responseBody ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {

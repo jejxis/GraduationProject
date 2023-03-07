@@ -15,6 +15,7 @@ import oasis.team.econg.graduationproject.data.Schedule
 import oasis.team.econg.graduationproject.databinding.FragmentScheduleBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.ScheduleAdapter
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -67,7 +68,7 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.getCalendars(API.HEADER_TOKEN, completion = {
+        RetrofitManager.instance.getCalendars(MyApplication.prefs.token, completion = {
             responseState, responseBody->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {

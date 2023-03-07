@@ -6,18 +6,19 @@ import android.content.SharedPreferences
 
 class PreferenceUtil(context: Context) {
     private val prefs: SharedPreferences =
-        context.getSharedPreferences("prefs_name", Context.MODE_PRIVATE)
+        context.getSharedPreferences("token", Context.MODE_PRIVATE)
 
     private var editor: SharedPreferences.Editor = prefs.edit()
 
-    var token:String?
-        get() = prefs.getString("token",null)
+    var token:String? = null
+        get() = prefs.getString("token",null)//pref.getString("email", "").toString()
         set(value){
-            editor.putString("token",value).apply()
+            editor.putString("token","Bearer $value").apply()
+            field = "Bearer $value"
         }
 
     fun logout(){
         editor.clear()
-        editor.commit()
+        editor.commit()//edit.apply()
     }
 }

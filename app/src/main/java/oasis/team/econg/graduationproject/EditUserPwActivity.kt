@@ -7,6 +7,7 @@ import android.widget.Toast
 import oasis.team.econg.graduationproject.data.PwDto
 import oasis.team.econg.graduationproject.databinding.ActivityEditUserPwBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -39,7 +40,7 @@ class EditUserPwActivity : AppCompatActivity() {
 
     private fun proceedChangeUserPw(){
         val pwDto = PwDto(binding.curPw.text.toString(), binding.editUserPw.text.toString())
-        RetrofitManager.instance.changeUserPw(API.HEADER_TOKEN, pwDto, completion = {
+        RetrofitManager.instance.changeUserPw(MyApplication.prefs.token, pwDto, completion = {
             responseState ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {

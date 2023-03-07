@@ -7,12 +7,15 @@ import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.google.gson.Gson
+import oasis.team.econg.graduationproject.data.DetailToMineDto
 import oasis.team.econg.graduationproject.data.PlantsPostDto
 import oasis.team.econg.graduationproject.databinding.ActivityAddPlantBinding
 import oasis.team.econg.graduationproject.dialog.CultureSettingFragment
 import oasis.team.econg.graduationproject.dialog.DatePickerFragment
 import oasis.team.econg.graduationproject.dialog.TemperatureSettingFragment
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.rvAdapter.MyPlantAdapter
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.CultureSettings
@@ -33,6 +36,10 @@ class AddPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        if(intent.hasExtra("Mine")){
+            var mineDto: DetailToMineDto = intent.getSerializableExtra("Mine") as DetailToMineDto
+            setScreen(mineDto)
+        }
         pictureAdder = PictureAdder(this, binding.plantThumb)
         binding.ratingBarSunshine.setOnRatingBarChangeListener {
                 ratingBar, fl, b
@@ -74,7 +81,7 @@ class AddPlantActivity : AppCompatActivity() {
             if(dto == null) return@setOnClickListener
             else{
                 val key = Gson().toJson(dto).toString().toRequestBody("text/plain".toMediaTypeOrNull())
-                RetrofitManager.instance.postPlants(auth = API.HEADER_TOKEN, key = key, file = requestFile, completion = {
+                RetrofitManager.instance.postPlants(auth = MyApplication.prefs.token, key = key, file = requestFile, completion = {
                     responseState, responseBody ->
                     when(responseState){
                         RESPONSE_STATE.OKAY ->{
@@ -120,10 +127,37 @@ class AddPlantActivity : AppCompatActivity() {
     }
 
     fun setTemperatureSetting(start: String, end: String){
-        binding.btnTemperatureSetting.text = "온도: ${start}℃ ~ ${end}℃"
+        binding.btnTemperatureSetting.text = "온도: ${start}~${end}℃"
         if(start.isNotEmpty())
             temStart = start.toInt()
         if(end.isNotEmpty())
             temEnd = end.toInt()
+    }
+
+    private fun setScreen(detailToMineDto: DetailToMineDto){
+        val waterString = detailToMineDto.water
+        var waterInt = -1
+        for(i in 0 until CultureSettings.WATER_ARRAY.size){
+            if(CultureSettings.WATER_ARRAY[i] == waterString){
+                waterInt = i
+                break
+            }
+        }
+
+        val sunshine: String = detailToMineDto.sunshine.split("(")[0]
+
+        binding.ratingBarWater.rating = waterInt as Float
+        binding.waterAmount.text = waterString
+
+        var sunshineFloat = when(sunshine){
+            "높은 광도" -> 3.0f
+            "중간 광도" -> 2.0f
+            "낮은 광도" -> 1.0f
+            else -> 0.0f
+        }
+        binding.sunshine.text = sunshineFloat.toString()
+        binding.ratingBarSunshine.rating = sunshineFloat
+
+        binding.btnTemperatureSetting.text = detailToMineDto.temperature
     }
 }

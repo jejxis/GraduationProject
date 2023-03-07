@@ -11,7 +11,6 @@ import oasis.team.econg.graduationproject.MainActivity
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.databinding.FragmentSearchBinding
 import oasis.team.econg.graduationproject.searchFragments.AllGardenFragment
-import oasis.team.econg.graduationproject.searchFragments.GuideFragment
 import oasis.team.econg.graduationproject.searchFragments.SearchResultFragment
 
 class SearchFragment : Fragment() {

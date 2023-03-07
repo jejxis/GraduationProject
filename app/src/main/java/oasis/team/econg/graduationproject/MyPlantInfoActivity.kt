@@ -10,6 +10,7 @@ import android.widget.Toast
 import oasis.team.econg.graduationproject.data.PlantsDetailResponseDto
 import oasis.team.econg.graduationproject.databinding.ActivityMyPlantInfoBinding
 import oasis.team.econg.graduationproject.retrofit.RetrofitManager
+import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -36,7 +37,7 @@ class MyPlantInfoActivity : AppCompatActivity() {
     }
 
     private fun loadData(){
-        RetrofitManager.instance.getPlantInfo(API.HEADER_TOKEN, plantId, completion = {
+        RetrofitManager.instance.getPlantInfo(MyApplication.prefs.token, plantId, completion = {
             responseState, plantsDetailResponseDto ->
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
