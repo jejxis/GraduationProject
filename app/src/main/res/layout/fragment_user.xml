@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activity_background"
     tools:context=".menuFragments.UserFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,9 +16,10 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/seoul_namsan_long_eb"
             android:text="사용자 설정"
-            android:textSize="24dp"
             android:textColor="@color/black"
+            android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/seoul_namsan_m"
             android:text="사용자님"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -33,12 +36,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             android:padding="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userName">
@@ -47,6 +50,7 @@
                 android:id="@+id/editUserInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_m"
                 android:paddingTop="10dp"
                 android:text="사용자 정보 수정"
                 android:textColor="@color/black"
@@ -58,6 +62,7 @@
                 android:id="@+id/changePw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_m"
                 android:paddingTop="10dp"
                 android:text="비밀번호 변경"
                 android:textColor="@color/black"
@@ -69,6 +74,7 @@
                 android:id="@+id/favoritePlants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_m"
                 android:paddingTop="10dp"
                 android:text="내가 찜한 식물"
                 android:textColor="@color/black"
@@ -80,6 +86,7 @@
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_m"
                 android:paddingTop="10dp"
                 android:text="로그아웃"
                 android:textColor="@color/black"
@@ -88,5 +95,14 @@
             <View style="@style/Divider" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="59dp"
+            android:layout_height="81dp"
+            android:src="@drawable/flowers"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

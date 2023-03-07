@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserInfoActivity"
+    android:background="@color/activity_background"
     android:padding="20dp">
 
 
@@ -14,6 +15,8 @@
         android:layout_height="180dp"
         android:layout_marginTop="60dp"
         android:clickable="false"
+        android:background="@drawable/border_round"
+        android:clipToOutline="true"
         android:scaleType="centerCrop"
         android:src="@drawable/flower_pot"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,19 +28,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="이메일"
-        android:textSize="20dp"
         android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userProfile" />
 
-    <TextView
+    <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/card"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="사용자이메일"
+        android:enabled="false"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,9 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="닉네임"
-        android:textSize="20dp"
         android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
@@ -59,9 +65,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/card"
         android:ems="10"
         android:enabled="false"
+        android:fontFamily="@font/seoul_namsan_m"
         android:inputType="textPersonName"
         android:text="사용자 닉네임"
         android:textSize="24dp"
@@ -73,10 +79,11 @@
         android:id="@+id/btnEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/border_round"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_edit_32"
-        android:background="@drawable/card"/>
+        app:srcCompat="@drawable/ic_baseline_edit_32" />
 
     <ImageView
         android:id="@+id/btnClose"
@@ -90,9 +97,11 @@
         android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/seoul_namsan_long_eb"
         android:text="사용자 정보"
-        android:textSize="20dp"
         android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -56,12 +56,13 @@
             android:id="@+id/loginEmail"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:text=""
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
-            app:layout_constraintEnd_toEndOf="@+id/loginPw"
-            app:layout_constraintStart_toStartOf="@+id/loginPw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toTopOf="@+id/textView16"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -72,8 +73,8 @@
             android:ems="10"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="@+id/textView37"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView37"
+            app:layout_constraintEnd_toEndOf="@+id/loginEmail"
+            app:layout_constraintStart_toStartOf="@+id/loginEmail"
             app:layout_constraintTop_toTopOf="@+id/textView37"
             app:layout_constraintVertical_bias="1.0" />
 
@@ -83,9 +84,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/montserrat_alternates_medium"
-            android:text="Id"
+            android:text="Email"
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
@@ -98,7 +99,7 @@
             android:fontFamily="@font/montserrat_alternates_medium"
             android:text="pw"
             android:textColor="@color/black"
-            android:textSize="30dp"
+            android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="@+id/textView16"
             app:layout_constraintStart_toStartOf="@+id/textView16"
             app:layout_constraintTop_toBottomOf="@+id/textView16" />

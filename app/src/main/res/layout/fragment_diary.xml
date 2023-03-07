@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activity_background"
     tools:context=".menuFragments.DiaryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,9 +16,10 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/seoul_namsan_long_eb"
             android:text="식물일지"
-            android:textSize="20dp"
             android:textColor="@color/black"
+            android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,9 +30,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="식물"
-            android:paddingRight="20dp"
+            android:fontFamily="@font/seoul_namsan_m"
             android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="식물"
             android:textSize="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
@@ -41,9 +44,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="스케줄"
-            android:paddingRight="20dp"
+            android:fontFamily="@font/seoul_namsan_m"
             android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="스케줄"
             android:textSize="15dp"
             app:layout_constraintStart_toEndOf="@+id/plant"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />

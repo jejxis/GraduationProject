@@ -26,7 +26,7 @@
         android:fontFamily="@font/seoul_namsan_long_b"
         android:text="식물 종 이름"
         android:textColor="@color/black"
-        android:textSize="26dp"
+        android:textSize="24dp"
         app:layout_constraintStart_toEndOf="@+id/plantSpeciesPicture"
         app:layout_constraintTop_toTopOf="parent" />
 

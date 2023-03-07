@@ -79,7 +79,7 @@ class UserInfoActivity : AppCompatActivity() {
                 thread.join()
                 binding.userProfile.setImageBitmap(bitmap)
             }
-            binding.email.text = user.email
+            binding.email.setText(user.email)
             binding.editUserNickname.setText(user.nickName)
         }catch (e: InterruptedException){
             e.printStackTrace()

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.MainActivity
@@ -50,6 +52,7 @@ class MyPlantFragment : Fragment() {
 
     private fun setAdapter() {
         myPlantAdapter.setData(myPlantList)
+        binding.myPlantList.addItemDecoration(DividerItemDecoration(main, LinearLayout.VERTICAL))
         binding.myPlantList.layoutManager = LinearLayoutManager(main,
         LinearLayoutManager.VERTICAL, false)
         myPlantAdapter.listener = onClickedMyPlant

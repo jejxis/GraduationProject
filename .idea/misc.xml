@@ -36,7 +36,7 @@
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_add_plant.xml" value="0.33" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_detail_plant_species.xml" value="0.1" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_diary_list.xml" value="0.33" />
-        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_edit_user_info.xml" value="0.3203125" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_edit_user_info.xml" value="0.25" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_edit_user_pw.xml" value="0.3203125" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_favorite_plant.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_login.xml" value="0.25" />
@@ -48,9 +48,9 @@
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/activity_user_info.xml" value="0.33" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_all_garden.xml" value="0.25625" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_bluetooth_list.xml" value="0.2815384615384615" />
-        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_check_delete_plant.xml" value="0.25" />
-        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_check_deletec_journal.xml" value="0.1" />
-        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_culture_setting.xml" value="0.1" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_check_delete_plant.xml" value="0.33" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_check_deletec_journal.xml" value="0.33" />
+        <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_culture_setting.xml" value="0.33" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_date_picker.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_diary.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/31900/AndroidStudioProjects/GraduationProject/app/src/main/res/layout/fragment_guide.xml" value="0.2861111111111111" />

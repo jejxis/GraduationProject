@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditUserPwActivity"
+    android:background="@color/activity_background"
     android:padding="20dp">
 
     <ImageView
@@ -20,9 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="현재 비밀번호"
-        android:textSize="20dp"
         android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:background="@drawable/card"
+        android:fontFamily="@font/seoul_namsan_m"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="새 비밀번호"
         android:textColor="@color/black"
         android:textSize="20dp"
@@ -54,8 +57,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/card"
         android:ems="10"
+        android:fontFamily="@font/seoul_namsan_m"
         android:inputType="textPassword"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"
+        android:fontFamily="@font/seoul_namsan_m"
         android:paddingStart="60dp"
         android:paddingEnd="60dp"
         android:text="저장"
@@ -80,6 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background_gray"
+        android:fontFamily="@font/seoul_namsan_m"
         android:paddingStart="60dp"
         android:paddingEnd="60dp"
         android:text="취소"
@@ -93,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:text="새 비밀번호 확인"
         android:textColor="@color/black"
         android:textSize="20dp"
@@ -105,9 +111,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:background="@drawable/card"
-        android:textSize="24dp"
+        android:fontFamily="@font/seoul_namsan_m"
         android:inputType="textPassword"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView28" />
@@ -116,11 +122,13 @@
         android:id="@+id/textView35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/seoul_namsan_long_eb"
         android:text="사용자 비밀번호 수정"
-        android:textSize="20dp"
         android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnClose"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btnClose" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
