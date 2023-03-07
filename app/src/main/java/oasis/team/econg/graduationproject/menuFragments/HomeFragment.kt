@@ -64,6 +64,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container, false)
+        binding.hello.text = "안녕하세요 ${MyApplication.prefs.nickname}님!"
         binding.btnGoToGuide.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GUIDELINE))
             startActivity(intent)

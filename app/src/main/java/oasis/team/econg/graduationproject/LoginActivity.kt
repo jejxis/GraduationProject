@@ -24,6 +24,7 @@ import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.samplePreference.PreferenceUtil
 import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 import java.util.logging.Logger
@@ -73,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             pushToken()
-
+            //loadUserData()
         }
 
         binding.btnSignup.setOnClickListener {
@@ -98,10 +99,6 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, MyApplication.prefs.token!!)
                     Log.d(TAG, "Login: api call success : $responseBody")
                     applyTopic()
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK//액티비티 스택제거
                 }
                 RESPONSE_STATE.FAIL -> {
                     Log.d(TAG, "Login: api call fail : $responseBody")
@@ -115,6 +112,7 @@ class LoginActivity : AppCompatActivity() {
         FirebaseMessaging.getInstance().subscribeToTopic("weather-notification").addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d(TAG,"구독 요청 성공")
+                loadUserData()
             } else {
                 Log.d(TAG, "구독 요청 실패")
             }
@@ -140,5 +138,26 @@ class LoginActivity : AppCompatActivity() {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH))
         }
+    }
+
+    private fun loadUserData(){
+        RetrofitManager.instance.getUser(MyApplication.prefs.token, completion = {
+                responseState, responseBody ->
+            when(responseState){
+                RESPONSE_STATE.OKAY -> {
+                    Log.d(TAG, "EditUserInfoActivity - loadData(): api call success : $responseBody")
+                    MyApplication.prefs.nickname = responseBody.nickName
+                    MyApplication.prefs.picture = responseBody.picture
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK//액티비티 스택제거
+                }
+                RESPONSE_STATE.FAIL -> {
+                    Toast.makeText(this, "EditUserInfoActivity - loadData(): api call error", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "EditUserInfoActivity - loadData(): api call fail : $responseBody")
+                }
+            }
+        })
     }
 }

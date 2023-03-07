@@ -27,6 +27,8 @@ class UserFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentUserBinding.inflate(inflater, container, false)
 
+        binding.userName.text = "${MyApplication.prefs.nickname}님"
+
         binding.favoritePlants.setOnClickListener {
             val intent = Intent(main, FavoritePlantActivity::class.java)
             startActivity(intent)
