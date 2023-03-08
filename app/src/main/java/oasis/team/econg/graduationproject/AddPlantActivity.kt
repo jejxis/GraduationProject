@@ -17,6 +17,7 @@ import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.rvAdapter.MyPlantAdapter
 import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
+import oasis.team.econg.graduationproject.utils.Constants
 import oasis.team.econg.graduationproject.utils.Constants.TAG
 import oasis.team.econg.graduationproject.utils.CultureSettings
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
@@ -136,17 +137,17 @@ class AddPlantActivity : AppCompatActivity() {
 
     private fun setScreen(detailToMineDto: DetailToMineDto){
         val waterString = detailToMineDto.water
-        var waterInt = -1
-        for(i in 0 until CultureSettings.WATER_ARRAY.size){
-            if(CultureSettings.WATER_ARRAY[i] == waterString){
-                waterInt = i
-                break
-            }
+        var waterFloat = when(waterString){
+            CultureSettings.WATER_ARRAY[1] -> 1.0f
+            CultureSettings.WATER_ARRAY[2] -> 2.0f
+            CultureSettings.WATER_ARRAY[3] -> 3.0f
+            CultureSettings.WATER_ARRAY[4] -> 4.0f
+            else -> 0.0f
         }
 
         val sunshine: String = detailToMineDto.sunshine.split("(")[0]
 
-        binding.ratingBarWater.rating = waterInt as Float
+        binding.ratingBarWater.rating = waterFloat
         binding.waterAmount.text = waterString
 
         var sunshineFloat = when(sunshine){
