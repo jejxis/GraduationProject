@@ -16,10 +16,11 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/seoul_namsan_long_eb"
             android:text="식물일지"
-            android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textColor="#476930"
+            android:textSize="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

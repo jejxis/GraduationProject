@@ -32,9 +32,9 @@
         android:id="@+id/careType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text=""
         android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/plantName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

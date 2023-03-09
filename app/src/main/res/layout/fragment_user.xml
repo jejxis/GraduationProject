@@ -16,10 +16,11 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/seoul_namsan_long_eb"
             android:text="사용자 설정"
-            android:textColor="@color/black"
-            android:textSize="24dp"
+            android:textColor="#476930"
+            android:textSize="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,6 +28,7 @@
             android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/seoul_namsan_m"
             android:text="사용자님"

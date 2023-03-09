@@ -6,7 +6,7 @@ data class PlantsPostDto(
     val name: String,
     val waterAlarmInterval: Int,
     val waterSupply: String,
-    val sunshine: Int,
+    val sunshine: Double,
     val highTemperature: Int,
     val lowTemperature: Int
 )

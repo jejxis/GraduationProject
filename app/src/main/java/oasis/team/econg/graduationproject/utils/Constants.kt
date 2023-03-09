@@ -6,7 +6,7 @@ import oasis.team.econg.graduationproject.samplePreference.MyApplication
 object Constants {
     const val BASE_URL = "https://oasisserver.site"
     const val TAG : String = "MYTAG"
-    const val GUIDELINE: String = "https://doda.app/quiz/jjc3lfdvlX"
+    const val GUIDELINE: String = "https://smore.im/quiz/vbqDYbbjPT"//"https://doda.app/quiz/jjc3lfdvlX"
 }
 
 object CultureSettings{

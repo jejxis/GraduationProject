@@ -106,7 +106,7 @@ class AddPlantActivity : AppCompatActivity() {
             name = binding.editPlantName.text.toString(),
             waterAlarmInterval = waterAlarmInterval,
             waterSupply = binding.waterAmount.text.toString(),
-            sunshine = binding.sunshine.text.toString().toInt(),
+            sunshine = binding.sunshine.text.toString().toDouble(),
             highTemperature = temEnd,
             lowTemperature = temStart
         )
