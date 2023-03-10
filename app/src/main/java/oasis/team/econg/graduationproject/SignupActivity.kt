@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
 import oasis.team.econg.graduationproject.data.SignupDto
@@ -53,8 +54,17 @@ class SignupActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
+                RESPONSE_STATE.NOT_FOUND -> {
+                    Toast.makeText(this, "페이지를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+                RESPONSE_STATE.EXIST_USER -> {
+                    Toast.makeText(this, "이미 존재하는 사용자입니다.", Toast.LENGTH_SHORT).show()
+                }
                 RESPONSE_STATE.FAIL -> {
                     Log.d(TAG, "Signup FAIL")
+                }
+                else -> {
+                    Toast.makeText(this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         })

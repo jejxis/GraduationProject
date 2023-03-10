@@ -148,7 +148,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword"
+            android:inputType="textPersonName|text"
             app:layout_constraintBottom_toBottomOf="@+id/textView40"
             app:layout_constraintEnd_toEndOf="@+id/signupPw"
             app:layout_constraintStart_toStartOf="@+id/signupPw"

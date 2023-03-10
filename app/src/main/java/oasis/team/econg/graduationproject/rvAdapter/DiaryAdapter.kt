@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.data.JournalsResponseDto
@@ -101,7 +102,11 @@ class DiaryAdapter(val context: Context?): RecyclerView.Adapter<DiaryAdapter.Dia
                         this@DiaryAdapter.notifyItemRemoved(index)
                     }
                     RESPONSE_STATE.FAIL -> {
+                        Toast.makeText(context, "데이터 삭제 실패했습니다.", Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "DiaryAdapter - DeleteJournals() FAIL: $msg")
+                    }
+                    else -> {
+                        Toast.makeText(context, "데이터 삭제 실패했습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             })

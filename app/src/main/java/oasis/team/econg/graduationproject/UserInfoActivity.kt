@@ -51,6 +51,9 @@ class UserInfoActivity : AppCompatActivity() {
                     Toast.makeText(this, "EditUserInfoActivity - loadData(): api call error", Toast.LENGTH_SHORT).show()
                     Log.d(Constants.TAG, "EditUserInfoActivity - loadData(): api call fail : $responseBody")
                 }
+                else -> {
+                    Toast.makeText(this, "사용자 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }

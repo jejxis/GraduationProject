@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
@@ -95,7 +96,11 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
                         checkEachCultureStyle(view as TextView)
                     }
                     RESPONSE_STATE.FAIL -> {
+                        Toast.makeText(context, "재배 기록 등록 실패했습니다.", Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "MyPlantAdapter - postCalendars: fail")
+                    }
+                    else -> {
+                        Toast.makeText(context, "재배 기록 등록 실패했습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             })

@@ -1,6 +1,7 @@
 package oasis.team.econg.graduationproject.retrofit
 
 import android.util.Log
+import com.google.gson.Gson
 import com.google.gson.JsonElement
 import io.swagger.v3.core.util.Json
 import oasis.team.econg.graduationproject.data.*
@@ -66,17 +67,33 @@ class RetrofitManager {
                 Log.d(TAG, "SignUp: onResponse() called/ response: $response")
                 when(response.code()){
                     200 -> {
-                        response.body()?.let{
+                        if(!response.body()!!.isJsonObject){
                             completion(RESPONSE_STATE.OKAY)
-                            Log.d(TAG, "onResponse: SUCCESS")
+                            return
                         }
-                    }
-                    else -> {
                         response.body()?.let{
-                            completion(RESPONSE_STATE.FAIL)
-                            Log.d(TAG, "onResponse: FAIL")
+                            val code = it.asJsonObject.get("code").asInt
+                            when(code){
+                                404 -> {
+                                    response.body()?.let{
+                                        completion(RESPONSE_STATE.NOT_FOUND)
+                                        Log.d(TAG, "onResponse: SUCCESS but NOT_FOUND")
+                                    }
+                                }
+                                1002 -> {
+                                    completion(RESPONSE_STATE.EXIST_USER)
+                                    Log.d(TAG, "onResponse: SUCCESS but EXIST_USER")
+                                }
+                                else -> {
+                                    response.body()?.let{
+                                        completion(RESPONSE_STATE.FAIL)
+                                        Log.d(TAG, "onResponse: FAIL")
+                                    }
+                                }
+                            }
                         }
                     }
+
                 }
             }
         })
@@ -348,8 +365,23 @@ class RetrofitManager {
                 Log.d(TAG, "changeUserPw: onResponse() called/ response: $response")
                 when(response.code()){
                     200 -> {
-                        Log.d(TAG, "changeUserPw: code 200")
-                        completion(RESPONSE_STATE.OKAY)
+                        response.body()?.let{
+                            val code = it.asJsonObject.get("code").asInt
+                            when(code){
+                                200 -> {
+                                    Log.d(TAG, "changeUserPw: code 200")
+                                    completion(RESPONSE_STATE.OKAY)
+                                }
+                                404 -> {
+                                    Log.d(TAG, "changeUserPw: code 404")
+                                    completion(RESPONSE_STATE.NOT_FOUND)
+                                }
+                                1003 -> {
+                                    Log.d(TAG, "changeUserPw: code 1003")
+                                    completion(RESPONSE_STATE.PASSWORD_NOT_MATCH)
+                                }
+                            }
+                        }
                     }
                 }
             }

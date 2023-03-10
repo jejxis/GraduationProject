@@ -73,6 +73,9 @@ class MyPlantFragment : Fragment() {
                     Toast.makeText(main, "MyPlantFragment - loadData(): api call error", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "MyPlantFragment - loadData(): api call fail : $responseBody")
                 }
+                else -> {
+                    Toast.makeText(main, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }

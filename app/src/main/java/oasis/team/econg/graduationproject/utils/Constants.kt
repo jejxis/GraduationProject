@@ -19,7 +19,10 @@ object CultureSettings{
 
 enum class RESPONSE_STATE{
     OKAY,
-    FAIL
+    FAIL,
+    NOT_FOUND,
+    EXIST_USER,
+    PASSWORD_NOT_MATCH
 }
 
 object API{

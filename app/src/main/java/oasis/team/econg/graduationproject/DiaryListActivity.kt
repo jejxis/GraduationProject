@@ -85,6 +85,9 @@ class DiaryListActivity : AppCompatActivity() {
                     Toast.makeText(this@DiaryListActivity, "다이어리 리스트를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "DiaryListActivity - loadData(): api call fail : $responseBody")
                 }
+                else -> {
+                    Toast.makeText(this@DiaryListActivity, "다이어리 리스트를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
@@ -110,6 +113,10 @@ class DiaryListActivity : AppCompatActivity() {
                 RESPONSE_STATE.FAIL -> {
                     Toast.makeText(this@DiaryListActivity, "데이터를 삭제하는 데 실패했습니다.",
                     Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(this@DiaryListActivity, "데이터를 삭제하는 데 실패했습니다.",
+                        Toast.LENGTH_SHORT).show()
                 }
             }
         })

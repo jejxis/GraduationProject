@@ -170,6 +170,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                         Toast.makeText(main, "식물샵 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
                         Log.d(TAG, "DiaryListActivity - loadData(): api call fail : $responseBody")
                     }
+                    else -> {
+                        Toast.makeText(main, "식물샵 정보를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
         })
     }

@@ -54,6 +54,9 @@ class MyPlantInfoActivity : AppCompatActivity() {
                     Log.d(TAG, "MyPlantInfoActivity getPlantInfo: FAIL")
                     Toast.makeText(this@MyPlantInfoActivity, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
+                else -> {
+                    Toast.makeText(this@MyPlantInfoActivity, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }

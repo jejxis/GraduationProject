@@ -45,10 +45,20 @@ class EditUserPwActivity : AppCompatActivity() {
             when(responseState){
                 RESPONSE_STATE.OKAY -> {
                     Log.d(TAG, "proceedChangeUserPw: api call success")
+                    Toast.makeText(this@EditUserPwActivity,"비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
                     finish()
+                }
+                RESPONSE_STATE.NOT_FOUND -> {
+                    Toast.makeText(this@EditUserPwActivity,"페이지를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+                RESPONSE_STATE.PASSWORD_NOT_MATCH -> {
+                    Toast.makeText(this@EditUserPwActivity,"현재 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show()
                 }
                 RESPONSE_STATE.FAIL -> {
                     Log.d(TAG, "proceedChangeUserPw: api call fail")
+                    Toast.makeText(this@EditUserPwActivity,"비밀 번호 변경에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
                     Toast.makeText(this@EditUserPwActivity,"비밀 번호 변경에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
