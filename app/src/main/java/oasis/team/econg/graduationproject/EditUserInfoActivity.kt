@@ -126,7 +126,7 @@ class EditUserInfoActivity : AppCompatActivity() {
                 RESPONSE_STATE.OKAY -> {
                     Log.d(TAG, "proceedUpdateUserInfo: SUCCESS")
                     val intent = Intent(this@EditUserInfoActivity, UserInfoActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(intent)
                     finish()
                 }

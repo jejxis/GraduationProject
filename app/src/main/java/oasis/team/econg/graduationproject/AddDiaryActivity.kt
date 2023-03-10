@@ -1,6 +1,7 @@
 package oasis.team.econg.graduationproject
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +33,9 @@ class AddDiaryActivity : AppCompatActivity() {
         }
 
         binding.btnClose.setOnClickListener {
+            val intent = Intent(this@AddDiaryActivity, DiaryListActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
             finish()
         }
 
@@ -68,6 +72,7 @@ class AddDiaryActivity : AppCompatActivity() {
                         Log.d(TAG, "AddDiaryActivity: uploadDiary(): result: $responseBody")
                         val intent = Intent(this@AddDiaryActivity, DiaryListActivity::class.java)
                         intent.putExtra("id", id)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                         startActivity(intent)
                         finish()
                     }

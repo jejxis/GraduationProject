@@ -18,6 +18,9 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_SETTLING
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -233,6 +236,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAdapter(){
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.diaryList)
         homeDiaryAdapter = HomeDiaryAdapter(main)
         homeDiaryAdapter.setData(plants)
         binding.diaryList.layoutManager = LinearLayoutManager(main,
