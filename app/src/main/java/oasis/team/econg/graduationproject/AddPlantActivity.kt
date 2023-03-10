@@ -79,7 +79,7 @@ class AddPlantActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             val dto = makePlant()
             requestFile = pictureAdder.getRequestFile()
-            if(dto == null) return@setOnClickListener
+            if(dto == null || requestFile == null) return@setOnClickListener
             else{
                 val key = Gson().toJson(dto).toString().toRequestBody("text/plain".toMediaTypeOrNull())
                 RetrofitManager.instance.postPlants(auth = MyApplication.prefs.token, key = key, file = requestFile, completion = {

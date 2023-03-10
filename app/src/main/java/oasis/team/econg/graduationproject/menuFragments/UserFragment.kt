@@ -47,6 +47,7 @@ class UserFragment : Fragment() {
             MyApplication.prefs.logout()
             val intent = Intent(main, LoginActivity::class.java)
             startActivity(intent)
+            main.finish()
         }
         return binding.root
     }

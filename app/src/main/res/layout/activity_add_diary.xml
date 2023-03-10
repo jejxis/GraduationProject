@@ -65,6 +65,7 @@
         android:fontFamily="@font/seoul_namsan_l"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAddDiary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

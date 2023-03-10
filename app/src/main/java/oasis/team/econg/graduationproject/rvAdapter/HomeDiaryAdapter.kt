@@ -47,7 +47,6 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
         var btConnector = BluetoothConnector(context!!, binding.sensorValue)
         fun setData(data: PlantsResponseDto, position: Int){
             var bitmap: Bitmap? = null
-            var message = ""
             val thread = object: Thread(){
                 override fun run() {
                     try{
@@ -74,13 +73,13 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
                     binding.star.setImageResource(R.drawable.ic_baseline_star_45_true)
                     binding.bluetoothLayout.visibility = View.VISIBLE
                     binding.btnBluetooth.setOnClickListener {
-                        //data.sensorValue
                         btConnector.searchDevice()
                     }
-                    //btConnector.beginListenForData()
-                    //binding.sensorValue.text = btConnector.message
                 }
-                else binding.star.setImageResource(R.drawable.ic_baseline_star_45_false)
+                else {
+                    binding.star.setImageResource(R.drawable.ic_baseline_star_45_false)
+                    binding.bluetoothLayout.visibility = View.GONE
+                }
                 binding.star.setOnClickListener {
                     proceedStarPlants(data.star, data.id)
                     data.star = !data.star

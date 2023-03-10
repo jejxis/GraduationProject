@@ -37,6 +37,7 @@ class PictureAdder(app: AppCompatActivity, imgView: ImageView) {
     }
 
     fun getImage(){
+
         Log.d(TAG,"사진변경 호출")
         val chooserIntent = Intent(Intent.ACTION_CHOOSER)
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -76,7 +77,7 @@ class PictureAdder(app: AppCompatActivity, imgView: ImageView) {
             Log.d(TAG,file.name)
         }
     }
-    //https://bubblebubble.tistory.com/15
+
     @RequiresApi(Build.VERSION_CODES.Q)
     fun compressImage(app: AppCompatActivity, uri: Uri, file: File){
         lateinit var inputStream: InputStream
@@ -93,7 +94,7 @@ class PictureAdder(app: AppCompatActivity, imgView: ImageView) {
         val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), byteArrayOutputStream.toByteArray())
         requestFile = MultipartBody.Part.createFormData("file", file.name, requestBody)
     }
-    //https://yong0810.tistory.com/34
+
     @RequiresApi(Build.VERSION_CODES.Q)
     fun fileToDegrees(file: File): Int {
         val exif = ExifInterface(file)
