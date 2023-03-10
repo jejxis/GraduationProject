@@ -133,4 +133,8 @@ class PictureAdder(app: AppCompatActivity, imgView: ImageView) {
         return bitmap
     }
 
+    fun deleteRequestFile(){
+        requestFile = null
+    }
+
 }

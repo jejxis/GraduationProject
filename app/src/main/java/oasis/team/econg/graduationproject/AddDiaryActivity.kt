@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.gson.JsonObject
 import oasis.team.econg.graduationproject.databinding.ActivityAddDiaryBinding
@@ -36,6 +37,16 @@ class AddDiaryActivity : AppCompatActivity() {
 
         binding.addPicture.setOnClickListener {
             pictureAdder.getImage()
+            binding.plantImage.visibility = View.VISIBLE
+            binding.addPictureLayout.visibility = View.GONE
+            binding.deletePictureLayout.visibility = View.VISIBLE
+        }
+
+        binding.deletePicture.setOnClickListener {
+            binding.plantImage.visibility = View.GONE
+            binding.deletePictureLayout.visibility = View.GONE
+            binding.addPictureLayout.visibility = View.VISIBLE
+            pictureAdder.deleteRequestFile()
         }
 
         binding.btnAddDiary.setOnClickListener {

@@ -8,6 +8,67 @@
     android:background="@color/activity_background"
     tools:context=".AddDiaryActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addPictureLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnClose">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/seoul_namsan_m"
+            android:text="사진 추가하기"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/addPicture"
+            app:layout_constraintEnd_toStartOf="@+id/addPicture"
+            app:layout_constraintTop_toTopOf="@+id/addPicture" />
+
+        <ImageView
+            android:id="@+id/addPicture"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/border_round"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/deletePictureLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnClose">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/seoul_namsan_m"
+            android:text="사진 삭제하기"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/deletePicture"
+            app:layout_constraintEnd_toStartOf="@+id/deletePicture"
+            app:layout_constraintTop_toTopOf="@+id/deletePicture" />
+
+        <ImageView
+            android:id="@+id/deletePicture"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/button_background_red"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/btnClose"
         android:layout_width="wrap_content"
@@ -17,39 +78,16 @@
         app:srcCompat="@drawable/ic_baseline_close_45" />
 
     <ImageView
-        android:id="@+id/addPicture"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/border_round"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnClose"
-        app:srcCompat="@drawable/ic_baseline_add_24" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/seoul_namsan_m"
-        android:text="사진 추가하기"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/addPicture"
-        app:layout_constraintEnd_toStartOf="@+id/addPicture"
-        app:layout_constraintTop_toTopOf="@+id/addPicture" />
-
-    <ImageView
         android:id="@+id/plantImage"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/deletePictureLayout"
         tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
@@ -57,7 +95,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/border_round"
