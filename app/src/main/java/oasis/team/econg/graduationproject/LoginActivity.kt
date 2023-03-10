@@ -33,48 +33,13 @@ class LoginActivity : AppCompatActivity() {
     val binding by lazy{ActivityLoginBinding.inflate(layoutInflater)}
     var email = ""
     var pw = ""
-    var auto = ""
     private var fcmToken = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        if(MyApplication.prefs != null && MyApplication.prefs.token != null){
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+
         MyApplication.prefs = PreferenceUtil(application)
         createNotificationChannel("notificationPermission", "notification")
-
-        if (ActivityCompat.checkSelfPermission(
-                application,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                application,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                application,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                application,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                application,
-                Manifest.permission.BLUETOOTH
-            ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                application,
-                Manifest.permission.BLUETOOTH_ADMIN
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(this, arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ),
-                1
-            )
-        }
 
         binding.btnLogin.setOnClickListener {
             email = binding.loginEmail.text.toString().trim()
@@ -120,6 +85,9 @@ class LoginActivity : AppCompatActivity() {
                 }
                 RESPONSE_STATE.FAIL -> {
                     Log.d(TAG, "Login: api call fail : $responseBody")
+                    Toast.makeText(this@LoginActivity, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
                     Toast.makeText(this@LoginActivity, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -174,6 +142,9 @@ class LoginActivity : AppCompatActivity() {
                 RESPONSE_STATE.FAIL -> {
                     Toast.makeText(this, "EditUserInfoActivity - loadData(): api call error", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "EditUserInfoActivity - loadData(): api call fail : $responseBody")
+                }
+                else -> {
+
                 }
             }
         })

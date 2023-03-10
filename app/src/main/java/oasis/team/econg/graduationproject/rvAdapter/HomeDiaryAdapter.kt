@@ -105,6 +105,9 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
                     RESPONSE_STATE.FAIL -> {
                         Log.d(TAG, "HomeDiaryAdapter - proceedStarPlants: FAIL")
                     }
+                    else -> {
+
+                    }
                 }
             })
         }

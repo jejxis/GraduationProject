@@ -95,6 +95,9 @@ class AddPlantActivity : AppCompatActivity() {
                             Log.d(TAG, "AddPlantActivity - postPlants() call fail: $responseBody")
                             Toast.makeText(this@AddPlantActivity, "결제 요청에 실패했습니다.", Toast.LENGTH_SHORT).show()
                         }
+                        else ->{
+
+                        }
                     }
                 })
             }
