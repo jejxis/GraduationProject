@@ -37,7 +37,7 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
         holder.saveData(data)
         holder.setData(data)
         holder.itemView.setOnClickListener {
-            listener!!.onClicked(data.id)
+            listener!!.onClicked(data.id, data.name)
         }
     }
 
@@ -108,7 +108,7 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
     }
 
     interface OnItemClickListener{
-        fun onClicked(id:Long)
+        fun onClicked(id:Long, name: String)
     }
 
     fun setData(list: MutableList<PlantsResponseDto>?){

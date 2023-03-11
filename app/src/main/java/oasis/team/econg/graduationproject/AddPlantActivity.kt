@@ -44,12 +44,12 @@ class AddPlantActivity : AppCompatActivity() {
         pictureAdder = PictureAdder(this, binding.plantThumb)
         binding.ratingBarSunshine.setOnRatingBarChangeListener {
                 ratingBar, fl, b
-            ->  binding.sunshine.text = fl.toInt().toString()
+            ->  binding.sunshine.text = CultureSettings.SUNSHINE_ARRAY[floor(fl).toInt()]
         }
 
         binding.ratingBarWater.setOnRatingBarChangeListener {
                 ratingBar, fl, b
-            ->  binding.waterAmount.text = CultureSettings.WATER_ARRAY[floor(fl.toDouble()).toInt()]
+            ->  binding.waterAmount.text = CultureSettings.WATER_ARRAY[floor(fl).toInt()]
         }
 
         binding.plantThumb.setOnClickListener {
@@ -109,7 +109,7 @@ class AddPlantActivity : AppCompatActivity() {
             name = binding.editPlantName.text.toString(),
             waterAlarmInterval = waterAlarmInterval,
             waterSupply = binding.waterAmount.text.toString(),
-            sunshine = binding.sunshine.text.toString().toDouble(),
+            sunshine = binding.ratingBarSunshine.rating.toDouble(),
             highTemperature = temEnd,
             lowTemperature = temStart
         )
@@ -148,20 +148,24 @@ class AddPlantActivity : AppCompatActivity() {
             else -> 0.0f
         }
 
-        val sunshine: String = detailToMineDto.sunshine.split("(")[0]
+        val sunshine: String = detailToMineDto.sunshine.split("),")[0] + ")"
 
         binding.ratingBarWater.rating = waterFloat
         binding.waterAmount.text = waterString
 
-        var sunshineFloat = when(sunshine){
-            "높은 광도" -> 3.0f
-            "중간 광도" -> 2.0f
-            "낮은 광도" -> 1.0f
+        val sunshineFloat = when(sunshine){
+            "높은 광도(1,500~10,000 Lux)" -> 3.0f
+            "중간 광도(800~1,500 Lux)" -> 2.0f
+            "낮은 광도(300~800 Lux)" -> 1.0f
             else -> 0.0f
         }
-        binding.sunshine.text = sunshineFloat.toString()
+        binding.sunshine.text = sunshine
         binding.ratingBarSunshine.rating = sunshineFloat
 
-        binding.btnTemperatureSetting.text = detailToMineDto.temperature
+        binding.btnTemperatureSetting.text = "온도: " + detailToMineDto.temperature
+
+        val tempArray = detailToMineDto.temperature.split("~", "℃")
+        temStart = tempArray[0].toInt()
+        temEnd = tempArray[1].toInt()
     }
 }

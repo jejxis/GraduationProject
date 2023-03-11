@@ -40,23 +40,36 @@
                 android:id="@+id/rvDiary"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnClose"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/diaryPlantName" />
 
             <ImageView
                 android:id="@+id/addDiary"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:padding="5dp"
                 android:background="@drawable/border_round"
+                android:padding="5dp"
                 android:src="@drawable/ic_baseline_add_45"
+                app:layout_constraintBottom_toTopOf="@+id/rvDiary"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/diaryPlantName" />
+
+            <TextView
+                android:id="@+id/diaryPlantName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/seoul_namsan_long_b"
+                android:text="식물 이름"
+                android:textColor="#4A332D"
+                android:textSize="24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/btnClose"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnClose" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

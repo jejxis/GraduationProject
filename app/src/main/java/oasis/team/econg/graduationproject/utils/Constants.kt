@@ -10,11 +10,19 @@ object Constants {
 }
 
 object CultureSettings{
-    val WATER_ARRAY = arrayOf("관수 양을 선택하세요.",
+    val WATER_ARRAY = arrayOf(
+        "관수 양을 선택하세요.",
         "화분 흙 대부분 말랐을때 충분히 관수함",
     "토양 표면이 말랐을때 충분히 관수함",
     "흙을 촉촉하게 유지함(물에 잠기지 않도록 주의)",
     "항상 흙을 축축하게 유지함(물에 잠김)")
+
+    val SUNSHINE_ARRAY = arrayOf(
+        "일조량을 선택하세요.",
+        "낮은 광도(300~800 Lux)",
+        "중간 광도(800~1,500 Lux)",
+        "높은 광도(1,500~10,000 Lux)"
+    )
 }
 
 enum class RESPONSE_STATE{

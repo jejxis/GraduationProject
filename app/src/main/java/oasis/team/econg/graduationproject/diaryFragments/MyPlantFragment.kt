@@ -81,9 +81,10 @@ class MyPlantFragment : Fragment() {
     }
 
     private val onClickedMyPlant = object : MyPlantAdapter.OnItemClickListener{
-        override fun onClicked(id: Long) {
+        override fun onClicked(id: Long, name: String) {
             var intent = Intent(main, DiaryListActivity::class.java)
             intent.putExtra("id", id)
+            intent.putExtra("name", name)
             startActivity(intent)
         }
     }

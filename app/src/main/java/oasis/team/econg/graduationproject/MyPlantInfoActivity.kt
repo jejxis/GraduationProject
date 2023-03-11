@@ -13,10 +13,12 @@ import oasis.team.econg.graduationproject.retrofit.RetrofitManager
 import oasis.team.econg.graduationproject.samplePreference.MyApplication
 import oasis.team.econg.graduationproject.utils.API
 import oasis.team.econg.graduationproject.utils.Constants.TAG
+import oasis.team.econg.graduationproject.utils.CultureSettings
 import oasis.team.econg.graduationproject.utils.RESPONSE_STATE
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
+import kotlin.math.floor
 
 class MyPlantInfoActivity : AppCompatActivity() {
     val binding by lazy { ActivityMyPlantInfoBinding.inflate(layoutInflater) }
@@ -89,7 +91,7 @@ class MyPlantInfoActivity : AppCompatActivity() {
             binding.waterInterval.text = "${dto.waterAlarmInterval}day(s)"
             binding.temperature.text = "${dto.lowTemperature}°C ~ ${dto.highTemperature}°C"
             binding.waterSupply.text = dto.waterSupply
-            binding.light.text = dto.sunshine.toString()
+            binding.light.text = CultureSettings.SUNSHINE_ARRAY[floor(dto.sunshine).toInt()]
         }catch (e: InterruptedException){
             e.printStackTrace()
         }

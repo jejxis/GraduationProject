@@ -24,6 +24,7 @@ class DiaryListActivity : AppCompatActivity() {
     var diaryList = mutableListOf<JournalsResponseDto>()
     var diaryAdapter = DiaryAdapter(this)
     var id: Long = -1
+    var name: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,10 @@ class DiaryListActivity : AppCompatActivity() {
         if(intent.hasExtra("id")){
             id = intent.getLongExtra("id", -1)
         }
-
+        if(intent.hasExtra("name")){
+            name = intent.getStringExtra("name").toString()
+        }
+        binding.diaryPlantName.text = name
         binding.btnVisibleGone.setOnClickListener {
             if(binding.buttons.visibility == View.VISIBLE){
                 binding.buttons.visibility = View.GONE
