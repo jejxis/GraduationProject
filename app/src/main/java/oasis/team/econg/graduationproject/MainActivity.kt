@@ -43,9 +43,14 @@ class MainActivity : AppCompatActivity() {
                     //val key = deeplink.getQueryParameter("key")
                 }
             }*/
-
-        binding.mainToolBar.selectedItemId = R.id.menuHome
-        showHomeFragment()
+        if(intent.hasExtra("menu")){
+            binding.mainToolBar.selectedItemId = R.id.menuUser
+            showUserFragment()
+        }
+        else{
+            binding.mainToolBar.selectedItemId = R.id.menuHome
+            showHomeFragment()
+        }
 
         getNavi()
     }

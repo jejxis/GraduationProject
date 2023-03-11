@@ -29,7 +29,10 @@ class UserInfoActivity : AppCompatActivity() {
         loadData()
 
         binding.btnClose.setOnClickListener {
-            finish()
+            val intent = Intent(this@UserInfoActivity, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.putExtra("menu", "user")
+            startActivity(intent)
         }
 
         binding.btnEditProfile.setOnClickListener {
@@ -45,6 +48,8 @@ class UserInfoActivity : AppCompatActivity() {
                 RESPONSE_STATE.OKAY -> {
                     Log.d(Constants.TAG, "EditUserInfoActivity - loadData(): api call success : $responseBody")
                     user = responseBody
+                    MyApplication.prefs.nickname = user.nickName
+                    MyApplication.prefs.picture = user.picture
                     setData()
                 }
                 RESPONSE_STATE.FAIL -> {
