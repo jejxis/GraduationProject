@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.gson.Gson
@@ -20,7 +21,10 @@ class SignupActivity : AppCompatActivity() {
     val binding by lazy{ActivitySignupBinding.inflate(layoutInflater)}
     private lateinit var pictureAdder: PictureAdder
     private var requestFile: MultipartBody.Part? = null
-    @RequiresApi(Build.VERSION_CODES.Q)
+    private var email = ""
+    private var nickname = ""
+    private var pw = ""
+    //@RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -31,6 +35,25 @@ class SignupActivity : AppCompatActivity() {
         }
 
         binding.btnSignUp.setOnClickListener {
+            email = binding.signupEmail.text.toString().trim()
+            pw = binding.signupPw.text.toString().trim()
+            nickname = binding.signupNickname.toString().trim()
+
+            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                binding.signupEmail.error = "Check the Email"
+                binding.signupEmail.requestFocus()
+                return@setOnClickListener
+            }
+            if (pw.isEmpty()) {
+                binding.signupPw.error = "Password required"
+                binding.signupPw.requestFocus()
+                return@setOnClickListener
+            }
+            if(nickname.isEmpty()){
+                binding.signupNickname.error = "Nickname required"
+                binding.signupNickname.requestFocus()
+                return@setOnClickListener
+            }
             proceedSignUp()
         }
 

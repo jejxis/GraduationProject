@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -45,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             email = binding.loginEmail.text.toString().trim()
             pw = binding.loginPw.text.toString().trim()
 
-            if (email.isEmpty()/* || !Patterns.EMAIL_ADDRESS.matcher(email).matches()*/) {
+            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 binding.loginEmail.error = "Check the Email"
                 binding.loginEmail.requestFocus()
                 return@setOnClickListener
@@ -57,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             pushToken()
-            //loadUserData()
+            loadUserData()
         }
 
         binding.btnSignup.setOnClickListener {
