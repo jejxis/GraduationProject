@@ -9,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.data.JournalsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemDiaryBinding
@@ -48,36 +52,28 @@ class DiaryAdapter(val context: Context?): RecyclerView.Adapter<DiaryAdapter.Dia
         private val checkDeleteJournalFragment = CheckDeleteJournalFragment()
 
         fun setData(data: JournalsResponseDto){
-            var bitmap: Bitmap? = null
-            val thread = object: Thread(){
-                override fun run() {
+            if(!data.picture.isNullOrEmpty()){
+                CoroutineScope(Dispatchers.Main).launch{
                     try{
-                        var url = URL(data.picture)
-                        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
-                        conn.connect()
-                        val inputStream = conn.inputStream
-                        bitmap =  BitmapFactory.decodeStream(inputStream)
+                        var bitmap: Bitmap? = withContext(Dispatchers.IO){
+                            var url = URL(data.picture)
+                            val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                            conn.connect()
+                            val inputStream = conn.inputStream
+                            BitmapFactory.decodeStream(inputStream)
+                        }
+                        binding.imgDiary.setImageBitmap(bitmap)
                     }catch(e: IOException){
                         e.printStackTrace()
                     }
                 }
             }
-            if(!data.picture.isNullOrEmpty())
-                thread.start()
-            else
+            else{
                 binding.imgDiary.visibility = View.GONE
-
-            try{
-                if(!data.picture.isNullOrEmpty()){
-                    thread.join()
-                    binding.imgDiary.setImageBitmap(bitmap)
-                }
-                binding.date.text = data.date
-                binding.content.text = data.content
-                setOnClickListener(data)
-            }catch (e: InterruptedException){
-                e.printStackTrace()
             }
+            binding.date.text = data.date
+            binding.content.text = data.content
+            setOnClickListener(data)
         }
 
         fun setOnClickListener(data: JournalsResponseDto){

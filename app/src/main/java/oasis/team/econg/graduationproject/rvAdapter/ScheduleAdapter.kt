@@ -34,6 +34,7 @@ class ScheduleAdapter(val context: Context?): RecyclerView.Adapter<ScheduleAdapt
                 "WATER" -> binding.careType.text = "물주기"
                 "NUTRITION" -> binding.careType.text = "영양제"
                 "REPOTTING" -> binding.careType.text = "분갈이"
+                else -> binding.careType.text = "입양한 날!"
             }
         }
     }

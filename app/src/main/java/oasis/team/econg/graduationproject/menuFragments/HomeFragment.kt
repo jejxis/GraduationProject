@@ -23,6 +23,9 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.OnTokenCanceledListener
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import oasis.team.econg.graduationproject.AddPlantActivity
 import oasis.team.econg.graduationproject.DiaryListActivity
 import oasis.team.econg.graduationproject.GpsTransfer
@@ -74,8 +77,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(main)
-        getLocationUpdated()
-        loadData()
+        CoroutineScope(Dispatchers.Main).launch{
+            getLocationUpdated()
+            loadData()
+        }
 
         return binding.root
     }

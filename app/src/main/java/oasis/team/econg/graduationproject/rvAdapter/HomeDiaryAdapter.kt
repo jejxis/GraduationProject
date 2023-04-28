@@ -9,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.bluetooth.BluetoothConnector
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
@@ -48,51 +52,49 @@ class HomeDiaryAdapter(val context: Context?): RecyclerView.Adapter<HomeDiaryAda
     inner class HomeDiaryHolder(val binding: ItemHomeDiaryBinding): RecyclerView.ViewHolder(binding.root){
         var btConnector = BluetoothConnector(context!!, binding.sensorValue)
         fun setData(data: PlantsResponseDto, position: Int){
-            var bitmap: Bitmap? = null
-            val thread = object: Thread(){
-                override fun run() {
+            if(!data.picture.isNullOrEmpty()){
+                CoroutineScope(Dispatchers.Main).launch{
                     try{
-                        var url = URL(data.picture)
-                        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
-                        conn.connect()
-                        val inputStream = conn.inputStream
-                        bitmap =  BitmapFactory.decodeStream(inputStream)
-
+                        var bitmap: Bitmap? = withContext(Dispatchers.IO){
+                            var url = URL(data.picture)
+                            val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                            conn.connect()
+                            val inputStream = conn.inputStream
+                            BitmapFactory.decodeStream(inputStream)
+                        }
+                        binding.diaryThumbnail.setImageBitmap(bitmap)
                     }catch(e: IOException){
+                        binding.diaryThumbnail.setImageResource(R.drawable.logo_pot)
                         e.printStackTrace()
                     }
                 }
             }
-            thread.start()
+            else{
+                binding.diaryThumbnail.setImageResource(R.drawable.logo_pot)
+            }
 
-            try{
-                thread.join()
-                binding.dday.text = "함께한지 "+data.dday.toString()+"일!"
-                binding.name.text = data.name
-                binding.recentRecordDate.text = "최근 기록 날짜: " + data.recentRecordDate
-                binding.diaryThumbnail.setImageBitmap(bitmap)
-                if(data.star){
-                    binding.star.setImageResource(R.drawable.ic_baseline_star_45_true)
-                    binding.bluetoothLayout.visibility = View.VISIBLE
-                    binding.btnBluetooth.setOnClickListener {
-                        btConnector.searchDevice()
-                    }
+            binding.dday.text = "함께한지 "+data.dday.toString()+"일!"
+            binding.name.text = data.name
+            binding.recentRecordDate.text = "최근 기록 날짜: " + data.recentRecordDate
+            if(data.star){
+                binding.star.setImageResource(R.drawable.ic_baseline_star_45_true)
+                binding.bluetoothLayout.visibility = View.VISIBLE
+                binding.btnBluetooth.setOnClickListener {
+                    btConnector.searchDevice()
                 }
-                else {
-                    binding.star.setImageResource(R.drawable.ic_baseline_star_45_false)
-                    binding.bluetoothLayout.visibility = View.GONE
+            }
+            else {
+                binding.star.setImageResource(R.drawable.ic_baseline_star_45_false)
+                binding.bluetoothLayout.visibility = View.GONE
+            }
+            binding.star.setOnClickListener {
+                if(starCount > 0 && !data.star){
+                    Toast.makeText(context, "대표 식물은 하나만 지정 가능합니다.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
                 }
-                binding.star.setOnClickListener {
-                    if(starCount > 0 && !data.star){
-                        Toast.makeText(context, "대표 식물은 하나만 지정 가능합니다.", Toast.LENGTH_SHORT).show()
-                        return@setOnClickListener
-                    }
-                    proceedStarPlants(data.star, data.id)
-                    data.star = !data.star
-                    this@HomeDiaryAdapter.notifyItemChanged(position)
-                }
-            }catch(e: InterruptedException){
-                e.printStackTrace()
+                proceedStarPlants(data.star, data.id)
+                data.star = !data.star
+                this@HomeDiaryAdapter.notifyItemChanged(position)
             }
         }
 

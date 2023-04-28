@@ -11,6 +11,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.PlantsResponseDto
 import oasis.team.econg.graduationproject.databinding.ItemMyPlantBinding
@@ -51,30 +55,29 @@ class MyPlantAdapter(val context: Context?): RecyclerView.Adapter<MyPlantAdapter
             this.data = data
         }
         fun setData(data: PlantsResponseDto){
-            var bitmap: Bitmap? = null
-            val thread = object: Thread(){
-                override fun run() {
+            if(!data.picture.isNullOrEmpty()){
+                CoroutineScope(Dispatchers.Main).launch{
                     try{
-                        var url = URL(data.picture)
-                        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
-                        conn.connect()
-                        val inputStream = conn.inputStream
-                        bitmap =  BitmapFactory.decodeStream(inputStream)
+                        var bitmap: Bitmap? = withContext(Dispatchers.IO){
+                            var url = URL(data.picture)
+                            val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                            conn.connect()
+                            val inputStream = conn.inputStream
+                            BitmapFactory.decodeStream(inputStream)
+                        }
+                        binding.plantImg.setImageBitmap(bitmap)
                     }catch(e: IOException){
+                        binding.plantImg.setImageResource(R.drawable.logo_pot)
                         e.printStackTrace()
                     }
                 }
             }
-            thread.start()
-
-            try{
-                thread.join()
-                binding.plantName.text = data.name
-                binding.plantImg.setImageBitmap(bitmap)
-                binding.latestDiary.text = data.recentRecordDate
-            }catch(e: InterruptedException){
-                e.printStackTrace()
+            else{
+                binding.plantImg.setImageResource(R.drawable.logo_pot)
             }
+
+            binding.plantName.text = data.name
+            binding.latestDiary.text = data.recentRecordDate
 
             binding.waterCheck.setOnClickListener {
                 postCalendars("w", it)

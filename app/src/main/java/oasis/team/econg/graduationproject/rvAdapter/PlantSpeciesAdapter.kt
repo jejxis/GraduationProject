@@ -6,6 +6,10 @@ import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.data.GardenDto
 import oasis.team.econg.graduationproject.databinding.ItemPlantSpeciesBinding
@@ -40,40 +44,32 @@ class PlantSpeciesAdapter(val context: Context?):RecyclerView.Adapter<PlantSpeci
 
     inner class PlantSpeciesHolder(val binding: ItemPlantSpeciesBinding):RecyclerView.ViewHolder(binding.root){
         fun setData(data: GardenDto){
-            var bitmap: Bitmap? = null
-            val thread = object: Thread(){
-                override fun run() {
+            if(!data.picture.isNullOrEmpty()){
+                CoroutineScope(Dispatchers.Main).launch{
                     try{
-                        var url = URL(data.picture)
-                        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
-                        conn.connect()
-                        val inputStream = conn.inputStream
-                        bitmap =  BitmapFactory.decodeStream(inputStream)
+                        var bitmap: Bitmap? = withContext(Dispatchers.IO){
+                            var url = URL(data.picture)
+                            val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                            conn.connect()
+                            val inputStream = conn.inputStream
+                            BitmapFactory.decodeStream(inputStream)
+                        }
+                        binding.plantSpeciesPicture.setImageBitmap(bitmap)
                     }catch(e: IOException){
+                        binding.plantSpeciesPicture.setImageResource(R.drawable.flower_pot)
                         e.printStackTrace()
                     }
                 }
             }
-            if(!data.picture.isNullOrEmpty())
-                thread.start()
-            else
+            else{
                 binding.plantSpeciesPicture.setImageResource(R.drawable.flower_pot)
-
-            try{
-                if(!data.picture.isNullOrEmpty()){
-                    thread.join()
-                    binding.plantSpeciesPicture.setImageBitmap(bitmap)
-                }
-                binding.plantSpeciesName.text = data.name
-                binding.plantSpeciesManageLevel.text = when(data.manageLevel){
-                    "초보자" -> "⭐"
-                    "경험자" -> "⭐⭐"
-                    "전문가" -> "⭐⭐⭐"
-                    else -> ""
-                }
-               data.manageLevel
-            }catch (e:InterruptedException){
-                e.printStackTrace()
+            }
+            binding.plantSpeciesName.text = data.name
+            binding.plantSpeciesManageLevel.text = when(data.manageLevel){
+                "초보자" -> "⭐"
+                "경험자" -> "⭐⭐"
+                "전문가" -> "⭐⭐⭐"
+                else -> ""
             }
         }
     }
