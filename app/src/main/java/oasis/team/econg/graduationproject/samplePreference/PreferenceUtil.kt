@@ -14,7 +14,7 @@ class PreferenceUtil(context: Context) {
     var token:String? = null
         get() = prefs.getString("token",null)//pref.getString("email", "").toString()
         set(value){
-            editor.putString("token","Bearer $value").commit()
+            editor.putString("token"," $value").commit()
             field = "Bearer $value"
         }
 
