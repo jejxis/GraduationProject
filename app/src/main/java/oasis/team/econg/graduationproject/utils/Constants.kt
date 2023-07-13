@@ -4,7 +4,7 @@ import oasis.team.econg.graduationproject.R
 import oasis.team.econg.graduationproject.samplePreference.MyApplication
 
 object Constants {
-    const val BASE_URL = "https://oasisserver.site"
+    const val BASE_URL = ""
     const val TAG : String = "MYTAG"
     const val GUIDELINE: String = "https://smore.im/quiz/vbqDYbbjPT"//"https://doda.app/quiz/jjc3lfdvlX"
 }
@@ -34,9 +34,9 @@ enum class RESPONSE_STATE{
 }
 
 object API{
-    const val BASE_URL : String = "https://oasisserver.site"
-    //    const val HEADER_TOKEN : String = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoZWxsb0BnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjY1MDc2MTk2fQ.WPuvT-YsumY2xQsmwSCHFzIQbgCgthdHEGQ0qT0UXyFeb_QkpC1FZthgeVRlrSEmncqwcgq_Fi-XxO9zN4GXhw"
-    //var HEADER_TOKEN : String = "Bearer ${MyApplication.prefs.token}"
+    const val BASE_URL : String = ""
+    //    const val HEADER_TOKEN : String = ""
+    //var HEADER_TOKEN : String = "${MyApplication.prefs.token}"
 }
 
 val skyList = arrayOf("", "맑음", "", "구름많음", "흐림")
